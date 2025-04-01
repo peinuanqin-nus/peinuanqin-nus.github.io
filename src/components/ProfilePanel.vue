@@ -49,6 +49,8 @@ export default {
       script.type = "text/javascript";
       script.id = "clstr_globe";
       script.src = "//clustrmaps.com/globe.js?d=INA58IVLqJvoe3UkBduCYuKIO96pu32r6f542tBBv6c";
+      // script.src = "https://clustrmaps.com/globe.js?d=INA58IVLqJvoe3UkBduCYuKIO96pu32r6f542tBBv6c";
+
       document.getElementById("clustr-globe-container")?.appendChild(script);
     }
   },
