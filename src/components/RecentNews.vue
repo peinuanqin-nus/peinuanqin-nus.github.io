@@ -138,8 +138,10 @@ export default {
 /* 整个页面：固定高度 + 居中 */
 .recent-news-page {
   /*height: 100vh;*/
-  height: 60vh;
-  background: #f4f5f7;
+  /*height: 60vh;*/
+  height: 55vh;
+  /*background: #f4f5f7;*/
+  background: white;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -163,6 +165,8 @@ export default {
 /* Panel 本体 */
 .panel {
   height: 100%;
+  /*background: white;*/
+  /*background: floralwhite;*/
   background: white;
   border-radius: 16px;
   padding: 20px 22px;

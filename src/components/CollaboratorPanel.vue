@@ -118,11 +118,11 @@ export default {
 
 
 .collaborator-panel {
-  width: 80%;
-  margin: 40px auto;
+  width: 75%;
+  margin: 0px auto;
   /*margin-top: 40px;*/
   padding-top: 20px;
-  border-top: 1px solid #eee;
+  /*border-top: 1px solid #eee;*/
 }
 
 .collaborator-card {

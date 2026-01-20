@@ -77,6 +77,10 @@ body {
 /*  justify-content: center;*/
 /*}*/
 
+.main_container{
+  background: white;
+}
+
 .el-header {
   background-color: #333;
   /*background-color: whitesmoke;*/

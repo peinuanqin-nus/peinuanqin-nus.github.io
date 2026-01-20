@@ -267,7 +267,7 @@ export default {
   display: flex;
   justify-content: center;
   /*padding: 90px 32px;*/
-  padding: 10px 50px;
+  padding: 10px 32px;
 }
 
 .profile-panel {

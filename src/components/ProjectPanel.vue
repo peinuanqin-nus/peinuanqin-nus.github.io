@@ -237,8 +237,8 @@ Together, these efforts aim to uncover design principles for building **co-creat
 
 <style scoped>
 .project-panel {
-  width: 60%;
-  margin: 20px auto;
+  width: 75%;
+  margin: 0px auto;
   padding: 20px;
   /*background-color: white;*/
   /*background-color: white;*/
