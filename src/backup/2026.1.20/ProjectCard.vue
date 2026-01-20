@@ -3,13 +3,30 @@
   <el-card class="project-card" @click="$emit('click')">
     <img :src="project.image" alt="Project Image" class="project-image" />
     <div class="project-info">
+<!--      <span-->
+<!--          class="project-title"-->
+<!--          :title="project.title"-->
+<!--      >📌 {{ project.title }}</span>-->
       <span
           class="project-title"
           :title="project.short_title"
       >📌 {{ project.short_title }}</span>
+<!--      <div class="labels">-->
+<!--        <span v-for="(label, index) in project.labels" :key="index" class="label">{{ label }}</span>-->
+<!--      </div>-->
+
+<!--      <div class="labels">-->
+<!--        <p class="year">{{ project.year }}</p>-->
+<!--        <el-tag-->
+<!--            v-for="(tag, index) in project.status"-->
+<!--            :key="index"-->
+<!--            size="small"-->
+<!--            :type="tagColorMap[tag] || 'info'"-->
+<!--        >{{ tag }}</el-tag>-->
+<!--      </div>-->
 
       <div class="labels-row">
-<!--        <p class="year">{{ project.year }}</p>-->
+        <p class="year">{{ project.year }}</p>
         <div class="tags">
           <el-tag
               v-for="(tag, index) in project.status"

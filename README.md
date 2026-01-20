@@ -24,3 +24,10 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+# How to run
+```angular2html
+npm run build
+然后 git push 到仓库，dist 文件夹会自动更新
+```

@@ -1,39 +1,34 @@
 <!-- Project Panel -->
 <template>
   <div class="project-panel">
-<!--    <h2>Ongoing Projects</h2>-->
-<!--    <el-row :gutter="20" justify="center">-->
-<!--      <el-col v-for="(project, index) in ongoingProjects" :key="index" :span="8">-->
-<!--        <ProjectCard :project="project" :index="index" @click.native="openDrawer(project)"/>-->
-<!--      </el-col>-->
-<!--    </el-row>-->
-
-
-<!--    <h2>Finished Projects</h2>-->
-<!--    <el-row :gutter="20" justify="center">-->
-<!--      <el-col v-for="(project, index) in finishedProjects" :key="index" :span="8">-->
-<!--        <ProjectCard :project="project" :index="index" @click.native="openDrawer(project)"/>-->
-<!--      </el-col>-->
-<!--    </el-row>-->
-
-<!--    <h2>Finished Projects</h2>-->
-    <h2>Selected Publications</h2>
-    <PublicationRow
-        v-for="(project, index) in finishedProjects"
-        :key="index"
-        :project="project"
-        @click="openDrawer(project)"
-    />
-
+<!--    <h2>Projects</h2>-->
     <h2>Ongoing Projects</h2>
-    <PublicationRow
-        v-for="(project, index) in ongoingProjects"
-        :key="index"
-        :project="project"
-        @click="openDrawer(project)"
-    />
+<!--    <div v-html="ongoingIntro" class="markdown-body project-intro"></div>-->
+<!--    <p class="section-description">-->
+<!--      These ongoing projects reflect my current research interests, including AI-assisted creation, language learning support for non-native speakers, and enhancing human-AI communication. Each project explores a unique aspect of how technology can augment human expression, collaboration, and understanding.-->
+<!--    </p>-->
+    <el-row :gutter="20" justify="center">
+<!--      <el-col v-for="(project, index) in projects" :key="index" :span="8">-->
+      <el-col v-for="(project, index) in ongoingProjects" :key="index" :span="8">
+        <ProjectCard :project="project" :index="index" @click.native="openDrawer(project)"/>
+      </el-col>
+    </el-row>
 
 
+    <h2>Finished Projects</h2>
+    <el-row :gutter="20" justify="center">
+      <el-col v-for="(project, index) in finishedProjects" :key="index" :span="8">
+        <ProjectCard :project="project" :index="index" @click.native="openDrawer(project)"/>
+      </el-col>
+    </el-row>
+
+<!--    <el-dialog-->
+<!--        :visible.sync="drawerVisible"-->
+<!--        :title="selectedProject?.title || 'Project Detail'"-->
+<!--        width="60%"-->
+<!--        class="project-dialog"-->
+<!--        :close-on-click-modal="false"-->
+<!--    >-->
     <el-dialog
         :visible.sync="drawerVisible"
         title=""
@@ -47,25 +42,50 @@
 
 
         <div class="info-grid">
+<!--          <div><span class="label">📚 Source:</span>-->
+<!--            <el-tag v-for="(s, i) in toArray(selectedProject?.source)" :key="i" type="info">{{ s }}</el-tag>-->
+<!--          </div>-->
+<!--          <div><span class="label">📚 Title:</span>-->
+<!--            &lt;!&ndash;            {{ selectedProject.author || 'Unknown' }}&ndash;&gt;-->
+<!--            <span v-html="selectedProject.title" class="markdown-inline"></span>-->
+<!--          </div>-->
           <div><span class="label">✍️ Author:</span>
+<!--            {{ selectedProject.author || 'Unknown' }}-->
             <span v-html="selectedProject.author" class="markdown-inline"></span>
           </div>
 
           <div><span class="label">🔗 Paper URL:</span>
+<!--            <a v-if="selectedProject.url" :href="selectedProject.url" target="_blank">{{ selectedProject.url }}</a>-->
             <span v-if="selectedProject.url" v-html="selectedProject.url" class="markdown-inline"></span>
             <span v-else>...</span>
           </div>
 
           <div><span class="label">🌟 Status:</span>
+<!--            <el-tag-->
+<!--                v-for="(tag, index) in selectedProject.status"-->
+<!--                :key="index"-->
+<!--                type="success"-->
+<!--                closable-->
+<!--                @close="removeTag(index)"-->
+<!--            >{{ tag }}</el-tag>-->
             <el-tag
                 v-for="(tag, index) in selectedProject.status"
                 :key="index"
                 :type="tagColorMap[tag] || 'info'"
             >{{ tag }}</el-tag>
+<!--            <el-input-->
+<!--                v-model="newTag"-->
+<!--                size="small"-->
+<!--                placeholder="Add status"-->
+<!--                @keyup.enter="addTag"-->
+<!--                style="width: 120px; margin-left: 10px;"-->
+<!--            />-->
           </div>
           <div v-if="selectedProject.published"><span class="label">🏛️ Published:</span>
             <span style="font-weight: bolder">{{selectedProject.published}}</span>
           </div>
+
+<!--          <div><span class="label">📅 Year:</span> {{ selectedProject.year }}</div>-->
         </div>
 
         <hr />
@@ -83,15 +103,12 @@
 </template>
 
 <script>
-// import ProjectCard from "@/components/ProjectCard";
+import ProjectCard from "@/components/ProjectCard";
 import {marked} from "marked";
-import PublicationRow from "@/components/PublicationRow";
 
 export default {
   name: "ProjectPanel",
-  components: {
-    // ProjectCard,
-    PublicationRow },
+  components: { ProjectCard },
   created() {
     this.loadAllProjects();
   },
@@ -137,21 +154,12 @@ Together, these efforts aim to uncover design principles for building **co-creat
       finishedProjects:[],
 
       projectFolders: [
-        "AI_personalization",
-        "chatlearn",
-        "QualCausal",
-        "timing_matters",
-        "speaking_support_for_NNS",
-        "Stigma",
-        "VR",
-          "Gait",
-
-
-        "cyberbullying_mitigation",
-        "ai_mediated_communication",
-
         "ai_assisted_creation",
+          "ai_mediated_communication",
+          "timing_matters",
+          "speaking_support_for_NNS",
           "language_learning_support",
+          "cyberbullying_mitigation",
 
         // "literature_review_tool",
         // "nns_ns_communication"
@@ -196,6 +204,10 @@ Together, these efforts aim to uncover design principles for building **co-creat
       );
 
       const validProjects = loadedProjects.filter((p) => p !== null);
+      // this.projects = loadedProjects
+      // this.ongoingProjects = loadedProjects
+      //     .filter((p) => p !== null)
+      //     .sort((a, b) => b.year - a.year); // 降序排序
 
       this.ongoingProjects = validProjects
           .filter((p) => p.status && p.status[0] === "🕒 Ongoing")

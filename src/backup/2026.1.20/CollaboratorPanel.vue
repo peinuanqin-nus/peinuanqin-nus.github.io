@@ -45,12 +45,6 @@ export default {
           link: "https://www.chilanyang.space/",
         },
         {
-          name: "Jane E",
-          role: "Assistant Professor, NUS Computing",
-          avatar: "/collaborators/janee.png",
-          link: "https://ejane.me/",
-        },
-        {
           name: "Jungup Lee",
           role: "Assistant Professor, NUS Social Work",
           avatar: "/collaborators/junguplee.png",

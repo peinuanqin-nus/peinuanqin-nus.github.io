@@ -1,0 +1,12 @@
+{
+  "title": "Designing Computational Tools for Exploring Causal Relationships in Qualitative Data",
+  "short_title": "QualCausal",
+  "author": "Han Meng, Qiuyuan Lyu, __<u>Peinuan Qin</u>__, Yitian Yang, Renwen Zhang, Wen-Chieh Lin, Yi-Chieh Lee",
+  "abstract": "Exploring causal relationships for qualitative data analysis in HCI and social science research enables the understanding of user needs and theory building. However, current computational tools primarily characterize and categorize qualitative data; the few systems that analyze causal relationships either inadequately consider context, lack credibility, or produce overly complex outputs. We first conducted a formative study with 15 participants interested in using computational tools for identifying causal relationships in qualitative data to understand their needs and derive design guidelines. Based on these findings, we designed and implemented QualCausal, a system that extracts and illustrates causal relationships through interactive causal network construction and multi-view visualization. A feedback study (n=15) revealed that participants valued our system for reducing the analytical burden and providing cognitive scaffolding, yet navigated how such systems fit within their established research paradigms, practices, and habits. We discuss broader implications for designing computational tools that support qualitative data analysis.\n",
+  "url": "",
+  "labels": ["LLM", "System", "Qualitative"],
+  "status": ["\uD83D\uDFE2 Accept"],
+  "published": "CHI2026",
+  "year": "2025-2028",
+  "image": "/projects/QualCausal/img.png"
+}
