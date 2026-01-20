@@ -1,8 +1,9 @@
 {
   "title": "AI-Based Speaking Assistant: Supporting Non-Native Speakers’ Speaking in Real-Time Multilingual Communication",
-  "short_title": "Speaking Support for Non-native Speaker",
+  "short_title": "Real-Time Speaking Support",
   "author": "__<u>Peinuan Qin</u>__, Zicheng Zhu, Naomi Yamashita, Yitian Yang, Keita Suga, Yi-Chieh Lee",
-  "url": "camera ready ...",
+  "abstract": "Non-native speakers (NNSs) often face speaking challenges in real-time multilingual communication, such as struggling \nto articulate their thoughts. To address this issue, we developed an AI-based speaking assistant (AISA) that provides \nspeaking references for NNSs based on their input queries, task background, and conversation history. To explore NNSs' \ninteraction with AISA and its impact on NNSs' speaking during real-time multilingual communication, we conducted a \nmixed-method study involving a within-subject experiment and follow-up interviews. In the experiment, \ntwo native speakers (NSs) and one NNS formed a team (31 teams in total) and completed two collaborative tasks—one with \naccess to the AISA and one without. Overall, our study revealed four types of AISA input patterns among NNSs, each \nreflecting different levels of effort and language preferences. Although AISA did not improve NNSs' speaking competence, \nfollow-up interviews revealed that it helped improve the logical flow and depth of their speech. Moreover, the additional \nmultitasking introduced by AISA, such as entering and reviewing system output, potentially elevated NNSs' workload and anxiety. \nBased on these observations, we discuss the pros and cons of implementing tools to assist NNS in real-time multilingual \ncommunication and offer design recommendations.",
+  "url": "https://doi.org/10.1145/3757455",
   "labels": ["AI-assisted Communication"],
   "status": ["\uD83D\uDFE2 Accept"],
   "published": "CSCW2025",
