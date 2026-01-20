@@ -1,62 +1,47 @@
+<!--<template>-->
+<!--  <div class="recent-news-container">-->
+<!--    <h2>Recent News</h2>-->
+
+<!--    <el-timeline>-->
+<!--      <el-timeline-item v-for="(news, index) in recentNews" :key="index" :timestamp="news.date">-->
+<!--&lt;!&ndash;        {{renderMarkdown(news.content) }}&ndash;&gt;-->
+<!--        <span v-html="renderMarkdown(news.content)">{{renderMarkdown(news.content) }}</span>-->
+
+<!--      </el-timeline-item>-->
+<!--    </el-timeline>-->
+<!--  </div>-->
+<!--</template>-->
+
 <template>
-  <div class="recent-news-page">
-    <div class="page-center">
-      <el-row :gutter="28" class="content-row">
-        <!-- Left: News -->
-        <el-col :span="14" class="full-height">
-          <div class="panel">
-            <h2 class="panel-title">Recent News</h2>
+  <div class="recent-news-container">
+    <h2 class="header">Recent News</h2>
 
-            <div class="panel-scroll">
-              <el-timeline>
-                <el-timeline-item
-                    v-for="(news, index) in recentNews"
-                    :key="index"
-                    :timestamp="news.date"
-                >
-                  <div
-                      class="news-content"
-                      v-html="renderMarkdown(news.content)"
-                  />
-                </el-timeline-item>
-              </el-timeline>
-            </div>
-          </div>
-        </el-col>
-
-        <!-- Right: Awards -->
-        <el-col :span="10" class="full-height">
-          <div class="panel">
-            <h2 class="panel-title">Awards & Honors</h2>
-
-            <div class="panel-scroll">
-              <el-card
-                  v-for="(award, index) in awards"
-                  :key="index"
-                  class="award-card"
-                  shadow="hover"
-              >
-                <div class="award-title">
-                  {{ award.icon }} {{ award.title }}
-                </div>
-                <div class="award-meta">{{ award.year }}</div>
-                <div class="award-desc">{{ award.description }}</div>
-              </el-card>
-            </div>
-          </div>
-        </el-col>
-      </el-row>
+    <div class="timeline-scroll-container">
+      <el-timeline>
+        <el-timeline-item
+            v-for="(news, index) in recentNews"
+            :key="index"
+            :timestamp="news.date"
+        >
+          <span v-html="renderMarkdown(news.content)">{{renderMarkdown(news.content)}}</span>
+        </el-timeline-item>
+      </el-timeline>
     </div>
   </div>
 </template>
 
-<script>
-import { marked } from "marked";
 
+<script>
+import {marked} from "marked";
 export default {
-  name: "RecentNewsPage",
+  name: "RecentNews",
   data() {
     return {
+      // recentNews: [
+      //   { date: "2025-03-10", content: "Submitted UIST paper on writing retrieval system." },
+      //   { date: "2025-02-28", content: "Integrated ChatPDF into my PDF reader project." },
+      //   { date: "2025-02-15", content: "Developed a VueX store for managing PDF annotations." }
+      // ]
       recentNews: [
         {
           date: "2026-01",
@@ -74,6 +59,11 @@ export default {
               "🎉 [third author] Full paper <u>_Designing Computational Tools for Exploring Causal Relationships in Qualitative Data_</u> accepted to **CHI 2026**"
         },
 
+        // {
+        //   date: "2026-01",
+        //   content:
+        //       "✍️ Completed revisions for **two first-author CSCW 2026 full papers**, addressing reviewer feedback and strengthening analyses."
+        // },
         {
           date: "2025-11",
           content:
@@ -104,115 +94,55 @@ export default {
           content:
               "🎉  [forth author] contributed to <u>_Mitigating Ageism through Virtual Reality: Intergenerational Collaborative Escape Room Design_</u>, accepted to **CHI 2024 Late-Breaking Work (LBW)**"
         }
-      ],
-
-      awards: [
-        {
-          icon: "🏆",
-          title: "NUS Venture Initiation Programme (VIP)",
-          year: "2025",
-          description:
-              "Award supporting the development of an AI-powered evaluation system for scalable quantitative and qualitative analysis."
-        },
-        {
-          icon: "🏅",
-          title: "Research Achievement Award",
-          year: "2025",
-          description:
-              "Recognized for sustained research contributions and academic excellence."
-        },
       ]
     };
   },
 
-  methods: {
-    renderMarkdown(content) {
-      return marked(content);
+  methods:{
+    renderMarkdown(content){
+      return marked(content)
     }
   }
 };
 </script>
 
-
 <style scoped>
-/* 整个页面：固定高度 + 居中 */
-.recent-news-page {
-  /*height: 100vh;*/
-  height: 60vh;
-  background: #f4f5f7;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+/*.recent-news-container {*/
+/*  !*margin-top: 10px;*!*/
+/*  padding: 20px;*/
+/*  max-width: 50%;*/
+/*  !*max-width: 100%;*!*/
+/*  max-height: 500px;*/
+/*  overflow: auto;*/
+/*  background-color: white;*/
+/*  border-radius: 10px;*/
+/*  !*box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);*!*/
+/*  margin: 20px auto;*/
+/*  !*align-items: center;*!*/
+/*  !*display: flex;*!*/
+/*  !*align-content: center;*!*/
+/*  !*justify-content: center;*!*/
+/*}*/
 
-/* 中央内容块 */
-.page-center {
-  width: 100%;
-  max-width: 1200px;
-  height: 55vh; /* 关键：整体高度固定 */
-  padding: 0 20px;
+.recent-news-container {
+  padding: 20px;
+  max-width: 50%;
+  background-color: white;
+  border-radius: 10px;
+  margin: 20px auto;
   box-sizing: border-box;
 }
 
-/* 行和列必须满高 */
-.content-row,
-.full-height {
-  height: 100%;
-}
-
-/* Panel 本体 */
-.panel {
-  height: 100%;
-  background: white;
-  border-radius: 16px;
-  padding: 20px 22px;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-}
-
-/* 标题固定 */
-.panel-title {
+.header {
+  margin-bottom: 10px;
   font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 12px;
-  flex-shrink: 0;
+  font-weight: bold;
 }
 
-/* 可滚动内容区 */
-.panel-scroll {
-  flex: 1;
+.timeline-scroll-container {
+  max-height: 450px; /* 控制滚动区域的高度 */
   overflow-y: auto;
-  padding-right: 8px;
+  padding-right: 10px; /* 可选：防止滚动条遮住内容 */
 }
 
-/* News */
-.news-content {
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-/* Awards */
-.award-card {
-  margin-bottom: 14px;
-  border-radius: 12px;
-}
-
-.award-title {
-  font-size: 15px;
-  font-weight: 600;
-}
-
-.award-meta {
-  font-size: 13px;
-  color: #888;
-  margin: 4px 0 6px;
-}
-
-.award-desc {
-  font-size: 14px;
-  line-height: 1.5;
-}
 </style>
-
-
