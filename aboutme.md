@@ -6,7 +6,8 @@ Hello! This is Peinuan!
 
 I am a **PhD candidate** of Computer Science (SoC) at the [AI4SG](https://www.ai4sg.org/) Lab @ National University of Singapore (NUS)
 , working under the supervision of [Prof. Yi-Chieh Lee (EJ)](https://www.comp.nus.edu.sg/cs/people/yclee/).
-My research interests include: Human AI Interaction, AI for Communication, AI-assisted Content Creation, etc.
+My research interests include: **Human-AI Interaction**, especially **AI-mediated Communication & Learning, AI-assisted Writing & Sensemaking, AI for Social Good, etc**.
+Alongside my academic research, I am also actively exploring entrepreneurial opportunities related to my research, with initial support from the Venture Initiation Programme (VIP@SoC) Award (2025).
 
 [//]: # (- 🔬 Research: AI-PM, Writing Support Tools, HCI)
 
