@@ -9,6 +9,9 @@ I am a **PhD candidate** of Computer Science (SoC) at the [AI4SG](https://www.ai
 My research interests include: **Human-AI Interaction**, especially **AI-mediated Communication & Learning, AI-assisted Writing & Sensemaking, AI for Social Good, etc**.
 Alongside my academic research, I am also actively exploring entrepreneurial opportunities related to my research, with initial support from the Venture Initiation Programme (VIP@SoC) Award (2025).
 
+_I am actively seeking potential high-value collaborators! If you are interested in my research and are highly self-motivated, please contact me at Jeffrey-qin@outlook.com, preferably with your CV and preliminary research plan._
+
+
 [//]: # (- 🔬 Research: AI-PM, Writing Support Tools, HCI)
 
 [//]: # (- 🎓 PhD Student @ NUS School of Computing)

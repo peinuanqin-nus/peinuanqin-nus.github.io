@@ -61,7 +61,7 @@ export default {
         {
           date: "2026-01",
           content:
-              "🌟 Participated in [**NUS-Google Workshop: The Future of CS Education in the AI Era**](https://futuredu.student.ai4sg.org/) (student-focused program) as a <u>_Facilitator_</u>"
+              "🌟 Participated in **Google CS Future Education** (student-focused program) as a <u>_Facilitator_</u>, supporting interactive learning and student engagement"
         },
         {
           date: "2026-01",
@@ -82,7 +82,7 @@ export default {
         {
           date: "2025-11",
           content:
-              "🌐 Served as a a <u>_Facilitator_</u> at the **[NUS-Google Workshop: Future of CS Education and Curriculum in the AI Era](https://futuredu.ai4sg.org/)** (professor-focused program), which brought together faculty from leading universities worldwide to discuss how computer science education should evolve in the age of AI."
+              "🌐 Served as a **volunteer** at the **Google-supported Future of CS Education Workshop** (AI4SG), which brought together faculty from leading universities worldwide to discuss how computer science education should evolve in the age of AI. Learn more at **[futuredu.ai4sg.org](https://futuredu.ai4sg.org/)**."
         },
         {
           date: "2025-09",

@@ -1,9 +1,10 @@
 {
-  "title": "AI-Assisted Writing & Sensemaking Systems",
+  "title": "Investigating and Designing User-Centered AI-Assisted Creation Tools",
   "short_title": "AI-Assisted Writing & Sensemaking Systems",
   "author": "__<u>Peinuan Qin</u>__, Prof. Chilan-Yang, Prof. Jane E",
-  "url": "...",
-  "labels": ["LLM", "System Built", "Empirical"],
+  "abstract": "The development of AI-assisted creation tools has brought improvements in efficiency and output quality, but it has also introduced a series of challenges. These include a decline of user ownership, autonomy, skill development, and critical thinking. Such issues can hinder the development of users’ creative abilities and reduce their deep engagement with the content. In response, we are exploring a series of tools aimed at enhancing the quality and outcomes of creation while preserving the user’s creative experience. Specifically, we are developing a new generation of AI-assisted writing and sensemaking tools to advance the current paradigm of Human-AI co-creation.",
+  "url": "",
+  "labels": [{"title": "call for intern", "type": "success"}],
   "status": ["\uD83D\uDD52 Ongoing"],
   "published": "Ongoing",
   "year": "2025-2028",

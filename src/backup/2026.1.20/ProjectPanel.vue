@@ -157,9 +157,10 @@ Together, these efforts aim to uncover design principles for building **co-creat
         "ai_assisted_creation",
           "ai_mediated_communication",
           "timing_matters",
-          "speaking_support_for_NNS",
-          "language_learning_support",
+          "AISA",
+          "skill_development",
           "cyberbullying_mitigation",
+          "automatic_interview",
 
         // "literature_review_tool",
         // "nns_ns_communication"

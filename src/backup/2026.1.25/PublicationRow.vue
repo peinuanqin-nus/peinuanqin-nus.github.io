@@ -11,34 +11,39 @@
 
       <p class="pub-authors" v-html="authorsHtml"></p>
 
-      <!-- 🏷 Labels -->
-      <div v-if="project.labels && project.labels.length" class="pub-labels">
-        <el-tag
-            v-for="(label, idx) in project.labels"
-            :key="idx"
-            size="mini"
-            :type="label.type || 'info'"
-            effect="light"
-        >
-          {{ label.title }}
-        </el-tag>
-      </div>
+<!--      <p class="pub-venue">-->
+<!--        <i>{{ project.venue || project.published }}</i>-->
+<!--      </p>-->
 
+      <!-- 🔘 Buttons -->
+<!--      <div class="pub-actions">-->
+<!--        <el-button-->
+<!--            v-if="project.url"-->
+<!--            type="primary"-->
+<!--            size="mini"-->
+<!--            plain-->
+<!--            @click.stop="openUrl"-->
+<!--        >-->
+<!--          Paper URL-->
+<!--        </el-button>-->
 
+<!--        <el-button-->
+<!--            size="mini"-->
+<!--            plain-->
+<!--            @click.stop="toggleAbstract"-->
+<!--        >-->
+<!--          Abstract-->
+<!--          <span v-if="showAbstract">▲</span>-->
+<!--          <span v-else>▼</span>-->
+<!--        </el-button>-->
+<!--      </div>-->
       <div class="pub-actions">
-        <span
-            v-if="project.arxiv"
-            class="action-link"
-            @click.stop="openUrl"
-        >
-           🔗 Arxiv
-        </span>
         <span
             v-if="project.url"
             class="action-link"
             @click.stop="openUrl"
         >
-          📖 Paper
+          📄 Paper
         </span>
 
               <span
@@ -167,12 +172,4 @@ export default {
   font-size: 13px;
   line-height: 1.7;
 }
-
-.pub-labels {
-  margin-top: 6px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
 </style>

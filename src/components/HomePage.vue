@@ -1,46 +1,48 @@
 <template>
   <el-container>
-    <el-header>
-<!--      <h2 class="title">Qin Peinuan</h2>-->
-      <span class="title">{{userName}}</span>
+<!--    <el-header>-->
+<!--      <span class="title">{{userName}}</span>-->
+<!--    </el-header>-->
+    <el-header class="fixed-header">
+      <div class="nav-bar">
+        <span class="title">{{ userName }}</span>
+
+        <div class="nav-links">
+          <span @click="scrollToSection('profile')">Profile</span>
+          <span @click="scrollToSection('recent_news')">Recent News</span>
+          <span @click="scrollToSection('projects')">Projects</span>
+          <span @click="scrollToSection('collaborators')">Collaborators</span>
+        </div>
+      </div>
     </el-header>
+
+<!--    <el-main class="main_container">-->
+<!--      <ProfilePanel></ProfilePanel>-->
+<!--      <RecentNews></RecentNews>-->
+<!--      <ProjectPanel></ProjectPanel>-->
+<!--      <CollaboratorPanel></CollaboratorPanel>-->
+<!--    </el-main>-->
     <el-main class="main_container">
-      <ProfilePanel></ProfilePanel>
-      <RecentNews></RecentNews>
-      <ProjectPanel></ProjectPanel>
-      <CollaboratorPanel></CollaboratorPanel>
+      <div id="profile">
+        <ProfilePanel />
+      </div>
+
+      <div id="recent_news">
+        <RecentNews />
+      </div>
+
+      <div id="projects">
+        <ProjectPanel />
+      </div>
+
+      <div id="collaborators">
+        <CollaboratorPanel />
+      </div>
     </el-main>
 
-<!--    <el-main>-->
-<!--      <el-card class="intro-card">-->
-<!--        <h2>About Me</h2>-->
-<!--        <p>I am a CS PhD student at NUS, focusing on HCI and AI-assisted writing.</p>-->
-<!--      </el-card>-->
-<!--      <el-row :gutter="20">-->
-<!--        <el-col :span="12">-->
-<!--          <el-card class="section-card">-->
-<!--            <h3>Projects</h3>-->
-<!--            <ul>-->
-<!--              <li>Writing Retrieval System</li>-->
-<!--              <li>Interactive Paper Track System</li>-->
-<!--              <li>PDF Reader with ChatPDF</li>-->
-<!--            </ul>-->
-<!--          </el-card>-->
-<!--        </el-col>-->
-<!--        <el-col :span="12">-->
-<!--          <el-card class="section-card">-->
-<!--            <h3>Publications</h3>-->
-<!--            <ul>-->
-<!--              <li>ACM CHI Paper on AI-Assisted Writing</li>-->
-<!--              <li>Upcoming UIST Submission</li>-->
-<!--            </ul>-->
-<!--          </el-card>-->
-<!--        </el-col>-->
-<!--      </el-row>-->
-<!--    </el-main>-->
-    <el-footer>
-      <p class="footer">© 2025 Qin Peinuan | Built with Vue & Element UI</p>
-    </el-footer>
+    <!--    <el-footer>-->
+<!--      <p class="footer">© 2025 Qin Peinuan | Built with Vue & Element UI</p>-->
+<!--    </el-footer>-->
   </el-container>
 </template>
 
@@ -56,6 +58,33 @@ export default {
     return{
       userName: "Qin Peinuan"
     }
+  },
+
+  methods:{
+    // scrollToSection(id) {
+    //   const el = document.getElementById(id);
+    //   if (el) {
+    //     el.scrollIntoView({
+    //       behavior: "smooth",
+    //       block: "start"
+    //     });
+    //   }
+    // }
+    scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        const y =
+            el.getBoundingClientRect().top +
+            window.pageYOffset -
+            80; // header height
+
+        window.scrollTo({
+          top: y,
+          behavior: "smooth"
+        });
+      }
+    },
+
   }
 };
 </script>
@@ -92,6 +121,53 @@ body {
 
 }
 
+
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  z-index: 999;
+
+  background-color: #333;
+  color: white;
+
+  display: flex;
+  align-items: center;
+}
+
+
+.nav-bar {
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-links span {
+  margin-left: 22px;
+  font-size: 14px;
+  cursor: pointer;
+  opacity: 0.85;
+  transition: 0.2s;
+}
+
+.nav-links span:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.main_container {
+  /*margin-top: 50px;*/
+  padding-top: 90px; /* 给 header 留空间 */
+  background: white;
+}
+
+
 .title {
   /*font-size: 2.5rem;*/
   font-size: 1.5rem;
@@ -101,6 +177,7 @@ body {
 }
 
 .el-main {
+  margin-top: 60px;  /* header height */
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -4,7 +4,7 @@
   "author": "Ruotong Zou, Shuyu Yin, Tianqi Song, __<u>Peinuan Qin</u>__, Yi-Chieh Lee",
   "abstract": "As virtual reality (VR) becomes more popular for intergenerational collaboration, there is a significant gap in research regarding understanding the potential to reduce ageism. Our study aims to address this gap by analyzing ageism levels before and after collaborative VR escape room experiences. We recruited 28 participants to collaborate with an older player in a challenging VR escape room game. To ensure consistent and reliable performance data of older players, our experimenters simulated older participants following specific guidelines. After completing the game, we found a significant reduction in ageism among younger participants. Furthermore, we introduce a new game mechanism that encourages intergenerational collaboration. Our research highlights the potential of collaborative VR games as a practical tool to mitigate ageism. It provides valuable insights for designing immersive VR experiences that foster enhanced intergenerational collaboration.",
   "url": "https://doi.org/10.1145/3613905.3650914",
-  "labels": ["LLM", "VR", "Elderly"],
+  "labels": [],
   "status": ["\uD83D\uDFE2 Accept"],
   "published": "CHI2024 Extended Abstract",
   "year": "2025-2028",

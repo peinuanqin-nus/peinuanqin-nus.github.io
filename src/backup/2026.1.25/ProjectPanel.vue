@@ -1,6 +1,22 @@
 <!-- Project Panel -->
 <template>
   <div class="project-panel">
+<!--    <h2>Ongoing Projects</h2>-->
+<!--    <el-row :gutter="20" justify="center">-->
+<!--      <el-col v-for="(project, index) in ongoingProjects" :key="index" :span="8">-->
+<!--        <ProjectCard :project="project" :index="index" @click.native="openDrawer(project)"/>-->
+<!--      </el-col>-->
+<!--    </el-row>-->
+
+
+<!--    <h2>Finished Projects</h2>-->
+<!--    <el-row :gutter="20" justify="center">-->
+<!--      <el-col v-for="(project, index) in finishedProjects" :key="index" :span="8">-->
+<!--        <ProjectCard :project="project" :index="index" @click.native="openDrawer(project)"/>-->
+<!--      </el-col>-->
+<!--    </el-row>-->
+
+<!--    <h2>Finished Projects</h2>-->
     <h2>Selected Publications</h2>
     <PublicationRow
         v-for="(project, index) in finishedProjects"
@@ -16,6 +32,8 @@
         :project="project"
         @click="openDrawer(project)"
     />
+
+
     <el-dialog
         :visible.sync="drawerVisible"
         title=""
@@ -55,6 +73,12 @@
         <div v-html="markdownContent" class="markdown-body"></div>
       </div>
     </el-dialog>
+
+
+
+
+
+
   </div>
 </template>
 
@@ -73,7 +97,32 @@ export default {
   },
   data() {
     return {
+      // projects: [
+      //   { title: "Writing Retrieval System", labels: ["HCI", "AI"], year: 2025, image: "/projects/AI-assisted writing.png" },
+      //   { title: "Interactive Paper Track System", labels: ["Visualization", "AI"], year: 2024, image: "/projects/cyberbullying.png" },
+      //   { title: "PDF Reader with ChatPDF", labels: ["AI", "UX"], year: 2024, image: "/projects/NNS.png" },
+      //   { title: "PDF Reader with ChatPDF", labels: ["AI", "UX"], year: 2024, image: "/projects/NNS.png" }
+      // ],
       ongoingProjects: [],
+//       ongoingIntro: marked(`
+// I'm currently focusing on several **AI + HCI** topics, such as:
+//
+// - ✍️ *AI-assisted creation* — studying how AI can support and co-create with humans.
+// - 🧠 *Language learning & communication support* — especially for **non-native speakers** (NNS).
+// - 🤝 *Human-AI interaction* — exploring timing, involvement, and feedback in collaborative writing.
+//
+// These projects reflect my broader interests in augmenting human cognition and expression with intelligent systems.
+// `),
+
+  //     ongoingIntro: marked(`
+  // We are currently exploring four ongoing directions that bridge **AI and HCI**:
+  //
+  //     - **AI-assisted creation**: We investigate how co-creation tools can improve writing quality and efficiency while maintaining user agency, focusing on literature review and academic writing support.
+  //     - **AI-mediated communication**: We design systems that reduce language barriers in multilingual teams, especially by empowering non-native speakers (NNS) in real-time conversations with native speakers (NS).
+  //     - **Cyberbullying intervention**: We build LLM-driven tools that help online bystanders overcome psychological and expressive barriers, encouraging direct and confident responses to bullying behavior.
+  //     - **Language learning support**: We study how LLMs can act as adaptive partners in learning, enabling NNS to develop sustainable writing and speaking practices across diverse learning scenarios.
+  //  Across these projects, we aim to enhance creativity, inclusion, and learning by carefully designing **human-centered AI systems**.`),
+
       ongoingIntro: marked(`
 We are currently investigating how **human-centered AI** can support expression, communication, and learning across diverse contexts.
 Our ongoing projects span several interrelated directions:
@@ -103,9 +152,6 @@ Together, these efforts aim to uncover design principles for building **co-creat
 
         "ai_assisted_creation",
           "skill_development",
-        "automatic_interview",
-        "modeling_human",
-
 
         // "literature_review_tool",
         // "nns_ns_communication"
