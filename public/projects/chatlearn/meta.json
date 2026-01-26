@@ -1,7 +1,7 @@
 {
   "title": "ChatLearn: Leveraging Non-Native Speaker Communication Challenges as Language Learning Opportunities",
   "short_title": "ChatLearn",
-  "author": "__<u>Peinuan Qin</u>__, Chilan-Yang, Nattapat Boonprakong, Jingzhu Chen, Yugin Tan, Yi-Chieh Lee",
+  "author": "__<u>Peinuan Qin</u>__, Yugin Tan, Jingzhu Chen, Nattapat Boonprakong, Zicheng Zhu, Naomi Yamashita, Yi-Chieh Lee",
   "abstract": "Non-native speakers (NNSs) face significant language barriers in multilingual communication with native speakers (NSs). While AI-mediated communication (AIMC) tools offer efficient one-time assistance, they often overlook opportunities for NNSs' continuous language acquisition in communication. We introduce ChatLearn, an enhanced AIMC system that leverages NNSs' communication difficulties as learning opportunities. Beyond comprehension and expression assistance, ChatLearn simultaneously captures NNSs' language challenges, and subsequently provides spaced review to NNSs as the conversation progresses. We conducted a mixed-methods study using a communication task with 43 NNS-NS pairs, after which ChatLearn NNSs recalled significantly more expressions than the baseline group, while there was no substantial decline in communication experience. Our findings highlight the value of contextual learning in NNS-NS communication, providing a new direction for AIMC systems that foster both immediate collaboration and continuous language development.",
   "url": "",
   "arxiv": "",
