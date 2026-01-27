@@ -29,14 +29,14 @@
         <span
             v-if="project.arxiv"
             class="action-link"
-            @click.stop="openUrl"
+            @click.stop="openUrl(project.arxiv)"
         >
            🔗 Arxiv
         </span>
         <span
             v-if="project.url"
             class="action-link"
-            @click.stop="openUrl"
+            @click.stop="openUrl(project.url)"
         >
           📖 Paper
         </span>
@@ -86,8 +86,9 @@ export default {
     toggleAbstract() {
       this.showAbstract = !this.showAbstract;
     },
-    openUrl() {
-      window.open(this.project.url, "_blank");
+    openUrl(link) {
+      if (!link) return;
+      window.open(link, "_blank");
     },
   },
 };
