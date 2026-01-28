@@ -61,6 +61,11 @@ export default {
         {
           date: "2026-01",
           content:
+              "🚀 Our startup project successfully cleared the **VIP Three-Month Initial Review**, marking a key milestone and the official start of **Phase II** with continued grant support."
+        },
+        {
+          date: "2026-01",
+          content:
               "🌟 Participated in [**NUS-Google Workshop: The Future of CS Education in the AI Era**](https://futuredu.student.ai4sg.org/) (student-focused program) as a <u>_Facilitator_</u>"
         },
         {
