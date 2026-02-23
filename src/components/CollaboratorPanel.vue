@@ -185,6 +185,12 @@ export default {
           avatar: "/collaborators/ann.png",
           link: "https://www.linkedin.com/in/annyuanchen/",
         },
+        {
+          name: "Yulu Pi",
+          role: "Postdoctoral Research Associate @ University of Duisburg-Essen",
+          avatar: "/collaborators/yulu.png",
+          link: "https://nikipi.github.io/",
+        },
       ],
 
 

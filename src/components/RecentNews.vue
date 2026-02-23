@@ -59,6 +59,13 @@ export default {
     return {
       recentNews: [
         {
+          date: "2026-02",
+          content:
+              "🎉 Two papers accepted as **CHI 2026 Posters**: <br/>" +
+              "- [first author] <u>_ConvScale: Conversational Interviews for Scale-Aligned Measurement_</u> <br/>" +
+              "- [second author] <u>_Branchat: A Tree-Structured Interface for Efficient Revisitation in Long-Horizon LLM Conversations_</u>"
+        },
+        {
           date: "2026-01",
           content:
               "🚀 Our startup project successfully cleared the **VIP Three-Month Initial Review**, marking a key milestone and the official start of **Phase II** with continued grant support."
