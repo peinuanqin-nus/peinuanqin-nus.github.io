@@ -104,6 +104,7 @@ Together, these efforts aim to uncover design principles for building **co-creat
         "ai_mediated_communication",
 
         "ai_assisted_creation",
+          "advancing_communication_between_groups",
           "skill_development",
         "automatic_interview",
         "modeling_human",
