@@ -88,6 +88,8 @@ Together, these efforts aim to uncover design principles for building **co-creat
       finishedProjects:[],
 
       projectFolders: [
+        "cyberbullying_mitigation",
+        "ai_mediated_communication",
         "AI_personalization",
         "chatlearn",
         "QualCausal",
@@ -99,9 +101,6 @@ Together, these efforts aim to uncover design principles for building **co-creat
         "VR",
           "Gait",
 
-
-        "cyberbullying_mitigation",
-        "ai_mediated_communication",
 
         "ai_assisted_creation",
           "advancing_communication_between_groups",

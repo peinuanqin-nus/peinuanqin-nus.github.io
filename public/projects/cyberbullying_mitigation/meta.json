@@ -1,11 +1,11 @@
 {
-  "title": "AI for Social Good (Cyberbullying & Mental Health)",
+  "title": "AI for Cyberbullying Mitigation [Unreal title]",
   "short_title": "AI for Social Good",
-  "author": "__<u>Peinuan Qin</u>__, Prof. Jungup Lee",
+  "author": "__<u>Peinuan Qin</u>__, Jiting Cheng, Jungup Lee, Junti Zhang, Zhixing Liu, Yi-Chieh Lee",
   "url": "",
   "labels": [],
-  "status": ["\uD83D\uDD52 Ongoing"],
-  "published": "CSCW2026 Under Revision",
+  "status": ["\uD83D\uDFE2 Accept"],
+  "published": "CSCW2026 Conditionally Accepted",
   "year": "2025-2028",
   "image": "/projects/cyberbullying_mitigation/img.png"
 }

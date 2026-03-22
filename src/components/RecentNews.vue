@@ -59,9 +59,14 @@ export default {
     return {
       recentNews: [
         {
+          date: "2026-03",
+          content:
+              "🎉 **Two** [first-author] full papers have been **conditionally accepted** by **CSCW 2026**. I am currently preparing the camera-ready versions, and the final titles and preprints will be announced soon."
+        },
+        {
           date: "2026-02",
           content:
-              "🎉 Two papers accepted as **CHI 2026 Posters**: <br/>" +
+              "🎉 **Two** papers accepted as **CHI 2026 Posters**: <br/>" +
               "- [first author] <u>_ConvScale: Conversational Interviews for Scale-Aligned Measurement_</u> <br/>" +
               "- [second author] <u>_Branchat: A Tree-Structured Interface for Efficient Revisitation in Long-Horizon LLM Conversations_</u>"
         },
@@ -75,20 +80,28 @@ export default {
           content:
               "🌟 Participated in [**NUS-Google Workshop: The Future of CS Education in the AI Era**](https://futuredu.student.ai4sg.org/) (student-focused program) as a <u>_Facilitator_</u>"
         },
+        // {
+        //   date: "2026-01",
+        //   content:
+        //       "🎉 [first author] Full paper <u>_AI Personalization Paradox: Reading Highlights for Personalized AI-Assisted Writing Increases Engagement but Undermines Autonomy and Ownership_</u> accepted to **CHI 2026**"
+        // },
+        // {
+        //   date: "2026-01",
+        //   content:
+        //       "🎉 [first author] Full paper <u>_ChatLearn: Leveraging Non-Native Speaker Communication Challenges as Language Learning Opportunities_</u> accepted to **CHI 2026**"
+        // },
+        // {
+        //   date: "2026-01",
+        //   content:
+        //       "🎉 [third author] Full paper <u>_Designing Computational Tools for Exploring Causal Relationships in Qualitative Data_</u> accepted to **CHI 2026**"
+        // },
         {
           date: "2026-01",
           content:
-              "🎉 [first author] Full paper <u>_AI Personalization Paradox: Reading Highlights for Personalized AI-Assisted Writing Increases Engagement but Undermines Autonomy and Ownership_</u> accepted to **CHI 2026**"
-        },
-        {
-          date: "2026-01",
-          content:
-              "🎉 [first author] Full paper <u>_ChatLearn: Leveraging Non-Native Speaker Communication Challenges as Language Learning Opportunities_</u> accepted to **CHI 2026**"
-        },
-        {
-          date: "2026-01",
-          content:
-              "🎉 [third author] Full paper <u>_Designing Computational Tools for Exploring Causal Relationships in Qualitative Data_</u> accepted to **CHI 2026**"
+              "🎉 **Three** full papers accepted to **CHI 2026**: <br/>" +
+              "- [first author] <u>_AI Personalization Paradox: Reading Highlights for Personalized AI-Assisted Writing Increases Engagement but Undermines Autonomy and Ownership_</u> <br/>" +
+              "- [first author] <u>_ChatLearn: Leveraging Non-Native Speaker Communication Challenges as Language Learning Opportunities_</u> <br/>" +
+              "- [third author] <u>_Designing Computational Tools for Exploring Causal Relationships in Qualitative Data_</u>"
         },
 
         {
@@ -105,17 +118,28 @@ export default {
           date: "2025-07",
           content: "🏆 Received the **Research Achievement Award** in recognition of research contributions."
         },
-        { date: "2025-04", content: "🎤 Attended **[SG CHI Meetup](https://sghcimeetup25.notion.site/)** on April 15, 2025, and delivered a presentation on my 2025CHI work." },
-        { date: "2025-03", content: "🎉 [first author] Workshop paper <u>_Empowering Bystanders: Leveraging Generative AI to Enhance Direct Cyberbullying Intervention and Support Teen Well-Being_</u> accepted to **CHI 2025 Mobile Technology and Teens workshop**" },
+        // { date: "2025-04", content: "🎤 Attended **[SG CHI Meetup](https://sghcimeetup25.notion.site/)** on April 15, 2025, and delivered a presentation on my 2025CHI work." },
+        // { date: "2025-03", content: "🎉 [first author] Workshop paper <u>_Empowering Bystanders: Leveraging Generative AI to Enhance Direct Cyberbullying Intervention and Support Teen Well-Being_</u> accepted to **CHI 2025 Mobile Technology and Teens workshop**" },
         // { date: "2025-02", content: "Two full paper <u>_Timing Matters: How Using LLMs at Different Timings Influences Writers’ Perceptions and Ideation Outcomes in AI-Assisted Ideation_</u> and <u>_Deconstructing Depression Stigma: Integrating AI-driven Data Collection and Analysis with Causal Knowledge Graphs_</u> accepted to **CHI 2025**" },
-        { date: "2025-02", content: "🎉 [first author] Full paper <u>_Timing Matters: How Using LLMs at Different Timings Influences Writers’ Perceptions and Ideation Outcomes in AI-Assisted Ideation_</u> accepted to **CHI 2025**" },
+        // { date: "2025-02", content: "🎉 [first author] Full paper <u>_Timing Matters: How Using LLMs at Different Timings Influences Writers’ Perceptions and Ideation Outcomes in AI-Assisted Ideation_</u> accepted to **CHI 2025**" },
+        // {
+        //   date: "2025-02",
+        //   content:
+        //       "🎉 [fifth author] Contributed to <u>_Deconstructing Depression Stigma: Integrating AI-driven Data Collection and Analysis with Causal Knowledge Graphs_</u> (led by Menghan), accepted to **CHI 2025**"
+        // },
+        {
+          date: "2025-03",
+          content: "🎉 [first author] Workshop paper <u>_Empowering Bystanders: Leveraging Generative AI to Enhance Direct Cyberbullying Intervention and Support Teen Well-Being_</u> accepted to **CHI 2025 Mobile Technology and Teens workshop**"
+        },
         {
           date: "2025-02",
           content:
-              "🎉 [fifth author] Contributed to <u>_Deconstructing Depression Stigma: Integrating AI-driven Data Collection and Analysis with Causal Knowledge Graphs_</u> (led by Menghan), accepted to **CHI 2025**"
+              "🎉 **Two** papers accepted to **CHI 2025**: <br/>" +
+              "- [first author] Full paper <u>_Timing Matters: How Using LLMs at Different Timings Influences Writers’ Perceptions and Ideation Outcomes in AI-Assisted Ideation_</u> <br/>" +
+              "- [fifth author] Contributed to <u>_Deconstructing Depression Stigma: Integrating AI-driven Data Collection and Analysis with Causal Knowledge Graphs_</u> (led by Menghan)"
         },
         { date: "2025-02", content: "🎉 [first author] Full paper <u>_AI-Based Speaking Assistant: Supporting Non-Native Speakers’ Speaking in Real-Time Multilingual Communication_</u> accepted to **CSCW 2025**" },
-        { date: "2024-12", content: "🎉 [first author] Workshop paper <u>_Empowering Bystanders: Enhancing Direct Intervention in Cyberbullying with EmojiGen_</u> accepted to **WABF (World Anti-Bullying Forum) 2025**" },
+        { date: "2024-12", content: "🎉 [first author] Workshop paper <u>_Empowering Bystanders: Enhancing Direct Intervention in Cyberbullying with EmojiGen_</u> accepted to [**WABF (World Anti-Bullying Forum) 2025**](https://indico2.uis.no/event/49/contributions/1491/)" },
         {
           date: "2024-05",
           content:
