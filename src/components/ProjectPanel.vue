@@ -1,92 +1,65 @@
-<!-- Project Panel -->
 <template>
   <div class="project-panel">
-    <h2>Selected Publications</h2>
-    <PublicationRow
-        v-for="(project, index) in finishedProjects"
-        :key="index"
-        :project="project"
-        @click="openDrawer(project)"
-    />
+    <div class="section-heading">
+      <p class="section-eyebrow">Research Portfolio</p>
+      <h2>Projects & Publications</h2>
+      <p class="section-intro">
+        A curated selection of accepted papers and ongoing projects across communication, writing, learning, and social support.
+      </p>
+    </div>
 
-    <h2>Ongoing Projects</h2>
-    <PublicationRow
-        v-for="(project, index) in ongoingProjects"
-        :key="index"
-        :project="project"
-        @click="openDrawer(project)"
-    />
-    <el-dialog
-        :visible.sync="drawerVisible"
-        title=""
-        width="60%"
-        class="project-dialog"
-        :close-on-click-modal="false"
-    >
-      <div class="dialog-content">
-        <h1 class="project-title">{{ selectedProject.title }}</h1>
-
-
-
-        <div class="info-grid">
-          <div><span class="label">✍️ Author:</span>
-            <span v-html="selectedProject.author" class="markdown-inline"></span>
-          </div>
-
-          <div><span class="label">🔗 Paper URL:</span>
-            <span v-if="selectedProject.url" v-html="selectedProject.url" class="markdown-inline"></span>
-            <span v-else>...</span>
-          </div>
-
-          <div><span class="label">🌟 Status:</span>
-            <el-tag
-                v-for="(tag, index) in selectedProject.status"
-                :key="index"
-                :type="tagColorMap[tag] || 'info'"
-            >{{ tag }}</el-tag>
-          </div>
-          <div v-if="selectedProject.published"><span class="label">🏛️ Published:</span>
-            <span style="font-weight: bolder">{{selectedProject.published}}</span>
-          </div>
+    <div class="project-group">
+      <div class="group-header">
+        <div>
+          <h3>Selected Publications</h3>
+          <p>Accepted and published work with links, abstracts, and publication details.</p>
         </div>
-
-        <hr />
-
-        <div v-html="markdownContent" class="markdown-body"></div>
+        <span class="group-count">{{ finishedProjects.length }}</span>
       </div>
-    </el-dialog>
+
+      <div class="group-card">
+        <PublicationRow
+            v-for="(project, index) in finishedProjects"
+            :key="`finished-${index}`"
+            :project="project"
+        />
+      </div>
+    </div>
+
+    <div class="project-group">
+      <div class="group-header">
+        <div>
+          <h3>Ongoing Projects</h3>
+          <p>Current systems, interventions, and research questions under active development.</p>
+        </div>
+        <span class="group-count">{{ ongoingProjects.length }}</span>
+      </div>
+
+      <div class="group-card">
+        <PublicationRow
+            v-for="(project, index) in ongoingProjects"
+            :key="`ongoing-${index}`"
+            :project="project"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-// import ProjectCard from "@/components/ProjectCard";
-import {marked} from "marked";
+import { marked } from "marked";
 import PublicationRow from "@/components/PublicationRow";
 
 export default {
   name: "ProjectPanel",
-  components: {
-    // ProjectCard,
-    PublicationRow },
+  components: { PublicationRow },
   created() {
     this.loadAllProjects();
   },
   data() {
     return {
       ongoingProjects: [],
-      ongoingIntro: marked(`
-We are currently investigating how **human-centered AI** can support expression, communication, and learning across diverse contexts.
-Our ongoing projects span several interrelated directions:
-- **AI-assisted creation** — exploring how intelligent systems can augment, rather than replace, human agency in creative practices.
-- **AI-mediated communication** — designing tools that facilitate mutual understanding across linguistic and cultural boundaries.
-- **Supportive social interventions** — leveraging AI to empower users in responding to challenging social dynamics, such as online hostility.
-- **Language learning with AI** — examining how LLMs can act as adaptive and context-aware partners in the development of communicative competence.
-
-Together, these efforts aim to uncover design principles for building **co-creative, empowering, and inclusive AI systems**.
-`),
-
-      finishedProjects:[],
-
+      finishedProjects: [],
       projectFolders: [
         "cyberbullying_mitigation",
         "ai_mediated_communication",
@@ -99,53 +72,16 @@ Together, these efforts aim to uncover design principles for building **co-creat
         "AISA",
         "Stigma",
         "VR",
-          "Gait",
-
-
+        "Gait",
         "ai_assisted_creation",
-          "advancing_communication_between_groups",
-          "skill_development",
+        "advancing_communication_between_groups",
+        "skill_development",
         "automatic_interview",
-        "modeling_human",
-
-
-        // "literature_review_tool",
-        // "nns_ns_communication"
-      ],
-
-      drawerVisible: false,
-      selectedProject: {},
-      newTag: "",
-      markdownContent: "",
-
-
-      tagColorMap: {
-        "🕒 Ongoing": 'warning',
-        "🟢 Accept": 'success'
-      }
+        "modeling_human"
+      ]
     };
   },
-
-  methods:{
-    openDrawer(project) {
-      console.log("Clicked project:", project);
-      this.selectedProject = { ...project }; // 深拷贝避免副作用
-      this.markdownContent = marked(project.content || "No content available.");
-      this.selectedProject.author = marked(project.author || "Unknown");
-      this.selectedProject.url = marked(project.url || "...");
-      this.drawerVisible = true;
-    },
-    addTag() {
-      const tag = this.newTag.trim();
-      if (tag && !this.selectedProject.status.includes(tag)) {
-        this.selectedProject.status.push(tag);
-      }
-      this.newTag = "";
-    },
-    removeTag(index) {
-      this.selectedProject.status.splice(index, 1);
-    },
-
+  methods: {
     async loadAllProjects() {
       const loadedProjects = await Promise.all(
           this.projectFolders.map((folder) => this.loadProject(folder))
@@ -161,183 +97,116 @@ Together, these efforts aim to uncover design principles for building **co-creat
           .filter((p) => !p.status || p.status[0] !== "🕒 Ongoing")
           .sort((a, b) => b.year - a.year);
     },
-
     async loadProject(folder) {
       try {
         const metaRes = await fetch(`/projects/${folder}/meta.json`);
         const meta = await metaRes.json();
-
         const descRes = await fetch(`/projects/${folder}/description.md`);
         const descText = await descRes.text();
         const content = marked(descText);
-
         return { ...meta, content };
       } catch (error) {
         console.error(`Error loading project from folder "${folder}":`, error);
         return null;
       }
-    },
-
-    // 👇 加上这个方法！
-    toArray(input) {
-      if (!input) return [];
-      if (Array.isArray(input)) return input;
-      return [String(input)];
     }
-
-
-
   }
 };
 </script>
 
 <style scoped>
 .project-panel {
-  width: 75%;
-  margin: 0px auto;
-  padding: 20px;
-  /*background-color: white;*/
-  /*background-color: white;*/
-  border-radius: 10px;
-  /*box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);*/
-  /*text-align: center;*/
-}
-
-
-.drawer-header {
-  font-size: 14px;
-  line-height: 1.6;
-  margin-bottom: 10px;
-}
-
-.status-tags {
-  margin-top: 10px;
-}
-
-.markdown-body {
-  margin-top: 20px;
-  font-size: 14px;
-  line-height: 1.8;
-}
-
-
-.project-detail-container {
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-}
-
-.project-card {
   width: 100%;
-  border-radius: 16px;
-  font-size: 14px;
-}
-
-.project-title {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 16px;
-}
-
-.info-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-  margin-bottom: 16px;
-}
-
-.label {
-  font-weight: 500;
-  margin-right: 5px;
-}
-
-
-
-.project-dialog ::v-deep .el-dialog {
-  border-radius: 16px;
-  padding: 20px;
-}
-
-.project-detail-container {
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 0;
-  display: flex;
-  justify-content: center;
+  color: #222;
 }
 
-.project-card {
-  width: 100%;
-  border-radius: 16px;
-  font-size: 14px;
+.section-heading {
+  max-width: 760px;
+  margin-bottom: 34px;
 }
 
-
-
-
-
-
-
-
-.project-dialog ::v-deep .el-dialog {
-  border-radius: 16px;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
-  padding: 20px;
+.section-eyebrow {
+  margin: 0 0 12px;
+  font-size: 0.86rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #145c52;
+  font-weight: 700;
 }
 
-.dialog-content {
-  font-size: 14px;
-  line-height: 1.8;
-}
-
-.project-title {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 16px;
-}
-
-.info-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-  margin-bottom: 16px;
-}
-
-.label {
-  font-weight: 500;
-  margin-right: 5px;
-}
-
-.markdown-body {
-  margin-top: 20px;
-  font-size: 14px;
-  line-height: 1.8;
-}
-
-
-.markdown-inline :deep(p) {
-  display: inline;
+.project-panel h2 {
   margin: 0;
-  padding: 0;
+  font-size: 2rem;
+  line-height: 1.15;
 }
 
-
-::v-deep(.el-tag) {
-  border-radius: 12px !important; /* 想多大就多大 */
-  /*padding: 3px 10px; !* 可选：更紧凑些 *!*/
+.section-intro {
+  margin: 14px 0 0;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #5b5b5b;
 }
 
-
-.section-description {
-  font-size: 14px;
-  margin-bottom: 20px;
-  color: #666;
-  text-align: center;
+.project-group + .project-group {
+  margin-top: 40px;
 }
 
-.project-intro {
-  margin-bottom: 20px;
-  text-align: left;
+.group-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
 }
 
+.group-header h3 {
+  margin: 0;
+  font-size: 1.4rem;
+}
 
+.group-header p {
+  margin: 6px 0 0;
+  color: #686868;
+  line-height: 1.6;
+}
 
+.group-count {
+  flex-shrink: 0;
+  min-width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(20, 92, 82, 0.08);
+  color: #145c52;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.group-card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(249, 247, 242, 0.96) 100%);
+  border: 1px solid rgba(20, 92, 82, 0.1);
+  border-radius: 24px;
+  padding: 8px 26px;
+  box-shadow: 0 16px 40px rgba(21, 31, 38, 0.05);
+}
+
+@media (max-width: 768px) {
+  .project-panel h2 {
+    font-size: 1.6rem;
+  }
+
+  .group-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .group-card {
+    padding: 4px 18px;
+  }
+}
 </style>

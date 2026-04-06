@@ -2,8 +2,7 @@
   <div class="recent-news-page">
     <div class="page-center">
       <el-row :gutter="28" class="content-row">
-        <!-- Left: News -->
-        <el-col :span="14" class="full-height">
+        <el-col :xs="24" :md="14" class="full-height">
           <div class="panel">
             <h2 class="panel-title">Recent News</h2>
 
@@ -24,8 +23,7 @@
           </div>
         </el-col>
 
-        <!-- Right: Awards -->
-        <el-col :span="10" class="full-height">
+        <el-col :xs="24" :md="10" class="full-height">
           <div class="panel">
             <h2 class="panel-title">Awards & Honors</h2>
 
@@ -80,21 +78,6 @@ export default {
           content:
               "🌟 Participated in [**NUS-Google Workshop: The Future of CS Education in the AI Era**](https://futuredu.student.ai4sg.org/) (student-focused program) as a <u>_Facilitator_</u>"
         },
-        // {
-        //   date: "2026-01",
-        //   content:
-        //       "🎉 [first author] Full paper <u>_AI Personalization Paradox: Reading Highlights for Personalized AI-Assisted Writing Increases Engagement but Undermines Autonomy and Ownership_</u> accepted to **CHI 2026**"
-        // },
-        // {
-        //   date: "2026-01",
-        //   content:
-        //       "🎉 [first author] Full paper <u>_ChatLearn: Leveraging Non-Native Speaker Communication Challenges as Language Learning Opportunities_</u> accepted to **CHI 2026**"
-        // },
-        // {
-        //   date: "2026-01",
-        //   content:
-        //       "🎉 [third author] Full paper <u>_Designing Computational Tools for Exploring Causal Relationships in Qualitative Data_</u> accepted to **CHI 2026**"
-        // },
         {
           date: "2026-01",
           content:
@@ -103,7 +86,6 @@ export default {
               "- [first author] <u>_ChatLearn: Leveraging Non-Native Speaker Communication Challenges as Language Learning Opportunities_</u> <br/>" +
               "- [third author] <u>_Designing Computational Tools for Exploring Causal Relationships in Qualitative Data_</u>"
         },
-
         {
           date: "2025-11",
           content:
@@ -113,20 +95,10 @@ export default {
           date: "2025-09",
           content: "🏆 Received the **NUS Venture Initiation Programme (VIP)** award, supporting the development of an **AI-powered evaluation system** that provides scalable, automated **quantitative and qualitative analysis**."
         },
-
         {
           date: "2025-07",
           content: "🏆 Received the **Research Achievement Award** in recognition of research contributions."
         },
-        // { date: "2025-04", content: "🎤 Attended **[SG CHI Meetup](https://sghcimeetup25.notion.site/)** on April 15, 2025, and delivered a presentation on my 2025CHI work." },
-        // { date: "2025-03", content: "🎉 [first author] Workshop paper <u>_Empowering Bystanders: Leveraging Generative AI to Enhance Direct Cyberbullying Intervention and Support Teen Well-Being_</u> accepted to **CHI 2025 Mobile Technology and Teens workshop**" },
-        // { date: "2025-02", content: "Two full paper <u>_Timing Matters: How Using LLMs at Different Timings Influences Writers’ Perceptions and Ideation Outcomes in AI-Assisted Ideation_</u> and <u>_Deconstructing Depression Stigma: Integrating AI-driven Data Collection and Analysis with Causal Knowledge Graphs_</u> accepted to **CHI 2025**" },
-        // { date: "2025-02", content: "🎉 [first author] Full paper <u>_Timing Matters: How Using LLMs at Different Timings Influences Writers’ Perceptions and Ideation Outcomes in AI-Assisted Ideation_</u> accepted to **CHI 2025**" },
-        // {
-        //   date: "2025-02",
-        //   content:
-        //       "🎉 [fifth author] Contributed to <u>_Deconstructing Depression Stigma: Integrating AI-driven Data Collection and Analysis with Causal Knowledge Graphs_</u> (led by Menghan), accepted to **CHI 2025**"
-        // },
         {
           date: "2025-03",
           content: "🎉 [first author] Workshop paper <u>_Empowering Bystanders: Leveraging Generative AI to Enhance Direct Cyberbullying Intervention and Support Teen Well-Being_</u> accepted to **CHI 2025 Mobile Technology and Teens workshop**"
@@ -146,7 +118,6 @@ export default {
               "🎉  [forth author] contributed to <u>_Mitigating Ageism through Virtual Reality: Intergenerational Collaborative Escape Room Design_</u>, accepted to **CHI 2024 Late-Breaking Work (LBW)**"
         }
       ],
-
       awards: [
         {
           icon: "🏆",
@@ -161,11 +132,10 @@ export default {
           year: "2025",
           description:
               "Recognized for sustained research contributions and academic excellence."
-        },
+        }
       ]
     };
   },
-
   methods: {
     renderMarkdown(content) {
       return marked(content);
@@ -174,73 +144,87 @@ export default {
 };
 </script>
 
-
 <style scoped>
-/* 整个页面：固定高度 + 居中 */
 .recent-news-page {
-  /*height: 100vh;*/
-  /*height: 60vh;*/
   height: 55vh;
-  /*background: #f4f5f7;*/
-  background: white;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* 中央内容块 */
 .page-center {
   width: 100%;
   max-width: 1200px;
-  height: 55vh; /* 关键：整体高度固定 */
-  padding: 0 20px;
+  height: 55vh;
+  padding: 0;
   box-sizing: border-box;
 }
 
-/* 行和列必须满高 */
 .content-row,
 .full-height {
   height: 100%;
 }
 
-/* Panel 本体 */
 .panel {
   height: 100%;
-  /*background: white;*/
-  /*background: floralwhite;*/
-  background: white;
-  border-radius: 16px;
-  padding: 20px 22px;
+  background: linear-gradient(180deg, rgba(252, 250, 246, 0.96) 0%, rgba(247, 244, 236, 0.96) 100%);
+  border: 1px solid rgba(20, 92, 82, 0.12);
+  border-radius: 24px;
+  padding: 24px 22px;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  box-shadow: 0 16px 42px rgba(21, 31, 38, 0.06);
 }
 
-/* 标题固定 */
 .panel-title {
-  font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 12px;
+  font-size: 1.55rem;
+  font-weight: 700;
+  margin: 0 0 14px;
   flex-shrink: 0;
+  color: #17322e;
 }
 
-/* 可滚动内容区 */
 .panel-scroll {
   flex: 1;
   overflow-y: auto;
   padding-right: 8px;
 }
 
-/* News */
-.news-content {
-  font-size: 14px;
-  line-height: 1.6;
+.panel-scroll::-webkit-scrollbar {
+  width: 8px;
 }
 
-/* Awards */
+.panel-scroll::-webkit-scrollbar-thumb {
+  background: rgba(20, 92, 82, 0.24);
+  border-radius: 999px;
+}
+
+.news-content {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #313131;
+}
+
+.panel :deep(.el-timeline-item__timestamp) {
+  color: #145c52;
+  font-weight: 700;
+}
+
+.panel :deep(.el-timeline-item__node) {
+  background-color: #145c52;
+}
+
+.panel :deep(.el-card__body) {
+  padding: 18px;
+}
+
 .award-card {
   margin-bottom: 14px;
-  border-radius: 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(20, 92, 82, 0.08);
+  background: rgba(255, 255, 255, 0.74);
+  box-shadow: none;
 }
 
 .award-title {
@@ -256,8 +240,27 @@ export default {
 
 .award-desc {
   font-size: 14px;
-  line-height: 1.5;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .recent-news-page,
+  .page-center,
+  .content-row,
+  .full-height {
+    height: auto;
+  }
+
+  .panel {
+    padding: 20px 18px;
+  }
+
+  .panel-scroll {
+    max-height: 48vh;
+  }
+
+  .full-height + .full-height {
+    margin-top: 18px;
+  }
 }
 </style>
-
-
