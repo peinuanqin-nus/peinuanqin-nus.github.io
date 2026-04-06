@@ -8,21 +8,56 @@
       </p>
     </div>
 
+    <div class="filter-panel">
+      <div class="search-wrap">
+        <input
+            v-model.trim="searchQuery"
+            type="text"
+            class="search-input"
+            placeholder="Search by title, author, venue, abstract, or keyword"
+        />
+      </div>
+
+      <div class="filter-tags">
+        <button
+            class="filter-chip"
+            :class="{ active: selectedCategories.length === 0 }"
+            @click="clearCategories"
+        >
+          All
+        </button>
+        <button
+            v-for="category in availableCategories"
+            :key="category"
+            class="filter-chip"
+            :class="{ active: selectedCategories.includes(category) }"
+            @click="toggleCategory(category)"
+        >
+          {{ category }}
+        </button>
+      </div>
+
+      <p class="filter-summary">
+        Showing {{ filteredFinishedProjects.length + filteredOngoingProjects.length }} of {{ allProjects.length }} projects
+      </p>
+    </div>
+
     <div class="project-group">
       <div class="group-header">
         <div>
           <h3>Selected Publications</h3>
           <p>Accepted and published work with links, abstracts, and publication details.</p>
         </div>
-        <span class="group-count">{{ finishedProjects.length }}</span>
+        <span class="group-count">{{ filteredFinishedProjects.length }}</span>
       </div>
 
       <div class="group-card">
         <PublicationRow
-            v-for="(project, index) in finishedProjects"
+            v-for="(project, index) in filteredFinishedProjects"
             :key="`finished-${index}`"
             :project="project"
         />
+        <p v-if="filteredFinishedProjects.length === 0" class="empty-state">No publication matches the current search or label filters.</p>
       </div>
     </div>
 
@@ -32,15 +67,16 @@
           <h3>Ongoing Projects</h3>
           <p>Current systems, interventions, and research questions under active development.</p>
         </div>
-        <span class="group-count">{{ ongoingProjects.length }}</span>
+        <span class="group-count">{{ filteredOngoingProjects.length }}</span>
       </div>
 
       <div class="group-card">
         <PublicationRow
-            v-for="(project, index) in ongoingProjects"
+            v-for="(project, index) in filteredOngoingProjects"
             :key="`ongoing-${index}`"
             :project="project"
         />
+        <p v-if="filteredOngoingProjects.length === 0" class="empty-state">No ongoing project matches the current search or label filters.</p>
       </div>
     </div>
   </div>
@@ -58,6 +94,15 @@ export default {
   },
   data() {
     return {
+      searchQuery: "",
+      selectedCategories: [],
+      availableCategories: [
+        "AI for communication",
+        "AI for learning",
+        "AI for assessment",
+        "AI for creation",
+        "AI for social good"
+      ],
       ongoingProjects: [],
       finishedProjects: [],
       projectFolders: [
@@ -81,7 +126,51 @@ export default {
       ]
     };
   },
+  computed: {
+    allProjects() {
+      return [...this.finishedProjects, ...this.ongoingProjects];
+    },
+    filteredFinishedProjects() {
+      return this.finishedProjects.filter((project) => this.matchesFilters(project));
+    },
+    filteredOngoingProjects() {
+      return this.ongoingProjects.filter((project) => this.matchesFilters(project));
+    }
+  },
   methods: {
+    toggleCategory(category) {
+      if (this.selectedCategories.includes(category)) {
+        this.selectedCategories = this.selectedCategories.filter((item) => item !== category);
+        return;
+      }
+      this.selectedCategories = [...this.selectedCategories, category];
+    },
+    clearCategories() {
+      this.selectedCategories = [];
+    },
+    matchesFilters(project) {
+      const query = this.searchQuery.toLowerCase();
+      const haystack = [
+        project.title,
+        project.short_title,
+        project.author,
+        project.abstract,
+        project.published,
+        project.year,
+        ...(project.categories || []),
+        ...((project.labels || []).map((label) => label.title))
+      ]
+          .filter(Boolean)
+          .join(" ")
+          .toLowerCase();
+
+      const matchesQuery = !query || haystack.includes(query);
+      const matchesCategory =
+          this.selectedCategories.length === 0 ||
+          this.selectedCategories.some((category) => (project.categories || []).includes(category));
+
+      return matchesQuery && matchesCategory;
+    },
     async loadAllProjects() {
       const loadedProjects = await Promise.all(
           this.projectFolders.map((folder) => this.loadProject(folder))
@@ -150,6 +239,73 @@ export default {
   color: #5b5b5b;
 }
 
+.filter-panel {
+  margin-bottom: 34px;
+  padding: 20px 22px;
+  background: rgba(255, 255, 255, 0.84);
+  border: 1px solid rgba(20, 92, 82, 0.1);
+  border-radius: 22px;
+  box-shadow: 0 12px 34px rgba(21, 31, 38, 0.04);
+}
+
+.search-wrap {
+  margin-bottom: 16px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid rgba(20, 92, 82, 0.14);
+  border-radius: 14px;
+  box-sizing: border-box;
+  font: inherit;
+  font-size: 15px;
+  color: #1f1f1f;
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: rgba(20, 92, 82, 0.35);
+  box-shadow: 0 0 0 4px rgba(20, 92, 82, 0.08);
+}
+
+.filter-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.filter-chip {
+  padding: 8px 14px;
+  border: 1px solid rgba(20, 92, 82, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.78);
+  color: #34544d;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.18s ease;
+}
+
+.filter-chip:hover {
+  transform: translateY(-1px);
+  border-color: rgba(20, 92, 82, 0.24);
+}
+
+.filter-chip.active {
+  background: rgba(20, 92, 82, 0.1);
+  color: #145c52;
+  border-color: rgba(20, 92, 82, 0.22);
+}
+
+.filter-summary {
+  margin: 14px 0 0;
+  font-size: 0.92rem;
+  color: #6a6a6a;
+}
+
 .project-group + .project-group {
   margin-top: 40px;
 }
@@ -195,9 +351,19 @@ export default {
   box-shadow: 0 16px 40px rgba(21, 31, 38, 0.05);
 }
 
+.empty-state {
+  margin: 20px 0;
+  color: #727272;
+  font-style: italic;
+}
+
 @media (max-width: 768px) {
   .project-panel h2 {
     font-size: 1.6rem;
+  }
+
+  .filter-panel {
+    padding: 16px;
   }
 
   .group-header {

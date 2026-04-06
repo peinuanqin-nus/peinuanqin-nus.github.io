@@ -24,6 +24,16 @@
         </el-tag>
       </div>
 
+      <div v-if="project.categories && project.categories.length" class="pub-categories">
+        <span
+            v-for="(category, idx) in project.categories"
+            :key="`category-${idx}`"
+            class="category-pill"
+        >
+          {{ category }}
+        </span>
+      </div>
+
       <div class="pub-actions">
         <span
             v-if="project.arxiv"
@@ -190,6 +200,24 @@ export default {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
+}
+
+.pub-categories {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.category-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(20, 92, 82, 0.08);
+  color: #145c52;
+  font-size: 12px;
+  font-weight: 700;
 }
 
 @media (max-width: 768px) {
