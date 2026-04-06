@@ -184,7 +184,7 @@ export default {
   line-height: 1.1;
   margin: 0 0 12px;
   flex-shrink: 0;
-  color: #4f5f95;
+  color: #145c52;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
