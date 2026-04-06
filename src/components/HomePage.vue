@@ -59,7 +59,8 @@ export default {
     scrollToSection(id) {
       const el = document.getElementById(id);
       if (el) {
-        const y = el.getBoundingClientRect().top + window.pageYOffset - 122;
+        const mobileOffset = window.innerWidth <= 768 ? 112 : 122;
+        const y = el.getBoundingClientRect().top + window.pageYOffset - mobileOffset;
         window.scrollTo({
           top: y,
           behavior: "smooth"
@@ -235,26 +236,29 @@ body {
 @media (max-width: 768px) {
   :root {
     --page-side-padding: 16px;
-    --header-height: 118px;
+    --header-height: 96px;
     --section-gap: 40px;
   }
 
-  .main_container {
-    padding-top: 0;
+  .fixed-header {
+    align-items: flex-start;
+    padding: 10px 0 8px;
+    box-sizing: border-box;
   }
 
   .header-spacer {
-    height: calc(var(--header-height) + 10px);
+    height: calc(var(--header-height) + 6px);
   }
 
   .nav-bar {
-    height: 100%;
-    align-items: stretch;
-    justify-content: center;
-    gap: 10px;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 8px;
   }
 
   .brand-block {
+    width: 100%;
     gap: 10px;
   }
 
@@ -270,7 +274,7 @@ body {
   }
 
   .subtitle {
-    font-size: 0.62rem;
+    display: none;
   }
 
   .nav-links {
@@ -289,7 +293,7 @@ body {
 
   .nav-links span {
     flex: 0 0 auto;
-    padding: 7px 10px;
+    padding: 6px 10px;
     font-size: 11px;
     white-space: nowrap;
   }
