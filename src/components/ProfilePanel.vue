@@ -89,13 +89,12 @@ export default {
 .profile-container {
   display: flex;
   justify-content: center;
-  /*padding: 90px 32px;*/
-  padding: 10px 32px;
+  padding: 4px 18px;
 }
 
 .profile-panel {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1120px;
   align-items: flex-start;
 }
 
@@ -106,21 +105,21 @@ export default {
 }
 
 .about-me {
-  font-size: 16px;
-  line-height: 1.8;
-  max-width: 720px;
+  font-size: 15px;
+  line-height: 1.72;
+  max-width: 680px;
   position: relative;
   z-index: 1;
 }
 
 .about-me h1,
 .about-me h2 {
-  margin-top: 32px;
-  margin-bottom: 12px;
+  margin-top: 26px;
+  margin-bottom: 10px;
 }
 
 .about-me p {
-  margin-bottom: 18px;
+  margin-bottom: 14px;
 }
 
 /* ===== Globe (true background) ===== */
@@ -129,9 +128,9 @@ export default {
   position: absolute;
   top: -60px;
   left: -180px;
-  width: 260px;
-  height: 260px;
-  opacity: 0.35;
+  width: 220px;
+  height: 220px;
+  opacity: 0.28;
   pointer-events: none;
   z-index: 0;
 }
@@ -143,21 +142,24 @@ export default {
   flex-direction: column;
   align-items: center;
   position: sticky;
-  top: 120px;
+  top: 106px;
 }
 
 /* Photo frame */
 .photo-frame {
-  padding: 10px;
+  padding: 8px;
   background: #fff;
   border: 1px solid #e6e6e6;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  margin-bottom: 28px;
+  margin-bottom: 20px;
 }
 
 .profile-image {
-  width: 240px;
-  height: auto;
+  width: 210px;
+  height: 210px;
+  object-fit: cover;
+  object-position: center center;
+  border-radius: 16px;
   display: block;
 }
 
@@ -165,12 +167,12 @@ export default {
 
 .social-links {
   display: flex;
-  gap: 20px;
+  gap: 16px;
 }
 
 .icon {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   opacity: 0.75;
   transition: opacity 0.2s ease;
 }
@@ -188,7 +190,7 @@ export default {
 
   .right-panel {
     position: static;
-    margin-top: 48px;
+    margin-top: 34px;
   }
 
   .globe-bg {

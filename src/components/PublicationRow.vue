@@ -104,8 +104,8 @@ export default {
 .publication-row {
   display: flex;
   align-items: flex-start;
-  gap: 20px;
-  padding: 24px 0;
+  gap: 16px;
+  padding: 20px 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
@@ -116,38 +116,38 @@ export default {
 .image-wrap {
   position: relative;
   flex-shrink: 0;
-  width: 184px;
+  width: 164px;
 }
 
 .pub-image {
-  width: 184px;
-  height: 118px;
+  width: 164px;
+  height: 104px;
   object-fit: cover;
-  border-radius: 16px;
+  border-radius: 14px;
   box-shadow: 0 12px 28px rgba(34, 46, 39, 0.12);
 }
 
 .year-badge {
   position: absolute;
-  left: 12px;
-  bottom: 12px;
-  padding: 6px 10px;
+  left: 10px;
+  bottom: 10px;
+  padding: 5px 8px;
   border-radius: 999px;
   background: rgba(20, 92, 82, 0.9);
   color: #fff;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
 }
 
 .pub-meta {
   flex: 1;
-  font-size: 14px;
-  line-height: 1.6;
+  font-size: 13px;
+  line-height: 1.55;
   min-width: 0;
 }
 
 .pub-title {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   line-height: 1.5;
   margin: 0 0 6px;
@@ -159,10 +159,10 @@ export default {
 }
 
 .pub-actions {
-  margin-top: 10px;
+  margin-top: 8px;
   display: flex;
   gap: 14px;
-  font-size: 13px;
+  font-size: 12px;
   flex-wrap: wrap;
 }
 
@@ -185,14 +185,14 @@ export default {
 }
 
 .pub-abstract {
-  margin-top: 14px;
-  padding: 14px 16px;
+  margin-top: 12px;
+  padding: 12px 14px;
   border-left: 3px solid #c3d7d0;
   background: rgba(20, 92, 82, 0.04);
   border-radius: 0 14px 14px 0;
   color: #444;
-  font-size: 13px;
-  line-height: 1.7;
+  font-size: 12px;
+  line-height: 1.62;
 }
 
 .pub-labels {
@@ -212,11 +212,11 @@ export default {
 .category-pill {
   display: inline-flex;
   align-items: center;
-  padding: 6px 10px;
+  padding: 5px 9px;
   border-radius: 999px;
   background: rgba(20, 92, 82, 0.08);
   color: #145c52;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
 }
 

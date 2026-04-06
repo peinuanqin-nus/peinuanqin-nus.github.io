@@ -1,53 +1,51 @@
 <template>
   <div class="collaborator-panel">
-    <div class="section-heading">
-      <p class="section-eyebrow">Research Network</p>
-      <h2>Collaborators</h2>
-      <p class="section-intro">
-        Ongoing collaborations across academia, industry, and student mentorship that shape the research community around this work.
-      </p>
-    </div>
-
-    <div
-        v-for="group in collaboratorGroups"
-        :key="group.title"
-        class="group-block"
-    >
-      <div class="group-header">
-        <div>
-          <h3 class="group-title">{{ group.title }}</h3>
-          <p class="group-description">{{ group.description }}</p>
-        </div>
-        <span class="group-count">{{ group.people.length }}</span>
+    <div class="section-shell">
+      <div class="section-heading compact-heading">
+        <p class="section-eyebrow">Research Network</p>
       </div>
 
-      <div class="group-shell">
-        <el-row :gutter="20">
-          <el-col
-              v-for="(person, index) in group.people"
-              :key="`${group.title}-${index}`"
-              :xs="24"
-              :sm="12"
-              :lg="8"
-          >
-            <component
-                :is="person.link ? 'a' : 'div'"
-                :href="person.link || null"
-                :target="person.link ? '_blank' : null"
-                :rel="person.link ? 'noopener noreferrer' : null"
-                class="collaborator-card"
+      <div
+          v-for="group in collaboratorGroups"
+          :key="group.title"
+          class="group-block"
+      >
+        <div class="group-shell">
+          <div class="group-header">
+            <div>
+              <h3 class="group-title">{{ group.title }}</h3>
+              <p class="group-description">{{ group.description }}</p>
+            </div>
+            <span class="group-count">{{ group.people.length }}</span>
+          </div>
+
+          <el-row :gutter="20">
+            <el-col
+                v-for="(person, index) in group.people"
+                :key="`${group.title}-${index}`"
+                :xs="24"
+                :sm="12"
+                :lg="8"
             >
-              <img :src="person.avatar" class="avatar" :alt="person.name" />
+              <component
+                  :is="person.link ? 'a' : 'div'"
+                  :href="person.link || null"
+                  :target="person.link ? '_blank' : null"
+                  :rel="person.link ? 'noopener noreferrer' : null"
+                  class="collaborator-card"
+              >
+                <img :src="person.avatar" class="avatar" :alt="person.name" />
 
-              <div class="info">
-                <p class="name">{{ person.name }}</p>
-                <p class="role">{{ person.role }}</p>
-              </div>
+                <div class="info">
+                  <p class="name">{{ person.name }}</p>
+                  <p class="role">{{ person.role }}</p>
+                </div>
 
-              <span class="card-arrow">{{ person.link ? "Visit" : "Profile" }}</span>
-            </component>
-          </el-col>
-        </el-row>
+                <span class="card-arrow">{{ person.link ? "Visit" : "Profile" }}</span>
+              </component>
+            </el-col>
+          </el-row>
+        </div>
       </div>
     </div>
   </div>
@@ -225,7 +223,7 @@ export default {
 <style scoped>
 .collaborator-panel {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1120px;
   margin: 0 auto;
   padding: 0;
   color: #222;
@@ -233,7 +231,19 @@ export default {
 
 .section-heading {
   max-width: 760px;
-  margin-bottom: 34px;
+  margin-bottom: 28px;
+}
+
+.section-shell {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(249, 247, 242, 0.96) 100%);
+  border: 1px solid rgba(20, 92, 82, 0.1);
+  border-radius: 20px;
+  padding: 16px 16px 14px;
+  box-shadow: 0 16px 40px rgba(21, 31, 38, 0.05);
+}
+
+.compact-heading {
+  margin-bottom: 18px;
 }
 
 .section-eyebrow {
@@ -245,21 +255,8 @@ export default {
   font-weight: 700;
 }
 
-.collaborator-panel h2 {
-  margin: 0;
-  font-size: 2rem;
-  line-height: 1.15;
-}
-
-.section-intro {
-  margin: 14px 0 0;
-  font-size: 1rem;
-  line-height: 1.8;
-  color: #5b5b5b;
-}
-
 .group-block + .group-block {
-  margin-top: 42px;
+  margin-top: 20px;
 }
 
 .group-header {
@@ -267,50 +264,53 @@ export default {
   align-items: flex-end;
   justify-content: space-between;
   gap: 16px;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .group-title {
   margin: 0;
-  font-size: 1.4rem;
+  font-family: var(--display-font);
+  font-size: 0.96rem;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #6d4f2a;
 }
 
 .group-description {
-  margin: 6px 0 0;
-  color: #686868;
-  line-height: 1.6;
+  margin: 4px 0 0;
+  color: #7d827f;
+  line-height: 1.5;
+  font-size: 0.84rem;
 }
 
 .group-count {
   flex-shrink: 0;
-  min-width: 44px;
-  height: 44px;
-  border-radius: 14px;
+  min-width: 38px;
+  height: 38px;
+  border-radius: 12px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   background: rgba(20, 92, 82, 0.08);
   color: #145c52;
-  font-size: 1rem;
+  font-size: 0.92rem;
   font-weight: 700;
 }
 
 .group-shell {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(249, 247, 242, 0.96) 100%);
-  border: 1px solid rgba(20, 92, 82, 0.1);
-  border-radius: 24px;
-  padding: 18px;
-  box-shadow: 0 16px 40px rgba(21, 31, 38, 0.05);
+  padding: 0;
 }
 
 .collaborator-card {
   display: flex;
   align-items: center;
-  gap: 16px;
-  min-height: 108px;
-  padding: 18px;
-  margin-top: 20px;
-  border-radius: 20px;
+  gap: 14px;
+  min-height: 94px;
+  padding: 14px;
+  margin-top: 12px;
+  border-radius: 18px;
   background: rgba(255, 255, 255, 0.82);
   border: 1px solid rgba(20, 92, 82, 0.08);
   box-shadow: 0 8px 24px rgba(18, 31, 27, 0.05);
@@ -325,10 +325,11 @@ export default {
 }
 
 .avatar {
-  width: 76px;
-  height: 76px;
-  border-radius: 22px;
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
   object-fit: cover;
+  object-position: center center;
   flex-shrink: 0;
 }
 
@@ -339,39 +340,35 @@ export default {
 
 .name {
   margin: 0;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 700;
   color: #213532;
 }
 
 .role {
   margin: 8px 0 0;
-  font-size: 0.9rem;
-  line-height: 1.55;
+  font-size: 0.84rem;
+  line-height: 1.48;
   color: #5f6e69;
 }
 
 .card-arrow {
   flex-shrink: 0;
   color: #145c52;
-  font-size: 0.83rem;
+  font-size: 0.76rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
 @media (max-width: 768px) {
-  .collaborator-panel h2 {
-    font-size: 1.6rem;
-  }
-
   .group-header {
     align-items: flex-start;
     flex-direction: column;
   }
 
   .group-shell {
-    padding: 14px;
+    padding: 0;
   }
 
   .collaborator-card {

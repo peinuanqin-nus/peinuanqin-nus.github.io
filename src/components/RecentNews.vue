@@ -4,7 +4,7 @@
       <el-row :gutter="28" class="content-row">
         <el-col :xs="24" :md="14" class="full-height">
           <div class="panel">
-            <h2 class="panel-title">Recent News</h2>
+            <p class="panel-title">Recent News</p>
 
             <div class="panel-scroll">
               <el-timeline>
@@ -25,7 +25,7 @@
 
         <el-col :xs="24" :md="10" class="full-height">
           <div class="panel">
-            <h2 class="panel-title">Awards & Honors</h2>
+            <p class="panel-title">Awards & Honors</p>
 
             <div class="panel-scroll">
               <el-card
@@ -146,7 +146,7 @@ export default {
 
 <style scoped>
 .recent-news-page {
-  height: 55vh;
+  height: 51vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -154,8 +154,8 @@ export default {
 
 .page-center {
   width: 100%;
-  max-width: 1200px;
-  height: 55vh;
+  max-width: 1120px;
+  height: 51vh;
   padding: 0;
   box-sizing: border-box;
 }
@@ -169,8 +169,8 @@ export default {
   height: 100%;
   background: linear-gradient(180deg, rgba(252, 250, 246, 0.96) 0%, rgba(247, 244, 236, 0.96) 100%);
   border: 1px solid rgba(20, 92, 82, 0.12);
-  border-radius: 24px;
-  padding: 24px 22px;
+  border-radius: 20px;
+  padding: 20px 18px;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -178,11 +178,15 @@ export default {
 }
 
 .panel-title {
-  font-size: 1.55rem;
-  font-weight: 700;
-  margin: 0 0 14px;
+  font-family: var(--display-font);
+  font-size: 0.96rem;
+  font-weight: 600;
+  line-height: 1.1;
+  margin: 0 0 12px;
   flex-shrink: 0;
-  color: #17322e;
+  color: #4f5f95;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .panel-scroll {
@@ -201,8 +205,8 @@ export default {
 }
 
 .news-content {
-  font-size: 14px;
-  line-height: 1.7;
+  font-size: 13px;
+  line-height: 1.62;
   color: #313131;
 }
 
@@ -221,26 +225,26 @@ export default {
 
 .award-card {
   margin-bottom: 14px;
-  border-radius: 16px;
+  border-radius: 14px;
   border: 1px solid rgba(20, 92, 82, 0.08);
   background: rgba(255, 255, 255, 0.74);
   box-shadow: none;
 }
 
 .award-title {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
 }
 
 .award-meta {
-  font-size: 13px;
+  font-size: 12px;
   color: #888;
   margin: 4px 0 6px;
 }
 
 .award-desc {
-  font-size: 14px;
-  line-height: 1.6;
+  font-size: 13px;
+  line-height: 1.55;
 }
 
 @media (max-width: 768px) {

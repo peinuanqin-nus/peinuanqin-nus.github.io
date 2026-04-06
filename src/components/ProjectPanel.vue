@@ -1,14 +1,10 @@
 <template>
   <div class="project-panel">
-    <div class="section-heading">
-      <p class="section-eyebrow">Research Portfolio</p>
-      <h2>Projects & Publications</h2>
-      <p class="section-intro">
-        A curated selection of accepted papers and ongoing projects across communication, writing, learning, and social support.
-      </p>
-    </div>
-
     <div class="filter-panel">
+      <div class="section-heading compact-heading">
+        <p class="section-eyebrow">Research Portfolio</p>
+      </div>
+
       <div class="search-wrap">
         <input
             v-model.trim="searchQuery"
@@ -43,15 +39,15 @@
     </div>
 
     <div class="project-group">
-      <div class="group-header">
-        <div>
-          <h3>Selected Publications</h3>
-          <p>Accepted and published work with links, abstracts, and publication details.</p>
-        </div>
-        <span class="group-count">{{ filteredFinishedProjects.length }}</span>
-      </div>
-
       <div class="group-card">
+        <div class="group-header">
+          <div>
+            <h3>Selected Publications</h3>
+            <p>Accepted and published work with links, abstracts, and publication details.</p>
+          </div>
+          <span class="group-count">{{ filteredFinishedProjects.length }}</span>
+        </div>
+
         <PublicationRow
             v-for="(project, index) in filteredFinishedProjects"
             :key="`finished-${index}`"
@@ -62,15 +58,15 @@
     </div>
 
     <div class="project-group">
-      <div class="group-header">
-        <div>
-          <h3>Ongoing Projects</h3>
-          <p>Current systems, interventions, and research questions under active development.</p>
-        </div>
-        <span class="group-count">{{ filteredOngoingProjects.length }}</span>
-      </div>
-
       <div class="group-card">
+        <div class="group-header">
+          <div>
+            <h3>Ongoing Projects</h3>
+            <p>Current systems, interventions, and research questions under active development.</p>
+          </div>
+          <span class="group-count">{{ filteredOngoingProjects.length }}</span>
+        </div>
+
         <PublicationRow
             v-for="(project, index) in filteredOngoingProjects"
             :key="`ongoing-${index}`"
@@ -206,7 +202,7 @@ export default {
 <style scoped>
 .project-panel {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1120px;
   margin: 0 auto;
   padding: 0;
   color: #222;
@@ -214,7 +210,11 @@ export default {
 
 .section-heading {
   max-width: 760px;
-  margin-bottom: 34px;
+  margin-bottom: 28px;
+}
+
+.compact-heading {
+  margin-bottom: 18px;
 }
 
 .section-eyebrow {
@@ -226,22 +226,9 @@ export default {
   font-weight: 700;
 }
 
-.project-panel h2 {
-  margin: 0;
-  font-size: 2rem;
-  line-height: 1.15;
-}
-
-.section-intro {
-  margin: 14px 0 0;
-  font-size: 1rem;
-  line-height: 1.8;
-  color: #5b5b5b;
-}
-
 .filter-panel {
-  margin-bottom: 34px;
-  padding: 20px 22px;
+  margin-bottom: 28px;
+  padding: 16px 18px;
   background: rgba(255, 255, 255, 0.84);
   border: 1px solid rgba(20, 92, 82, 0.1);
   border-radius: 22px;
@@ -254,12 +241,12 @@ export default {
 
 .search-input {
   width: 100%;
-  padding: 14px 16px;
+  padding: 12px 14px;
   border: 1px solid rgba(20, 92, 82, 0.14);
   border-radius: 14px;
   box-sizing: border-box;
   font: inherit;
-  font-size: 15px;
+  font-size: 14px;
   color: #1f1f1f;
   background: rgba(255, 255, 255, 0.92);
 }
@@ -277,13 +264,13 @@ export default {
 }
 
 .filter-chip {
-  padding: 8px 14px;
+  padding: 7px 12px;
   border: 1px solid rgba(20, 92, 82, 0.12);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.78);
   color: #34544d;
   font: inherit;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   cursor: pointer;
   transition: 0.18s ease;
@@ -302,12 +289,12 @@ export default {
 
 .filter-summary {
   margin: 14px 0 0;
-  font-size: 0.92rem;
+  font-size: 0.86rem;
   color: #6a6a6a;
 }
 
 .project-group + .project-group {
-  margin-top: 40px;
+  margin-top: 22px;
 }
 
 .group-header {
@@ -315,53 +302,57 @@ export default {
   align-items: flex-end;
   justify-content: space-between;
   gap: 16px;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 
 .group-header h3 {
   margin: 0;
-  font-size: 1.4rem;
+  font-family: var(--display-font);
+  font-size: 0.96rem;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #145c52;
 }
 
 .group-header p {
-  margin: 6px 0 0;
-  color: #686868;
-  line-height: 1.6;
+  margin: 4px 0 0;
+  color: #7d827f;
+  line-height: 1.45;
+  font-size: 0.84rem;
 }
 
 .group-count {
   flex-shrink: 0;
-  min-width: 44px;
-  height: 44px;
-  border-radius: 14px;
+  min-width: 38px;
+  height: 38px;
+  border-radius: 12px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   background: rgba(20, 92, 82, 0.08);
   color: #145c52;
-  font-size: 1rem;
+  font-size: 0.92rem;
   font-weight: 700;
 }
 
 .group-card {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(249, 247, 242, 0.96) 100%);
   border: 1px solid rgba(20, 92, 82, 0.1);
-  border-radius: 24px;
-  padding: 8px 26px;
+  border-radius: 20px;
+  padding: 14px 20px 6px;
   box-shadow: 0 16px 40px rgba(21, 31, 38, 0.05);
 }
 
 .empty-state {
-  margin: 20px 0;
+  margin: 16px 0;
   color: #727272;
   font-style: italic;
+  font-size: 0.92rem;
 }
 
 @media (max-width: 768px) {
-  .project-panel h2 {
-    font-size: 1.6rem;
-  }
-
   .filter-panel {
     padding: 16px;
   }

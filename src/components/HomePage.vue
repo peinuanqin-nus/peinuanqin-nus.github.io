@@ -71,7 +71,7 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Spectral:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Spectral:wght@300;400;700&display=swap');
 
 html {
   scroll-behavior: smooth;
@@ -83,24 +83,26 @@ body {
       radial-gradient(circle at top left, rgba(210, 227, 215, 0.92) 0%, rgba(245, 238, 224, 0.96) 28%, rgba(251, 249, 244, 0.98) 60%, #ffffff 100%);
   margin: 0;
   color: #1f1f1f;
+  font-size: 15px;
 }
 
 :root {
-  --page-max-width: 1200px;
-  --page-side-padding: 28px;
-  --header-height: 82px;
-  --section-gap: 84px;
+  --page-max-width: 1120px;
+  --page-side-padding: 24px;
+  --header-height: 76px;
+  --section-gap: 72px;
+  --display-font: 'Cormorant Garamond', serif;
 }
 
 .main_container {
   width: 100%;
-  padding: 0 0 72px;
+  padding: 0 0 60px;
   box-sizing: border-box;
   background: transparent;
 }
 
 .header-spacer {
-  height: calc(var(--header-height) + 28px);
+  height: calc(var(--header-height) + 22px);
   flex-shrink: 0;
 }
 
@@ -140,20 +142,20 @@ body {
 .brand-block {
   display: inline-flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   cursor: pointer;
 }
 
 .brand-mark {
-  width: 42px;
-  height: 42px;
-  border-radius: 14px;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, #145c52, #2c796d);
   color: #f8f7f2;
-  font-size: 0.98rem;
+  font-size: 0.9rem;
   font-weight: 700;
   letter-spacing: 0.08em;
 }
@@ -171,9 +173,9 @@ body {
 }
 
 .nav-links span {
-  padding: 9px 14px;
+  padding: 8px 12px;
   border-radius: 999px;
-  font-size: 13px;
+  font-size: 12px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   font-weight: 600;
@@ -191,7 +193,7 @@ body {
 }
 
 .title {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 700;
   margin: 0;
   letter-spacing: 0.02em;
@@ -200,7 +202,7 @@ body {
 
 .subtitle {
   margin-top: 2px;
-  font-size: 0.74rem;
+  font-size: 0.68rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #6b7f79;
@@ -218,12 +220,12 @@ body {
   padding: 0 var(--page-side-padding);
   box-sizing: border-box;
   margin-bottom: var(--section-gap);
-  scroll-margin-top: calc(var(--header-height) + 28px);
+  scroll-margin-top: calc(var(--header-height) + 24px);
 }
 
 .profile-section {
-  margin-bottom: 64px;
-  padding-top: 8px;
+  margin-bottom: 54px;
+  padding-top: 4px;
 }
 
 .page-section:last-child {
@@ -233,8 +235,8 @@ body {
 @media (max-width: 768px) {
   :root {
     --page-side-padding: 18px;
-    --header-height: 96px;
-    --section-gap: 60px;
+    --header-height: 88px;
+    --section-gap: 52px;
   }
 
   .main_container {
@@ -242,7 +244,7 @@ body {
   }
 
   .header-spacer {
-    height: calc(var(--header-height) + 20px);
+    height: calc(var(--header-height) + 16px);
   }
 
   .nav-bar {
