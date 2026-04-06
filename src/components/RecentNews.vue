@@ -255,16 +255,35 @@ export default {
     height: auto;
   }
 
+  .page-center {
+    max-width: 100%;
+  }
+
   .panel {
-    padding: 20px 18px;
+    padding: 18px 16px;
+    border-radius: 18px;
   }
 
   .panel-scroll {
-    max-height: 48vh;
+    max-height: 42vh;
   }
 
   .full-height + .full-height {
-    margin-top: 18px;
+    margin-top: 14px;
+  }
+
+  .panel-title {
+    font-size: 0.88rem;
+  }
+
+  .news-content,
+  .award-desc {
+    font-size: 12px;
+    line-height: 1.55;
+  }
+
+  .award-title {
+    font-size: 13px;
   }
 }
 </style>

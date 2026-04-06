@@ -365,21 +365,44 @@ export default {
   .group-header {
     align-items: flex-start;
     flex-direction: column;
+    gap: 8px;
   }
 
-  .group-shell {
-    padding: 0;
+  .section-shell {
+    padding: 14px 14px 12px;
+    border-radius: 18px;
   }
 
   .collaborator-card {
-    margin-top: 14px;
-    padding: 16px;
+    margin-top: 10px;
+    padding: 12px;
+    min-height: 84px;
+    border-radius: 16px;
   }
 
   .avatar {
-    width: 68px;
-    height: 68px;
-    border-radius: 18px;
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+  }
+
+  .group-title,
+  .section-eyebrow {
+    font-size: 0.82rem;
+  }
+
+  .group-description,
+  .role {
+    font-size: 0.78rem;
+    line-height: 1.4;
+  }
+
+  .name {
+    font-size: 0.88rem;
+  }
+
+  .card-arrow {
+    display: none;
   }
 }
 </style>

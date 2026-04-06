@@ -234,9 +234,9 @@ body {
 
 @media (max-width: 768px) {
   :root {
-    --page-side-padding: 18px;
-    --header-height: 88px;
-    --section-gap: 52px;
+    --page-side-padding: 16px;
+    --header-height: 118px;
+    --section-gap: 40px;
   }
 
   .main_container {
@@ -244,24 +244,62 @@ body {
   }
 
   .header-spacer {
-    height: calc(var(--header-height) + 16px);
+    height: calc(var(--header-height) + 10px);
   }
 
   .nav-bar {
-    align-items: flex-start;
-    flex-direction: column;
+    height: 100%;
+    align-items: stretch;
     justify-content: center;
-    gap: 12px;
+    gap: 10px;
+  }
+
+  .brand-block {
+    gap: 10px;
+  }
+
+  .brand-mark {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    font-size: 0.82rem;
+  }
+
+  .title {
+    font-size: 0.92rem;
+  }
+
+  .subtitle {
+    font-size: 0.62rem;
   }
 
   .nav-links {
     width: 100%;
     justify-content: flex-start;
+    flex-wrap: nowrap;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    scrollbar-width: none;
+  }
+
+  .nav-links::-webkit-scrollbar {
+    display: none;
   }
 
   .nav-links span {
-    padding: 8px 12px;
-    font-size: 12px;
+    flex: 0 0 auto;
+    padding: 7px 10px;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  .page-section {
+    scroll-margin-top: calc(var(--header-height) + 14px);
+  }
+
+  .profile-section {
+    margin-bottom: 34px;
   }
 }
 </style>

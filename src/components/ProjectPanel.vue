@@ -354,16 +354,52 @@ export default {
 
 @media (max-width: 768px) {
   .filter-panel {
-    padding: 16px;
+    padding: 14px;
+    border-radius: 18px;
   }
 
   .group-header {
     align-items: flex-start;
     flex-direction: column;
+    gap: 8px;
   }
 
   .group-card {
-    padding: 4px 18px;
+    padding: 12px 14px 4px;
+    border-radius: 18px;
+  }
+
+  .compact-heading {
+    margin-bottom: 14px;
+  }
+
+  .section-eyebrow,
+  .group-header h3 {
+    font-size: 0.82rem;
+  }
+
+  .group-header p,
+  .filter-summary,
+  .empty-state {
+    font-size: 0.8rem;
+  }
+
+  .filter-tags {
+    gap: 8px;
+  }
+
+  .filter-chip {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+
+  .search-wrap {
+    margin-bottom: 12px;
+  }
+
+  .search-input {
+    font-size: 13px;
+    padding: 11px 12px;
   }
 }
 </style>

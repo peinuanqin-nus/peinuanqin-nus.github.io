@@ -1,16 +1,13 @@
 <template>
   <div class="profile-container">
     <el-row class="profile-panel" :gutter="64">
-      <!-- Left: About -->
-      <el-col :span="15" class="left-panel">
-        <!-- Globe as background -->
+      <el-col :xs="24" :sm="24" :md="15" class="left-panel">
         <div class="globe-bg" id="clustr-globe-container"></div>
 
         <div class="about-me" v-html="aboutMe"></div>
       </el-col>
 
-      <!-- Right: Profile -->
-      <el-col :span="9" class="right-panel">
+      <el-col :xs="24" :sm="24" :md="9" class="right-panel">
         <div class="photo-frame">
           <img
               :src="profileImage"
@@ -197,6 +194,60 @@ export default {
 
   .globe-bg {
     display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-container {
+    padding: 0;
+  }
+
+  .profile-panel {
+    display: block;
+  }
+
+  .about-me {
+    max-width: 100%;
+    font-size: 14px;
+    line-height: 1.68;
+  }
+
+  .about-me h1,
+  .about-me h2 {
+    margin-top: 20px;
+    margin-bottom: 8px;
+  }
+
+  .photo-frame {
+    width: 128px;
+    max-width: none;
+    margin: 0;
+    flex-shrink: 0;
+  }
+
+  .profile-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+
+  .right-panel {
+    align-items: flex-start;
+    flex-direction: row;
+    gap: 14px;
+    margin-top: 24px;
+  }
+
+  .social-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 14px;
+    align-content: start;
+  }
+
+  .icon {
+    width: 18px;
+    height: 18px;
   }
 }
 </style>

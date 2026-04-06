@@ -226,13 +226,45 @@ export default {
 @media (max-width: 768px) {
   .publication-row {
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
+    padding: 16px 0;
+  }
+
+  .image-wrap {
+    width: min(100%, 220px);
   }
 
   .pub-image {
     width: 100%;
-    max-width: 100%;
+    max-width: 220px;
     height: auto;
+    aspect-ratio: 16 / 10;
+  }
+
+  .pub-title {
+    font-size: 14px;
+  }
+
+  .pub-meta {
+    font-size: 12px;
+  }
+
+  .pub-actions {
+    gap: 10px 12px;
+  }
+
+  .action-link {
+    padding: 4px 0;
+  }
+
+  .pub-abstract {
+    padding: 10px 12px;
+    font-size: 11px;
+  }
+
+  .pub-categories,
+  .pub-labels {
+    gap: 6px;
   }
 }
 </style>
