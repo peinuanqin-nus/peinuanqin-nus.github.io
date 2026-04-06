@@ -42,7 +42,9 @@ export default {
   name: "ProfilePanel",
   data() {
     return {
-      profileImage: "/profile.png",
+      // profileImage: "/profile_official.png",
+      // profileImage: "/profile_official_blue.jpg",
+      profileImage: "/profile_official_green.png",
       socialLinks: [
         {
           name: "GitHub",
