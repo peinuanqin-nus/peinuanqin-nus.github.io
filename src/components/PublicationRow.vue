@@ -7,7 +7,10 @@
 
     <div class="pub-meta">
       <p class="pub-title">
-        <b>[{{ project.published }}]</b> {{ project.title }}
+        <template v-if="project.published">
+          <b>[{{ project.published }}]</b>
+        </template>
+        {{ project.title }}
       </p>
 
       <p class="pub-authors" v-html="authorsHtml"></p>
