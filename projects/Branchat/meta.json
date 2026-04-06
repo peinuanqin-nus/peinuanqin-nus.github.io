@@ -5,9 +5,10 @@
   "abstract": "Linear chat interfaces for Large Language Models (LLMs) can make complex, multi-turn work difficult. Users often struggle to revisit prior information and manage context states, which degrades user experience and hinders complex task performance. In this study, we introduce Branchat, which implements a tree structure to manage different dialogue tasks, allowing users to select context nodes for more transparent and controllable context scoping. In a within-subject study (N=12) against a linear chat baseline, our preliminary results show that participants using Branchat reported faster completion times, reduced cognitive load, higher trust, and stronger self-efficacy in task completion. We discuss how Branchat can drive the development of current conversation-based applications and guide future design.",
   "url": "",
   "arxiv": "",
+  "categories": ["AI for creation"],
   "labels": [],
   "status": ["\uD83D\uDFE2 Accept"],
   "published": "CHI2026 Extended Abstract",
-  "year": "2026 CHI",
+  "year": "2026 CHI EA",
   "image": "/projects/Branchat/img.png"
 }

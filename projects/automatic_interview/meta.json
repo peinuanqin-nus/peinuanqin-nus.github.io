@@ -4,6 +4,7 @@
   "author": "__<u>Peinuan Qin</u>__, Prof. Shuicheng Yan",
   "abstract": "This series of projects explore the use of LLMs to conduct more natural, conversational interviews. The project also focuses on developing a robust process for analyzing the interview data to extract deep, actionable insights. Overall, these studies aim to transform conventional data collection and analysis, making it more efficient and insightful for researchers and practitioners.",
   "url": "",
+  "categories": ["AI for assessment"],
   "labels": [{"title": "call for intern", "type": "success"}],
   "status": ["\uD83D\uDD52 Ongoing"],
   "year": "2025-2028",

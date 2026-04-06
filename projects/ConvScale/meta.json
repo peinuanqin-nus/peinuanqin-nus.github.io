@@ -5,9 +5,10 @@
   "abstract": "Conversational interviews are commonly used to complement structured surveys by eliciting rich and contextualized responses, which are typically analyzed qualitatively. However, their potential contribution to quantitative measurement remains underexplored. In this paper, we introduce ConvScale, an AI-supported approach that transforms psychometric scales into natural conversational interviews while preserving the original measurement structure. Based on interview data, ConvScale predicts item-level scores and aggregates them to derive scale-based assessments. In a within-subjects study with 18 participants, our results show that ConvScale-derived scores align closely with participants' self-report scores at both the item and construct levels, while maintaining moderate internal reliability; however, the structural validity was inadequate. In light of this, we discussed the potential of supporting quantitative measurement through interviews and proposed implications for future designs.\n",
   "url": "",
   "arxiv": "",
+  "categories": ["AI for assessment"],
   "labels": [],
   "status": ["\uD83D\uDFE2 Accept"],
   "published": "CHI2026 Extended Abstract",
-  "year": "2026 CHI",
+  "year": "2026 CHI EA",
   "image": "/projects/ConvScale/img.png"
 }
