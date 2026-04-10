@@ -11,6 +11,14 @@
           <b>[{{ project.published }}]</b>
         </template>
         {{ project.title }}
+        <el-tooltip
+          v-if="project.award"
+          effect="light"
+          :content="project.award"
+          placement="top"
+        >
+          <span class="award-icon" aria-label="Awarded paper" title="Awarded paper">🏆</span>
+        </el-tooltip>
       </p>
 
       <p class="pub-authors" v-html="authorsHtml"></p>
@@ -159,6 +167,24 @@ export default {
 .pub-authors {
   color: #333;
   margin: 0;
+}
+
+.award-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: rgba(163, 118, 32, 0.1);
+  color: #8a6115;
+  border: 1px solid rgba(163, 118, 32, 0.16);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  vertical-align: middle;
+  cursor: help;
 }
 
 .pub-actions {

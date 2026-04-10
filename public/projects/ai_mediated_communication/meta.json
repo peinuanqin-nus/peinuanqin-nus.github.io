@@ -1,8 +1,9 @@
 {
-  "title": "AI-mediated Communication for Non-native Speakers and Native Speakers [Unreal Title]",
+  "title": "Alleviating Linguistic and Interactional Anxiety of Non-Native Speakers in Multilingual Communication",
   "short_title": "",
   "author": "__<u>Peinuan Qin</u>__, Justin Peng, Zhengtao Xu, Jiting Cheng, Zicheng Zhu, Naomi Yamashita, Yi-Chieh Lee",
   "url": "",
+  "abstract": "Non-native speakers (NNSs) frequently encounter speaking difficulties in multilingual communication, where existing approaches have shown promise in facilitating NNSs' comprehension and participation in real-time communication. However, they often overlook providing direct speaking support, where anxiety stemming from linguistic inadequacy and uncertain communication dynamics are core issues. To address this, we introduce an AI tool with translation for real-time speaking support. It also builds a channel for mutual understanding with native speakers (NSs) to mitigate interactional anxiety. Through a within-subjects experiment involving 25 NNS-NS pairs (N = 50) on collaborative tasks, our findings suggest that the tool improved NNSs' speaking self-efficacy, reduced their interactional anxiety, and decreased their workload, particularly for NNSs with below-average language proficiency. Furthermore, NNSs reported a significant sense of support from their NS partners via the mutual understanding channel, and NSs also clearly perceived the NNSs' need for assistance and displayed a strong sense of communicative responsibility. This research underscores the potential of AI support in real-time NNS communication and the importance of promoting mutual understanding, culminating in actionable design insights for future work.",
   "categories": ["AI for communication"],
   "labels": [],
   "status": ["\uD83D\uDFE2 Accept"],

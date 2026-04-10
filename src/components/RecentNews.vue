@@ -38,7 +38,7 @@
                   {{ award.icon }} {{ award.title }}
                 </div>
                 <div class="award-meta">{{ award.year }}</div>
-                <div class="award-desc">{{ award.description }}</div>
+                <div class="award-desc" v-html="renderMarkdown(award.description)"></div>
               </el-card>
             </div>
           </div>
@@ -59,7 +59,14 @@ export default {
         {
           date: "2026-03",
           content:
-              "🎉 **Two** [first-author] full papers have been **conditionally accepted** by **CSCW 2026**. I am currently preparing the camera-ready versions, and the final titles and preprints will be announced soon."
+              "🎉 **Two** full papers accepted to **CSCW 2026**: <br/>" +
+              "- [first author] <u>_Alleviating Linguistic and Interactional Anxiety of Non-Native Speakers in Multilingual Communication_</u> <br/>" +
+              "- [first author] <u>_Leveraging AI for Direct Bystander Intervention Against Cyberbullying_</u>"
+        },
+        {
+          date: "2026-03",
+          content:
+              "🏅 Our CHI 2026 paper <u>_Designing Computational Tools for Exploring Causal Relationships in Qualitative Data_</u> received a **Best Paper Honorable Mention Award**."
         },
         {
           date: "2026-02",
@@ -132,6 +139,13 @@ export default {
           year: "2025",
           description:
               "Recognized for sustained research contributions and academic excellence."
+        },
+        {
+          icon: "🏅",
+          title: "CHI 2026 Best Paper Honorable Mention Award",
+          year: "2026",
+          description:
+              "Awarded to _Designing Computational Tools for Exploring Causal Relationships in Qualitative Data_."
         }
       ]
     };
