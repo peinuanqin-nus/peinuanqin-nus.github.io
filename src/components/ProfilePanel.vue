@@ -39,7 +39,8 @@ export default {
   name: "ProfilePanel",
   data() {
     return {
-      profileImage: "/profile_official.png",
+      // profileImage: "/profile_official.png",
+      profileImage: "/IMG_0253.JPG",
       // profileImage: "/profile_official_blue.jpg",
       // profileImage: "/profile_official_green.png",
       socialLinks: [
@@ -151,15 +152,19 @@ export default {
   border: 1px solid #e6e6e6;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   margin-bottom: 20px;
+  overflow: hidden;
+  border-radius: 24px;
 }
 
 .profile-image {
   width: 210px;
   height: 210px;
   object-fit: cover;
-  object-position: center center;
+  object-position: center 58%;
   border-radius: 16px;
   display: block;
+  transform: scale(1.18);
+  transform-origin: center center;
 }
 
 /* ===== Social ===== */
@@ -229,6 +234,8 @@ export default {
     width: 100%;
     height: auto;
     aspect-ratio: 1 / 1;
+    object-position: center 56%;
+    transform: scale(1.14);
   }
 
   .right-panel {
