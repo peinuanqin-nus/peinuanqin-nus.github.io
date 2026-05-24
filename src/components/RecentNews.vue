@@ -59,7 +59,7 @@ export default {
         {
           date: "2026-03",
           content:
-              "🎉 **Two** full papers accepted to **CSCW 2026**: <br/>" +
+              "🎉 **Two** papers accepted to **CSCW 2026**: <br/>" +
               "- [first author] <u>_Alleviating Linguistic and Interactional Anxiety of Non-Native Speakers in Multilingual Communication_</u> <br/>" +
               "- [first author] <u>_Leveraging AI for Direct Bystander Intervention Against Cyberbullying_</u>"
         },
@@ -71,33 +71,28 @@ export default {
         {
           date: "2026-02",
           content:
-              "🎉 **Two** papers accepted as **CHI 2026 Posters**: <br/>" +
-              "- [first author] <u>_ConvScale: Conversational Interviews for Scale-Aligned Measurement_</u> <br/>" +
-              "- [second author] <u>_Branchat: A Tree-Structured Interface for Efficient Revisitation in Long-Horizon LLM Conversations_</u>"
-        },
-        {
-          date: "2026-01",
-          content:
-              "🚀 Our startup project successfully cleared the **VIP Three-Month Initial Review**, marking a key milestone and the official start of **Phase II** with continued grant support."
-        },
-        {
-          date: "2026-01",
-          content:
-              "🌟 Participated in [**NUS-Google Workshop: The Future of CS Education in the AI Era**](https://futuredu.student.ai4sg.org/) (student-focused program) as a <u>_Facilitator_</u>"
-        },
-        {
-          date: "2026-01",
-          content:
-              "🎉 **Three** full papers accepted to **CHI 2026**: <br/>" +
+              "🎉 **Three** papers and **two** posters accepted to **CHI 2026**: <br/>" +
               "- [first author] <u>_AI Personalization Paradox: Reading Highlights for Personalized AI-Assisted Writing Increases Engagement but Undermines Autonomy and Ownership_</u> <br/>" +
               "- [first author] <u>_ChatLearn: Leveraging Non-Native Speaker Communication Challenges as Language Learning Opportunities_</u> <br/>" +
-              "- [third author] <u>_Designing Computational Tools for Exploring Causal Relationships in Qualitative Data_</u>"
+              "- [third author] <u>_Designing Computational Tools for Exploring Causal Relationships in Qualitative Data_</u> <br/>" +
+              "- [first author, poster] <u>_ConvScale: Conversational Interviews for Scale-Aligned Measurement_</u> <br/>" +
+              "- [second author, poster] <u>_Branchat: A Tree-Structured Interface for Efficient Revisitation in Long-Horizon LLM Conversations_</u>"
         },
-        {
-          date: "2025-11",
-          content:
-              "🌐 Served as a a <u>_Facilitator_</u> at the **[NUS-Google Workshop: Future of CS Education and Curriculum in the AI Era](https://futuredu.ai4sg.org/)** (professor-focused program), which brought together faculty from leading universities worldwide to discuss how computer science education should evolve in the age of AI."
-        },
+        // {
+        //   date: "2026-01",
+        //   content:
+        //       "🚀 Our startup project successfully cleared the **VIP Three-Month Initial Review**, marking a key milestone and the official start of **Phase II** with continued grant support."
+        // },
+        // {
+        //   date: "2026-01",
+        //   content:
+        //       "🌟 Participated in [**NUS-Google Workshop: The Future of CS Education in the AI Era**](https://futuredu.student.ai4sg.org/) (student-focused program) as a <u>_Facilitator_</u>"
+        // },
+        // {
+        //   date: "2025-11",
+        //   content:
+        //       "🌐 Served as a a <u>_Facilitator_</u> at the **[NUS-Google Workshop: Future of CS Education and Curriculum in the AI Era](https://futuredu.ai4sg.org/)** (professor-focused program), which brought together faculty from leading universities worldwide to discuss how computer science education should evolve in the age of AI."
+        // },
         {
           date: "2025-09",
           content: "🏆 Received the **NUS Venture Initiation Programme (VIP)** award, supporting the development of an **AI-powered evaluation system** that provides scalable, automated **quantitative and qualitative analysis**."
@@ -106,10 +101,10 @@ export default {
           date: "2025-07",
           content: "🏆 Received the **Research Achievement Award** in recognition of research contributions."
         },
-        {
-          date: "2025-03",
-          content: "🎉 [first author] Workshop paper <u>_Empowering Bystanders: Leveraging Generative AI to Enhance Direct Cyberbullying Intervention and Support Teen Well-Being_</u> accepted to **CHI 2025 Mobile Technology and Teens workshop**"
-        },
+        // {
+        //   date: "2025-03",
+        //   content: "🎉 [first author] Workshop paper <u>_Empowering Bystanders: Leveraging Generative AI to Enhance Direct Cyberbullying Intervention and Support Teen Well-Being_</u> accepted to **CHI 2025 Mobile Technology and Teens workshop**"
+        // },
         {
           date: "2025-02",
           content:
@@ -117,12 +112,18 @@ export default {
               "- [first author] Full paper <u>_Timing Matters: How Using LLMs at Different Timings Influences Writers’ Perceptions and Ideation Outcomes in AI-Assisted Ideation_</u> <br/>" +
               "- [fifth author] Contributed to <u>_Deconstructing Depression Stigma: Integrating AI-driven Data Collection and Analysis with Causal Knowledge Graphs_</u> (led by Menghan)"
         },
-        { date: "2025-02", content: "🎉 [first author] Full paper <u>_AI-Based Speaking Assistant: Supporting Non-Native Speakers’ Speaking in Real-Time Multilingual Communication_</u> accepted to **CSCW 2025**" },
-        { date: "2024-12", content: "🎉 [first author] Workshop paper <u>_Empowering Bystanders: Enhancing Direct Intervention in Cyberbullying with EmojiGen_</u> accepted to [**WABF (World Anti-Bullying Forum) 2025**](https://indico2.uis.no/event/49/contributions/1491/)" },
+        {
+          date: "2025-02",
+          content:
+              "🎉 **One** paper accepted to **CSCW 2025**: <br/>" +
+              "- [first author] <u>_AI-Based Speaking Assistant: Supporting Non-Native Speakers’ Speaking in Real-Time Multilingual Communication_</u>"
+        },
+        // { date: "2024-12", content: "🎉 [first author] Workshop paper <u>_Empowering Bystanders: Enhancing Direct Intervention in Cyberbullying with EmojiGen_</u> accepted to [**WABF (World Anti-Bullying Forum) 2025**](https://indico2.uis.no/event/49/contributions/1491/)" },
         {
           date: "2024-05",
           content:
-              "🎉  [forth author] contributed to <u>_Mitigating Ageism through Virtual Reality: Intergenerational Collaborative Escape Room Design_</u>, accepted to **CHI 2024 Late-Breaking Work (LBW)**"
+              "🎉 **One** paper accepted to **CHI 2024 Late-Breaking Work (LBW)**: <br/>" +
+              "- [forth author] <u>_Mitigating Ageism through Virtual Reality: Intergenerational Collaborative Escape Room Design_</u>"
         }
       ],
       awards: [

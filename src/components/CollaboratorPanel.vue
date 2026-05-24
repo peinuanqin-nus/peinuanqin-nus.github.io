@@ -34,7 +34,12 @@
                   :rel="person.link ? 'noopener noreferrer' : null"
                   class="collaborator-card"
               >
-                <img :src="person.avatar" class="avatar" :alt="person.name" />
+                <img
+                    :src="person.avatar"
+                    class="avatar"
+                    :class="{ 'avatar-top': person.avatarPosition === 'top' }"
+                    :alt="person.name"
+                />
 
                 <div class="info">
                   <p class="name">{{ person.name }}</p>
@@ -98,6 +103,12 @@ export default {
           role: "Researcher, CAS Institute of Software",
           avatar: "/collaborators/xiangminfan.png",
           link: "https://lcs.ios.ac.cn/~xiangmin/"
+        },
+        {
+          name: "Jat Singh",
+          role: "Research Professor, Department of Computer Science and Technology, University of Cambridge",
+          avatar: "/collaborators/jat.png",
+          link: "https://www.cst.cam.ac.uk/people/js573#:~:text=Prof%20Jat%20Singh,technology%20and%20law%20%26%20society."
         }
       ],
       phdCollaborators: [
@@ -126,10 +137,23 @@ export default {
           link: "https://hanmeng2004.github.io/"
         },
         {
+          name: "Zifei (FeiFei) Han",
+          role: "PhD Student, NUS Computing",
+          avatar: "/collaborators/feifei.png",
+          avatarPosition: "top",
+          link: "https://hanzifeifei.com/"
+        },
+        {
           name: "Yugin Tan",
           role: "PhD Candidate, NUS Computing",
           avatar: "/collaborators/yugin.png",
           link: "https://lumos309.notion.site/Yugin-s-Online-Home-b3373f39bab748d6ae9dd30b38758334"
+        },
+        {
+          name: "Tianqi Song",
+          role: "PhD Candidate, NUS Computing",
+          avatar: "/collaborators/tianqi.png",
+          link: "https://hollysong.site/"
         },
         {
           name: "Yan Liu",
@@ -138,8 +162,14 @@ export default {
           link: ""
         },
         {
+          name: "Liuqi",
+          role: "PhD Candidate, Zhejiang University",
+          avatar: "/collaborators/liuqi.png",
+          link: "http://www.idi.zju.edu.cn/member/4108.html"
+        },
+        {
           name: "Yitian Yang",
-          role: "PhD Student, NUS Computing",
+          role: "PhD Candidate, NUS Computing",
           avatar: "/collaborators/yitian.png",
           link: "https://yitian.super.site/"
         },
@@ -331,6 +361,10 @@ export default {
   object-fit: cover;
   object-position: center center;
   flex-shrink: 0;
+}
+
+.avatar-top {
+  object-position: center 24%;
 }
 
 .info {
