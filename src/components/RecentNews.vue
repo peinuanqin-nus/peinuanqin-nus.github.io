@@ -57,6 +57,11 @@ export default {
     return {
       recentNews: [
         {
+          date: "2026-06",
+          content:
+              "🎉 My research on AI-mediated communication was selected for the **CSCW 2026 Doctoral Consortium**."
+        },
+        {
           date: "2026-03",
           content:
               "🎉 **Two** papers accepted to **CSCW 2026**: <br/>" +
