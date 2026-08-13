@@ -57,6 +57,10 @@ export default {
     return {
       recentNews: [
         {
+          date: "2026-07",
+          content: "🏆 Received the **Research Achievement Award** from the **NUS School of Computing** in recognition of research contributions."
+        },
+        {
           date: "2026-06",
           content:
               "🎉 My research on AI-mediated communication was selected for the **CSCW 2026 Doctoral Consortium**."
@@ -104,7 +108,7 @@ export default {
         },
         {
           date: "2025-07",
-          content: "🏆 Received the **Research Achievement Award** in recognition of research contributions."
+          content: "🏆 Received the **Research Achievement Award** from the **NUS School of Computing** in recognition of research contributions."
         },
         // {
         //   date: "2025-03",
@@ -133,6 +137,13 @@ export default {
       ],
       awards: [
         {
+          icon: "🏅",
+          title: "Research Achievement Award",
+          year: "2026",
+          description:
+              "Awarded by the **NUS School of Computing** in recognition of sustained research contributions and academic excellence."
+        },
+        {
           icon: "🏆",
           title: "NUS Venture Initiation Programme (VIP)",
           year: "2025",
@@ -144,7 +155,7 @@ export default {
           title: "Research Achievement Award",
           year: "2025",
           description:
-              "Recognized for sustained research contributions and academic excellence."
+              "Awarded by the **NUS School of Computing** in recognition of sustained research contributions and academic excellence."
         },
         {
           icon: "🏅",
