@@ -1,260 +1,111 @@
 <template>
-  <div class="profile-container">
-    <el-row class="profile-panel" :gutter="64">
-      <el-col :xs="24" :sm="24" :md="15" class="left-panel">
-        <div class="globe-bg" id="clustr-globe-container"></div>
-
-        <div class="about-me" v-html="aboutMe"></div>
-      </el-col>
-
-      <el-col :xs="24" :sm="24" :md="9" class="right-panel">
-        <div class="photo-frame">
-          <img
-              :src="profileImage"
-              alt="Profile Picture"
-              class="profile-image"
-          />
+  <div class="profile">
+    <div class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Human-AI Interaction Research</p>
+        <h1 class="research-statement">Designing AI that supports how people <strong><span class="keyword-blue">communicate</span>, <span class="keyword-green">learn</span>, <span class="keyword-black">and</span> <span class="keyword-red">create.</span></strong></h1>
+        <div class="profile-meta">
+          <p class="affiliation">PhD Candidate · National University of Singapore</p>
+          <div class="social-links" aria-label="Social and contact links">
+            <a v-for="link in socialLinks" :key="link.name" :href="link.url" target="_blank" rel="noopener noreferrer" :aria-label="link.name" :title="link.name">
+              <img :src="link.icon" width="18" height="18" alt="" />
+            </a>
+          </div>
         </div>
-
-        <div class="social-links">
-          <a
-              v-for="(link, index) in socialLinks"
-              :key="index"
-              :href="link.url"
-              target="_blank"
-              rel="noopener noreferrer"
-          >
-            <img :src="link.icon" class="icon" :alt="link.name" />
-          </a>
-        </div>
-      </el-col>
-    </el-row>
+      </div>
+      <div class="portrait">
+        <img src="/images/peinuan-960.webp" srcset="/images/peinuan-480.webp 480w, /images/peinuan-960.webp 960w" sizes="(max-width: 600px) 80px, (max-width: 900px) 132px, 150px" width="960" height="1302" alt="Peinuan Qin standing on a city street, with the original streetscape in the background" fetchpriority="high" />
+      </div>
+    </div>
+    <details class="about-disclosure">
+      <summary>More about me <span class="disclosure-arrow el-icon-arrow-down" aria-hidden="true"></span></summary>
+      <div class="about-content">
+        <div v-if="aboutMe" class="about-me" v-html="aboutMe"></div>
+        <p v-else-if="loadError" role="alert">The biography couldn't be loaded. <button class="text-button" @click="getMarkdown">Try again</button></p>
+        <p v-else role="status">Loading biography…</p>
+      </div>
+    </details>
   </div>
 </template>
 
 <script>
-import { marked } from "marked";
+import { marked } from 'marked';
 
 export default {
-  name: "ProfilePanel",
+  name: 'ProfilePanel',
   data() {
     return {
-      // profileImage: "/profile_official.png",
-      profileImage: "/IMG_0253.JPG",
-      // profileImage: "/profile_official_blue.jpg",
-      // profileImage: "/profile_official_green.png",
       socialLinks: [
-        {
-          name: "GitHub",
-          url: "https://github.com/peinuanqin-nus",
-          icon: "/icons/github.svg"
-        },
-        {
-          name: "Google Scholar",
-          url: "https://scholar.google.com.au/citations?user=hi0tKAkAAAAJ",
-          icon: "/icons/googlescholar.svg"
-        },
-        {
-          name: "Email",
-          url: "mailto:e1322754@u.nus.edu",
-          icon: "/icons/gmail.svg"
-        },
-        {
-          name: "LinkedIn",
-          url: "https://www.linkedin.com/in/peinuan-qin-2759301b3/",
-          icon: "/icons/linkedin.svg"
-        }
+        { name: 'Google Scholar', url: 'https://scholar.google.com.au/citations?user=hi0tKAkAAAAJ', icon: '/icons/googlescholar.svg' },
+        { name: 'GitHub', url: 'https://github.com/peinuanqin-nus', icon: '/icons/github.svg' },
+        { name: 'Email', url: 'mailto:e1322754@u.nus.edu', icon: '/icons/gmail.svg' },
+        { name: 'LinkedIn', url: 'https://www.linkedin.com/in/peinuan-qin-2759301b3/', icon: '/icons/linkedin.svg' }
       ],
-      aboutMe: ""
+      aboutMe: '',
+      loadError: false
     };
   },
-  mounted() {
-    this.getMarkdown();
-  },
+  mounted() { this.getMarkdown(); },
   methods: {
-    getMarkdown() {
-      fetch("/aboutme.md")
-          .then((r) => r.text())
-          .then((text) => {
-            this.aboutMe = marked(text);
-          });
+    async getMarkdown() {
+      this.loadError = false;
+      try {
+        const response = await fetch('/aboutme.md');
+        if (!response.ok) throw new Error('Biography unavailable');
+        this.aboutMe = marked(await response.text());
+      } catch (error) {
+        this.loadError = true;
+      }
     }
   }
 };
 </script>
 
 <style scoped>
-/* ===== Layout ===== */
-
-.profile-container {
-  display: flex;
-  justify-content: center;
-  padding: 4px 18px;
+.profile { padding-top: 36px; margin-bottom: var(--section-gap); }
+.hero { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 32px; align-items: center; }
+.hero-copy { min-width: 0; grid-column: 2; grid-row: 1; }
+.eyebrow { margin-bottom: 12px; }
+.research-statement { max-width: 760px; font-family: var(--font-display); font-size: clamp(28px, 2.5vw, 32px); line-height: 1.35; letter-spacing: -.015em; font-weight: 400; margin: 0 0 16px; text-wrap: balance; }
+.research-statement strong { font-weight: 500; color: var(--text); }
+.keyword-blue { color: var(--google-blue); }
+.keyword-green { color: var(--google-green); }
+.keyword-red { color: var(--google-red); }
+.keyword-black { color: var(--text); }
+.profile-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 20px; }
+.affiliation { margin: 0; color: var(--muted); font-size: 14px; font-weight: 400; }
+.social-links { display: flex; gap: 6px; }
+.social-links a { display: grid; place-items: center; width: 40px; height: 40px; border-radius: var(--control-radius); }
+.social-links a:hover { background: var(--surface-soft); transform: translateY(-2px); }
+.social-links img { opacity: .82; }
+.portrait { grid-column: 1; grid-row: 1; border-radius: var(--radius); overflow: hidden; aspect-ratio: 5 / 6; background: var(--surface-soft); }
+.portrait img { width: 100%; height: 100%; object-fit: cover; }
+.about-disclosure { margin-top: 28px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: transparent; }
+summary { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 52px; padding: 12px 0; cursor: pointer; list-style: none; font-size: 14px; font-weight: 500; color: var(--text); }
+summary::-webkit-details-marker { display: none; }
+summary:focus-visible { outline-offset: -3px; }
+.disclosure-arrow { color: var(--muted); font-size: 14px; }
+details[open] .disclosure-arrow { transform: rotate(180deg); }
+.about-content { max-width: 76ch; padding: 4px 0 20px; font-size: 16px; line-height: 1.7; }
+.about-me ::v-deep p { margin-bottom: 18px; }
+.about-me ::v-deep a { text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px; }
+.about-me ::v-deep p:last-child { margin-bottom: 0; }
+@media (prefers-reduced-motion: no-preference) { .disclosure-arrow { transition: transform .2s ease; } }
+@media (max-width: 900px) {
+  .profile { padding-top: 32px; }
+  .hero { grid-template-columns: 132px minmax(0, 1fr); gap: 26px; }
+  .research-statement { font-size: 28px; }
 }
-
-.profile-panel {
-  width: 100%;
-  max-width: 1120px;
-  align-items: flex-start;
-}
-
-/* ===== Left ===== */
-
-.left-panel {
-  position: relative;
-}
-
-.about-me {
-  font-size: 15px;
-  line-height: 1.72;
-  max-width: 680px;
-  position: relative;
-  z-index: 1;
-}
-
-.about-me h1,
-.about-me h2 {
-  margin-top: 26px;
-  margin-bottom: 10px;
-}
-
-.about-me p {
-  margin-bottom: 14px;
-}
-
-/* ===== Globe (true background) ===== */
-
-.globe-bg {
-  position: absolute;
-  top: -60px;
-  left: -180px;
-  width: 220px;
-  height: 220px;
-  opacity: 0.28;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* ===== Right ===== */
-
-.right-panel {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: sticky;
-  top: 106px;
-}
-
-/* Photo frame */
-.photo-frame {
-  padding: 8px;
-  background: #fff;
-  border: 1px solid #e6e6e6;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  margin-bottom: 20px;
-  overflow: hidden;
-  border-radius: 24px;
-}
-
-.profile-image {
-  width: 210px;
-  height: 210px;
-  object-fit: cover;
-  object-position: center 58%;
-  border-radius: 16px;
-  display: block;
-  transform: scale(1.18);
-  transform-origin: center center;
-}
-
-/* ===== Social ===== */
-
-.social-links {
-  display: flex;
-  gap: 16px;
-}
-
-.icon {
-  width: 20px;
-  height: 20px;
-  opacity: 0.75;
-  transition: opacity 0.2s ease;
-}
-
-.icon:hover {
-  opacity: 1;
-}
-
-/* ===== Responsive ===== */
-
-@media (max-width: 1024px) {
-  .profile-panel {
-    flex-direction: column;
-  }
-
-  .right-panel {
-    position: static;
-    margin-top: 34px;
-  }
-
-  .globe-bg {
-    display: none;
-  }
-}
-
-@media (max-width: 768px) {
-  .profile-container {
-    padding: 0;
-  }
-
-  .profile-panel {
-    display: block;
-  }
-
-  .about-me {
-    max-width: 100%;
-    font-size: 14px;
-    line-height: 1.68;
-  }
-
-  .about-me h1,
-  .about-me h2 {
-    margin-top: 20px;
-    margin-bottom: 8px;
-  }
-
-  .photo-frame {
-    width: 128px;
-    max-width: none;
-    margin: 0;
-    flex-shrink: 0;
-  }
-
-  .profile-image {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 1 / 1;
-    object-position: center 56%;
-    transform: scale(1.14);
-  }
-
-  .right-panel {
-    align-items: flex-start;
-    flex-direction: row;
-    gap: 14px;
-    margin-top: 24px;
-  }
-
-  .social-links {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px 14px;
-    align-content: start;
-  }
-
-  .icon {
-    width: 18px;
-    height: 18px;
-  }
+@media (max-width: 600px) {
+  .profile { padding-top: 24px; }
+  .hero { grid-template-columns: 80px minmax(0, 1fr); gap: 0 18px; align-items: start; }
+  .hero-copy, .profile-meta { display: contents; }
+  .eyebrow { grid-column: 2; grid-row: 1; align-self: end; font-size: 10px; margin-bottom: 6px; }
+  .affiliation { grid-column: 2; grid-row: 2; font-size: 13px; line-height: 1.6; }
+  .research-statement { grid-column: 1 / -1; grid-row: 3; font-size: 26px; margin: 24px 0 16px; }
+  .social-links { grid-column: 1 / -1; grid-row: 4; gap: 4px; }
+  .social-links a { width: 36px; height: 40px; }
+  .portrait { grid-column: 1; grid-row: 1 / 3; width: 80px; max-width: 100%; }
+  .about-disclosure { margin-top: 24px; }
 }
 </style>

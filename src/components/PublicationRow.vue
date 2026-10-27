@@ -1,296 +1,78 @@
 <template>
   <article class="publication-row">
     <div class="image-wrap">
-      <img :src="project.image" class="pub-image" />
-      <span v-if="project.year" class="year-badge">{{ project.year }}</span>
+      <p v-if="venueLabel" class="venue-banner">{{ venueLabel }}</p>
+      <picture v-if="project.image">
+        <source :srcset="project.image.replace(/\.png$/, '.webp')" type="image/webp" />
+        <img :src="project.image" :alt="project.title.trim() + ' research overview'" class="pub-image" width="200" height="132" loading="lazy" />
+      </picture>
+      <div v-else class="document-preview" aria-hidden="true"><i class="el-icon-document"></i></div>
     </div>
-
     <div class="pub-meta">
-      <p class="pub-title">
-        <template v-if="project.published">
-          <b>[{{ project.published }}]</b>
-        </template>
-        {{ project.title }}
-        <el-tooltip
-          v-if="project.award"
-          effect="light"
-          :content="project.award"
-          placement="top"
-        >
-          <span class="award-icon" aria-label="Awarded paper" title="Awarded paper">🏆</span>
-        </el-tooltip>
-      </p>
-
-      <p class="pub-authors" v-html="authorsHtml"></p>
-
+      <h4 class="pub-title">{{ project.title }}</h4>
+      <p v-if="project.award" class="pub-award"><span class="award-icon" aria-hidden="true"><i class="el-icon-trophy"></i></span>{{ project.award }}</p>
+      <div class="pub-authors" v-html="authorsHtml"></div>
       <div v-if="project.labels && project.labels.length" class="pub-labels">
-        <el-tag
-            v-for="(label, idx) in project.labels"
-            :key="idx"
-            size="mini"
-            :type="label.type || 'info'"
-            effect="light"
-        >
-          {{ label.title }}
-        </el-tag>
+        <span v-for="(label, index) in project.labels" :key="index" class="project-label">{{ label.title }}</span>
       </div>
-
-      <div v-if="project.categories && project.categories.length" class="pub-categories">
-        <span
-            v-for="(category, idx) in project.categories"
-            :key="`category-${idx}`"
-            class="category-pill"
-        >
-          {{ category }}
-        </span>
-      </div>
-
-      <div class="pub-actions">
-        <span
-            v-if="project.arxiv"
-            class="action-link"
-            @click.stop="openUrl(project.arxiv)"
-        >
-           🔗 Arxiv
-        </span>
-        <span
-            v-if="project.url"
-            class="action-link"
-            @click.stop="openUrl(project.url)"
-        >
-          📖 Paper
-        </span>
-        <span
-            class="action-link"
-            @click.stop="toggleAbstract"
-        >
-          📝 Abstract
-          <span class="arrow">
-            {{ showAbstract ? "▲" : "▼" }}
-          </span>
-        </span>
-      </div>
-
-      <div v-if="showAbstract" class="pub-abstract">
-        <p v-html="abstractHtml"></p>
+      <div class="pub-actions resource-links">
+        <a v-if="project.url" :href="project.url" target="_blank" rel="noopener noreferrer" :aria-label="'Read paper: ' + project.title">Paper <span aria-hidden="true">↗</span></a>
+        <a v-else-if="project.arxiv" :href="project.arxiv" target="_blank" rel="noopener noreferrer" :aria-label="'Read on arXiv: ' + project.title">arXiv <span aria-hidden="true">↗</span></a>
+        <button class="abstract-button" :aria-expanded="showAbstract ? 'true' : 'false'" :aria-controls="'abstract-' + project.id" @click="showAbstract = !showAbstract">Abstract <span aria-hidden="true">{{ showAbstract ? '−' : '+' }}</span></button>
       </div>
     </div>
+    <div v-show="showAbstract" :id="'abstract-' + project.id" class="pub-abstract" v-html="abstractHtml"></div>
   </article>
 </template>
 
 <script>
-import { marked } from "marked";
+import { marked } from 'marked';
 
 export default {
-  name: "PublicationRow",
-  props: {
-    project: Object
-  },
-  data() {
-    return {
-      showAbstract: false
-    };
-  },
+  name: 'PublicationRow',
+  props: { project: { type: Object, required: true } },
+  data() { return { showAbstract: false }; },
   computed: {
-    authorsHtml() {
-      return marked(this.project.author || "");
+    venueLabel() {
+      const year = this.project.year || '';
+      const match = year.match(/^(\d{4})\s+(.+)$/);
+      return match ? `${match[2]} ${match[1]}` : [this.project.published, year].filter(Boolean).join(' · ');
     },
-    abstractHtml() {
-      return marked(this.project.abstract || "Abstract not available.");
-    }
-  },
-  methods: {
-    toggleAbstract() {
-      this.showAbstract = !this.showAbstract;
-    },
-    openUrl(link) {
-      if (!link) return;
-      window.open(link, "_blank");
-    }
+    authorsHtml() { return marked(this.project.author || ''); },
+    abstractHtml() { return marked(this.project.abstract || 'Abstract not available.'); }
   }
 };
 </script>
 
 <style scoped>
-.publication-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  padding: 20px 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-.publication-row:last-child {
-  border-bottom: none;
-}
-
-.image-wrap {
-  position: relative;
-  flex-shrink: 0;
-  width: 164px;
-}
-
-.pub-image {
-  width: 164px;
-  height: 104px;
-  object-fit: cover;
-  border-radius: 14px;
-  box-shadow: 0 12px 28px rgba(34, 46, 39, 0.12);
-}
-
-.year-badge {
-  position: absolute;
-  left: 10px;
-  bottom: 10px;
-  padding: 5px 8px;
-  border-radius: 999px;
-  background: rgba(20, 92, 82, 0.9);
-  color: #fff;
-  font-size: 11px;
-  font-weight: 700;
-}
-
-.pub-meta {
-  flex: 1;
-  font-size: 13px;
-  line-height: 1.55;
-  min-width: 0;
-}
-
-.pub-title {
-  font-size: 15px;
-  font-weight: 600;
-  line-height: 1.5;
-  margin: 0 0 6px;
-}
-
-.pub-authors {
-  color: #333;
-  margin: 0;
-}
-
-.award-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 8px;
-  width: 22px;
-  height: 22px;
-  border-radius: 999px;
-  background: rgba(163, 118, 32, 0.1);
-  color: #8a6115;
-  border: 1px solid rgba(163, 118, 32, 0.16);
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 1;
-  vertical-align: middle;
-  cursor: help;
-}
-
-.pub-actions {
-  margin-top: 8px;
-  display: flex;
-  gap: 14px;
-  font-size: 12px;
-  flex-wrap: wrap;
-}
-
-.action-link {
-  color: #145c52;
-  cursor: pointer;
-  user-select: none;
-  transition: all 0.15s ease;
-  padding: 6px 0;
-  font-weight: 600;
-}
-
-.action-link:hover {
-  color: #0c4038;
-}
-
-.arrow {
-  font-size: 11px;
-  margin-left: 2px;
-}
-
-.pub-abstract {
-  margin-top: 12px;
-  padding: 12px 14px;
-  border-left: 3px solid #c3d7d0;
-  background: rgba(20, 92, 82, 0.04);
-  border-radius: 0 14px 14px 0;
-  color: #444;
-  font-size: 12px;
-  line-height: 1.62;
-}
-
-.pub-labels {
-  margin-top: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.pub-categories {
-  margin-top: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.category-pill {
-  display: inline-flex;
-  align-items: center;
-  padding: 5px 9px;
-  border-radius: 999px;
-  background: rgba(20, 92, 82, 0.08);
-  color: #145c52;
-  font-size: 11px;
-  font-weight: 700;
-}
-
-@media (max-width: 768px) {
-  .publication-row {
-    flex-direction: column;
-    gap: 12px;
-    padding: 16px 0;
-  }
-
-  .image-wrap {
-    width: min(100%, 220px);
-  }
-
-  .pub-image {
-    width: 100%;
-    max-width: 220px;
-    height: auto;
-    aspect-ratio: 16 / 10;
-  }
-
-  .pub-title {
-    font-size: 14px;
-  }
-
-  .pub-meta {
-    font-size: 12px;
-  }
-
-  .pub-actions {
-    gap: 10px 12px;
-  }
-
-  .action-link {
-    padding: 4px 0;
-  }
-
-  .pub-abstract {
-    padding: 10px 12px;
-    font-size: 11px;
-  }
-
-  .pub-categories,
-  .pub-labels {
-    gap: 6px;
-  }
+.publication-row { display: grid; grid-template-columns: 144px minmax(0, 1fr); column-gap: 24px; row-gap: 0; padding: 22px 0; }
+.publication-row + .publication-row { border-top: 1px solid var(--line); }
+.image-wrap { background: var(--image-bg); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; align-self: start; }
+.image-wrap picture { display: block; padding: 6px; }
+.venue-banner { margin: 0; padding: 8px; border-bottom: 1px solid var(--line); background: var(--surface-soft); text-align: center; font-size: 12px; line-height: 1.4; color: var(--accent); font-weight: 600; }
+.pub-image { width: 100%; height: auto; aspect-ratio: 200 / 132; object-fit: contain; }
+.document-preview { display: grid; place-items: center; height: 100px; color: var(--muted); font-size: 34px; }
+.pub-title { font-size: 17px; font-weight: 500; line-height: 1.5; letter-spacing: -.01em; margin: 0 0 6px; text-wrap: pretty; }
+.pub-authors { color: var(--muted); font-size: 14px; line-height: 1.65; }
+.pub-authors ::v-deep p { margin: 0; }
+.pub-authors ::v-deep strong { color: var(--text); font-weight: 600; }
+.pub-authors ::v-deep u { text-decoration: none; }
+.pub-award { display: flex; align-items: center; gap: 7px; color: var(--accent); font-size: 13px; font-weight: 500; margin-bottom: 8px; }
+.award-icon { display: inline-grid; place-items: center; flex: 0 0 24px; height: 24px; border-radius: 50%; background: var(--surface-soft); border: 1px solid var(--line); color: var(--text); font-size: 15px; }
+.pub-labels { display: flex; flex-wrap: wrap; gap: 5px 14px; margin-top: 8px; font-size: 13px; color: var(--muted); }
+.project-label { color: var(--accent); font-weight: 500; }
+.pub-actions { margin-top: 12px; gap: 8px; }
+.abstract-button { border: 1px solid var(--line); padding: 6px 13px; min-height: 36px; border-radius: var(--control-radius); background: var(--surface); color: var(--accent); font-size: var(--control-font-size); line-height: 1.4; font-weight: 500; }
+.abstract-button:hover { background: var(--surface-soft); border-color: var(--muted); text-decoration: none; }
+.abstract-button span { margin-left: 6px; }
+.pub-abstract { grid-column: 2; padding: 14px 18px; border-left: 2px solid var(--accent); margin-top: 12px; background: var(--surface-soft); font-size: 16px; line-height: 1.7; color: var(--muted); overflow-wrap: anywhere; }
+.pub-abstract ::v-deep p { margin: 0; }
+@media (max-width: 900px) { .publication-row { grid-template-columns: 128px minmax(0, 1fr); column-gap: 20px; } }
+@media (max-width: 600px) {
+  .publication-row { grid-template-columns: 1fr; gap: 14px; padding: 24px 0; }
+  .image-wrap { width: 132px; }
+  .pub-title { font-size: 16px; }
+  .pub-abstract { grid-column: 1; margin-top: 0; padding: 15px; }
+  .abstract-button { min-height: 40px; }
 }
 </style>

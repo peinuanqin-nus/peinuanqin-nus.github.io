@@ -1,85 +1,58 @@
 <template>
-  <div class="project-panel">
-    <div class="filter-panel">
-      <div class="section-heading compact-heading">
-        <p class="section-eyebrow">Research Portfolio</p>
-      </div>
-
-      <div class="search-wrap">
-        <input
-            v-model.trim="searchQuery"
-            type="text"
-            class="search-input"
-            placeholder="Search by title, author, venue, abstract, or keyword"
-        />
-      </div>
-
-      <div class="filter-tags">
-        <button
-            class="filter-chip"
-            :class="{ active: selectedCategories.length === 0 }"
-            @click="clearCategories"
-        >
-          All
-        </button>
-        <button
-            v-for="category in availableCategories"
-            :key="category"
-            class="filter-chip"
-            :class="{ active: selectedCategories.includes(category) }"
-            @click="toggleCategory(category)"
-        >
-          {{ category }}
-        </button>
-      </div>
-
-      <p class="filter-summary">
-        Showing {{ filteredFinishedProjects.length + filteredOngoingProjects.length }} of {{ allProjects.length }} projects
-      </p>
+  <div class="project-panel" :aria-busy="isLoading ? 'true' : 'false'">
+    <div v-if="isLoading" class="loading-research" role="status">
+      <h2>Publications &amp; Projects</h2>
+      <p>Loading research…</p>
+      <div class="research-skeleton" aria-hidden="true"></div>
     </div>
-
-    <div class="project-group">
-      <div class="group-card">
-        <div class="group-header">
-          <div>
-            <h3>Selected Publications</h3>
-            <p>Accepted and published work with links, abstracts, and publication details.</p>
+    <template v-else>
+      <div v-if="failedProjects.length" class="status-message" role="alert">
+        <p>{{ allProjects.length ? 'Some projects could not be loaded. Available projects are shown below.' : 'Research could not be loaded. Please try again.' }}</p>
+        <button class="text-button" @click="loadAllProjects">Retry loading</button>
+      </div>
+      <div v-if="allProjects.length" class="publication-library">
+        <div class="section-heading">
+          <h2>Publications &amp; Projects</h2>
+        </div>
+        <div class="filter-panel">
+          <div class="filter-toolbar">
+            <label for="research-search" class="search-label">Find research</label>
+            <div class="search-field">
+              <span class="el-icon-search" aria-hidden="true"></span>
+              <input id="research-search" v-model.trim="searchQuery" type="search" class="search-input" placeholder="Search title, author, venue, or keyword" />
+            </div>
+            <details ref="categoryMenu" class="category-menu" @keydown.esc.prevent.stop="closeCategoryMenu">
+              <summary ref="categoryToggle" class="filter-toggle" :class="{ active: selectedCategories.length > 0 }">
+                Research area <span v-if="selectedCategories.length" class="filter-count">{{ selectedCategories.length }}</span>
+                <span class="filter-arrow el-icon-arrow-down" aria-hidden="true"></span>
+              </summary>
+              <div class="filter-options" role="group" aria-label="Filter by research area">
+                <label v-for="category in availableCategories" :key="category" class="filter-option">
+                  <input v-model="selectedCategories" type="checkbox" :value="category" />
+                  <span>{{ category }}</span>
+                </label>
+                <button class="clear-filter-button" @click="clearCategories">Clear selection</button>
+              </div>
+            </details>
           </div>
-          <span class="group-count">{{ filteredFinishedProjects.length }}</span>
         </div>
 
-        <PublicationRow
-            v-for="(project, index) in filteredFinishedProjects"
-            :key="`finished-${index}`"
-            :project="project"
-        />
-        <p v-if="filteredFinishedProjects.length === 0" class="empty-state">No publication matches the current search or label filters.</p>
-      </div>
-    </div>
-
-    <div class="project-group">
-      <div class="group-card">
-        <div class="group-header">
-          <div>
-            <h3>Ongoing Projects</h3>
-            <p>Current systems, interventions, and research questions under active development.</p>
-          </div>
-          <span class="group-count">{{ filteredOngoingProjects.length }}</span>
+        <div class="project-group">
+          <h3 class="group-title">Selected Publications <span>{{ filteredFinishedProjects.length }}</span></h3>
+          <PublicationRow v-for="project in filteredFinishedProjects" :key="project.id" :project="project" />
+          <p v-if="!filteredFinishedProjects.length" class="empty-state">No publication matches the current search or label filters.</p>
         </div>
-
-        <PublicationRow
-            v-for="(project, index) in filteredOngoingProjects"
-            :key="`ongoing-${index}`"
-            :project="project"
-        />
-        <p v-if="filteredOngoingProjects.length === 0" class="empty-state">No ongoing project matches the current search or label filters.</p>
+        <div class="project-group">
+          <h3 class="group-title">Ongoing Projects <span>{{ filteredOngoingProjects.length }}</span></h3>
+          <PublicationRow v-for="project in filteredOngoingProjects" :key="project.id" :project="project" />
+          <p v-if="!filteredOngoingProjects.length" class="empty-state">No ongoing project matches the current search or label filters.</p>
+        </div>
       </div>
-    </div>
+    </template>
   </div>
 </template>
 
 <script>
-import { marked } from "marked";
 import PublicationRow from "@/components/PublicationRow";
 
 export default {
@@ -88,9 +61,17 @@ export default {
   created() {
     this.loadAllProjects();
   },
+  mounted() {
+    document.addEventListener("click", this.handleOutsideClick);
+  },
+  beforeDestroy() {
+    document.removeEventListener("click", this.handleOutsideClick);
+  },
   data() {
     return {
       searchQuery: "",
+      isLoading: true,
+      failedProjects: [],
       selectedCategories: [],
       availableCategories: [
         "AI for communication",
@@ -102,6 +83,7 @@ export default {
       ongoingProjects: [],
       finishedProjects: [],
       projectFolders: [
+        "cscw_doctoral_consortium",
         "cyberbullying_mitigation",
         "ai_mediated_communication",
         "AI_personalization",
@@ -134,12 +116,13 @@ export default {
     }
   },
   methods: {
-    toggleCategory(category) {
-      if (this.selectedCategories.includes(category)) {
-        this.selectedCategories = this.selectedCategories.filter((item) => item !== category);
-        return;
-      }
-      this.selectedCategories = [...this.selectedCategories, category];
+    handleOutsideClick(event) {
+      const menu = this.$refs.categoryMenu;
+      if (menu && menu.open && !menu.contains(event.target)) menu.open = false;
+    },
+    closeCategoryMenu() {
+      this.$refs.categoryMenu.open = false;
+      this.$refs.categoryToggle.focus();
     },
     clearCategories() {
       this.selectedCategories = [];
@@ -168,6 +151,8 @@ export default {
       return matchesQuery && matchesCategory;
     },
     async loadAllProjects() {
+      this.isLoading = true;
+      this.failedProjects = [];
       const loadedProjects = await Promise.all(
           this.projectFolders.map((folder) => this.loadProject(folder))
       );
@@ -176,22 +161,21 @@ export default {
 
       this.ongoingProjects = validProjects
           .filter((p) => p.status && p.status[0] === "🕒 Ongoing")
-          .sort((a, b) => b.year - a.year);
+          .sort((a, b) => parseInt(b.year, 10) - parseInt(a.year, 10));
 
       this.finishedProjects = validProjects
           .filter((p) => !p.status || p.status[0] !== "🕒 Ongoing")
-          .sort((a, b) => b.year - a.year);
+          .sort((a, b) => parseInt(b.year, 10) - parseInt(a.year, 10));
+      this.isLoading = false;
     },
     async loadProject(folder) {
       try {
         const metaRes = await fetch(`/projects/${folder}/meta.json`);
+        if (!metaRes.ok) throw new Error(`Project unavailable: ${folder}`);
         const meta = await metaRes.json();
-        const descRes = await fetch(`/projects/${folder}/description.md`);
-        const descText = await descRes.text();
-        const content = marked(descText);
-        return { ...meta, content };
+        return { ...meta, id: folder };
       } catch (error) {
-        console.error(`Error loading project from folder "${folder}":`, error);
+        this.failedProjects.push(folder);
         return null;
       }
     }
@@ -200,206 +184,44 @@ export default {
 </script>
 
 <style scoped>
-.project-panel {
-  width: 100%;
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 0;
-  color: #222;
-}
-
-.section-heading {
-  max-width: 760px;
-  margin-bottom: 28px;
-}
-
-.compact-heading {
-  margin-bottom: 18px;
-}
-
-.section-eyebrow {
-  margin: 0 0 12px;
-  font-size: 0.86rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #145c52;
-  font-weight: 700;
-}
-
-.filter-panel {
-  margin-bottom: 28px;
-  padding: 16px 18px;
-  background: rgba(255, 255, 255, 0.84);
-  border: 1px solid rgba(20, 92, 82, 0.1);
-  border-radius: 22px;
-  box-shadow: 0 12px 34px rgba(21, 31, 38, 0.04);
-}
-
-.search-wrap {
-  margin-bottom: 16px;
-}
-
-.search-input {
-  width: 100%;
-  padding: 12px 14px;
-  border: 1px solid rgba(20, 92, 82, 0.14);
-  border-radius: 14px;
-  box-sizing: border-box;
-  font: inherit;
-  font-size: 14px;
-  color: #1f1f1f;
-  background: rgba(255, 255, 255, 0.92);
-}
-
-.search-input:focus {
-  outline: none;
-  border-color: rgba(20, 92, 82, 0.35);
-  box-shadow: 0 0 0 4px rgba(20, 92, 82, 0.08);
-}
-
-.filter-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.filter-chip {
-  padding: 7px 12px;
-  border: 1px solid rgba(20, 92, 82, 0.12);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.78);
-  color: #34544d;
-  font: inherit;
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.18s ease;
-}
-
-.filter-chip:hover {
-  transform: translateY(-1px);
-  border-color: rgba(20, 92, 82, 0.24);
-}
-
-.filter-chip.active {
-  background: rgba(20, 92, 82, 0.1);
-  color: #145c52;
-  border-color: rgba(20, 92, 82, 0.22);
-}
-
-.filter-summary {
-  margin: 14px 0 0;
-  font-size: 0.86rem;
-  color: #6a6a6a;
-}
-
-.project-group + .project-group {
-  margin-top: 22px;
-}
-
-.group-header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 10px;
-}
-
-.group-header h3 {
-  margin: 0;
-  font-family: var(--display-font);
-  font-size: 0.96rem;
-  font-weight: 600;
-  line-height: 1.1;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #145c52;
-}
-
-.group-header p {
-  margin: 4px 0 0;
-  color: #7d827f;
-  line-height: 1.45;
-  font-size: 0.84rem;
-}
-
-.group-count {
-  flex-shrink: 0;
-  min-width: 38px;
-  height: 38px;
-  border-radius: 12px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(20, 92, 82, 0.08);
-  color: #145c52;
-  font-size: 0.92rem;
-  font-weight: 700;
-}
-
-.group-card {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(249, 247, 242, 0.96) 100%);
-  border: 1px solid rgba(20, 92, 82, 0.1);
-  border-radius: 20px;
-  padding: 14px 20px 6px;
-  box-shadow: 0 16px 40px rgba(21, 31, 38, 0.05);
-}
-
-.empty-state {
-  margin: 16px 0;
-  color: #727272;
-  font-style: italic;
-  font-size: 0.92rem;
-}
-
-@media (max-width: 768px) {
-  .filter-panel {
-    padding: 14px;
-    border-radius: 18px;
-  }
-
-  .group-header {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .group-card {
-    padding: 12px 14px 4px;
-    border-radius: 18px;
-  }
-
-  .compact-heading {
-    margin-bottom: 14px;
-  }
-
-  .section-eyebrow,
-  .group-header h3 {
-    font-size: 0.82rem;
-  }
-
-  .group-header p,
-  .filter-summary,
-  .empty-state {
-    font-size: 0.8rem;
-  }
-
-  .filter-tags {
-    gap: 8px;
-  }
-
-  .filter-chip {
-    padding: 6px 10px;
-    font-size: 11px;
-  }
-
-  .search-wrap {
-    margin-bottom: 12px;
-  }
-
-  .search-input {
-    font-size: 13px;
-    padding: 11px 12px;
-  }
+.loading-research { min-height: 420px; }
+.loading-research p { color: var(--muted); }
+.research-skeleton { height: 260px; border-radius: var(--radius); background: var(--surface-soft); }
+.status-message { margin-bottom: 32px; }
+.status-message p { margin-bottom: 4px; }
+.filter-panel { margin-bottom: 28px; }
+.filter-toolbar { display: flex; align-items: flex-start; gap: 12px; }
+.search-label { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.search-field { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; padding: 0 18px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface-soft); }
+.search-field > span { color: var(--muted); font-size: 17px; }
+.search-field:focus-within { border-color: var(--accent); background: var(--surface); box-shadow: 0 0 0 3px rgba(0, 0, 0, .06); }
+.search-input { width: 100%; min-width: 0; height: 44px; padding: 0; border: 0; background: transparent; color: var(--text); font-size: 15px; }
+.search-input:focus-visible { outline: none; }
+.search-input::-webkit-search-cancel-button { cursor: pointer; filter: grayscale(1); opacity: .7; }
+.search-input::placeholder { color: var(--muted); opacity: 1; }
+.category-menu { position: relative; flex-shrink: 0; }
+.filter-toggle { display: flex; align-items: center; gap: 10px; min-height: 46px; padding: 10px 16px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--accent); list-style: none; cursor: pointer; font-size: var(--control-font-size); line-height: 1.4; font-weight: 500; }
+.filter-toggle::-webkit-details-marker { display: none; }
+.filter-toggle:hover { border-color: var(--muted); }
+.filter-toggle.active { color: var(--button-text); background: var(--button-bg); border-color: var(--button-bg); }
+.filter-count { display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding-inline: 5px; border-radius: var(--control-radius); background: var(--surface-soft); color: var(--text); font-size: 11px; }
+.filter-arrow { font-size: 12px; }
+.category-menu[open] .filter-arrow { transform: rotate(180deg); }
+.filter-options { position: absolute; top: calc(100% + 8px); right: 0; z-index: 5; width: 264px; padding: 10px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); box-shadow: 0 8px 24px rgba(34, 34, 34, .08); }
+.filter-option { display: flex; align-items: center; gap: 10px; min-height: 40px; padding: 6px 10px; border-radius: 8px; color: var(--text); font-size: 14px; cursor: pointer; }
+.filter-option:hover { background: var(--surface-soft); }
+.filter-option input { width: 16px; height: 16px; margin: 0; flex-shrink: 0; accent-color: var(--accent); cursor: pointer; }
+.clear-filter-button { width: 100%; min-height: 36px; margin-top: 6px; padding: 8px 10px; border: 0; border-top: 1px solid var(--line); background: transparent; color: var(--muted); text-align: left; font-size: var(--control-font-size); line-height: 1.4; }
+.clear-filter-button:hover { color: var(--text); }
+@media (prefers-reduced-motion: no-preference) { .filter-arrow { transition: transform .2s ease; } }
+.project-group + .project-group { margin-top: 48px; }
+.group-title { display: flex; align-items: baseline; gap: 12px; border-bottom: 1px solid var(--line); padding-bottom: 14px; margin-bottom: 0; }
+.group-title span { color: var(--muted); font-family: var(--font-body); font-size: 13px; font-weight: 400; }
+.empty-state { padding: 28px 0; color: var(--muted); font-size: 16px; }
+@media (max-width: 600px) {
+  .filter-toolbar { flex-wrap: wrap; gap: 10px; }
+  .search-field { flex-basis: 100%; padding-inline: 14px; }
+  .search-input { font-size: 16px; }
+  .filter-options { left: 0; right: auto; }
 }
 </style>

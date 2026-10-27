@@ -1,49 +1,36 @@
 <template>
-  <div class="recent-news-page">
-    <div class="page-center">
-      <el-row :gutter="28" class="content-row">
-        <el-col :xs="24" :md="14" class="full-height">
-          <div class="panel">
-            <p class="panel-title">Recent News</p>
-
-            <div class="panel-scroll">
-              <el-timeline>
-                <el-timeline-item
-                    v-for="(news, index) in recentNews"
-                    :key="index"
-                    :timestamp="news.date"
-                >
-                  <div
-                      class="news-content"
-                      v-html="renderMarkdown(news.content)"
-                  />
-                </el-timeline-item>
-              </el-timeline>
-            </div>
+  <div class="news-and-awards">
+    <div class="news-panel">
+      <h2>Recent News</h2>
+      <div class="news-scroll" tabindex="0" role="region" aria-label="Recent news, scroll for older updates">
+        <ol id="news-list" class="news-list">
+          <li v-for="(news, index) in recentNews" :key="index" class="news-item">
+            <details class="news-details">
+              <summary class="news-summary">
+                <time :datetime="news.date">{{ news.date }}</time>
+                <span class="news-event">
+                  <i :class="news.icon" class="news-icon" aria-hidden="true"></i>
+                  <span class="news-overview">{{ news.summary }}</span>
+                  <i class="el-icon-arrow-down news-chevron" aria-hidden="true"></i>
+                </span>
+              </summary>
+              <div class="news-content" v-html="renderMarkdown(news.content)"></div>
+            </details>
+          </li>
+        </ol>
+      </div>
+    </div>
+    <div class="awards-panel">
+      <h2>Awards &amp; Honors</h2>
+      <ul class="awards-list">
+        <li v-for="(award, index) in awards" :key="index" class="award-item">
+          <span class="award-year">{{ award.year }}</span>
+          <div>
+            <h3>{{ award.title }}</h3>
+            <div class="award-desc" v-html="renderMarkdown(award.description)"></div>
           </div>
-        </el-col>
-
-        <el-col :xs="24" :md="10" class="full-height">
-          <div class="panel">
-            <p class="panel-title">Awards & Honors</p>
-
-            <div class="panel-scroll">
-              <el-card
-                  v-for="(award, index) in awards"
-                  :key="index"
-                  class="award-card"
-                  shadow="hover"
-              >
-                <div class="award-title">
-                  {{ award.icon }} {{ award.title }}
-                </div>
-                <div class="award-meta">{{ award.year }}</div>
-                <div class="award-desc" v-html="renderMarkdown(award.description)"></div>
-              </el-card>
-            </div>
-          </div>
-        </el-col>
-      </el-row>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -58,34 +45,44 @@ export default {
       recentNews: [
         {
           date: "2026-07",
-          content: "🏆 Received the **Research Achievement Award** from the **NUS School of Computing** in recognition of research contributions."
+          icon: "el-icon-trophy",
+          summary: "Research Achievement Award from NUS Computing",
+          content: "Received the **Research Achievement Award** from the **NUS School of Computing** in recognition of research contributions."
         },
         {
           date: "2026-06",
+          icon: "el-icon-reading",
+          summary: "Selected for CSCW 2026 Doctoral Consortium",
           content:
-              "🎉 My research on AI-mediated communication was selected for the **CSCW 2026 Doctoral Consortium**."
+              "My paper [***From Immediate Assistance to Sustained Support: Designing AI-Mediated Communication for Non-Native Speakers' Interaction with Native Speakers***](https://doi.org/10.1145/3785651.3830040) was selected for the **CSCW 2026 Doctoral Consortium**."
         },
         {
           date: "2026-03",
+          icon: "el-icon-document-checked",
+          summary: "Two papers accepted to CSCW 2026",
           content:
-              "🎉 **Two** papers accepted to **CSCW 2026**: <br/>" +
-              "- [first author] <u>_Alleviating Linguistic and Interactional Anxiety of Non-Native Speakers in Multilingual Communication_</u> <br/>" +
-              "- [first author] <u>_Leveraging AI for Direct Bystander Intervention Against Cyberbullying_</u>"
+              "**Two** papers accepted to **CSCW 2026**:\n\n" +
+              "- [first author] [***Alleviating Linguistic and Interactional Anxiety of Non-Native Speakers in Multilingual Communication***](https://doi.org/10.1145/3816899)\n" +
+              "- [first author] [***Leveraging AI for Direct Bystander Intervention Against Cyberbullying***](https://doi.org/10.1145/3816963)"
         },
         {
           date: "2026-03",
+          icon: "el-icon-medal",
+          summary: "CHI 2026 Best Paper Honorable Mention",
           content:
-              "🏅 Our CHI 2026 paper <u>_Designing Computational Tools for Exploring Causal Relationships in Qualitative Data_</u> received a **Best Paper Honorable Mention Award**."
+              "Our CHI 2026 paper ***Designing Computational Tools for Exploring Causal Relationships in Qualitative Data*** received a **Best Paper Honorable Mention Award**."
         },
         {
           date: "2026-02",
+          icon: "el-icon-document-checked",
+          summary: "Three papers and two posters accepted to CHI 2026",
           content:
-              "🎉 **Three** papers and **two** posters accepted to **CHI 2026**: <br/>" +
-              "- [first author] <u>_AI Personalization Paradox: Reading Highlights for Personalized AI-Assisted Writing Increases Engagement but Undermines Autonomy and Ownership_</u> <br/>" +
-              "- [first author] <u>_ChatLearn: Leveraging Non-Native Speaker Communication Challenges as Language Learning Opportunities_</u> <br/>" +
-              "- [third author] <u>_Designing Computational Tools for Exploring Causal Relationships in Qualitative Data_</u> <br/>" +
-              "- [first author, poster] <u>_ConvScale: Conversational Interviews for Scale-Aligned Measurement_</u> <br/>" +
-              "- [second author, poster] <u>_Branchat: A Tree-Structured Interface for Efficient Revisitation in Long-Horizon LLM Conversations_</u>"
+              "**Three** papers and **two** posters accepted to **CHI 2026**:\n\n" +
+              "- [first author] ***AI Personalization Paradox: Reading Highlights for Personalized AI-Assisted Writing Increases Engagement but Undermines Autonomy and Ownership***\n" +
+              "- [first author] ***ChatLearn: Leveraging Non-Native Speaker Communication Challenges as Language Learning Opportunities***\n" +
+              "- [third author] ***Designing Computational Tools for Exploring Causal Relationships in Qualitative Data***\n" +
+              "- [first author, poster] ***ConvScale: Conversational Interviews for Scale-Aligned Measurement***\n" +
+              "- [second author, poster] ***Branchat: A Tree-Structured Interface for Efficient Revisitation in Long-Horizon LLM Conversations***"
         },
         // {
         //   date: "2026-01",
@@ -104,11 +101,15 @@ export default {
         // },
         {
           date: "2025-09",
-          content: "🏆 Received the **NUS Venture Initiation Programme (VIP)** award, supporting the development of an **AI-powered evaluation system** that provides scalable, automated **quantitative and qualitative analysis**."
+          icon: "el-icon-trophy",
+          summary: "NUS Venture Initiation Programme award",
+          content: "Received the **NUS Venture Initiation Programme (VIP)** award, supporting the development of an **AI-powered evaluation system** that provides scalable, automated **quantitative and qualitative analysis**."
         },
         {
           date: "2025-07",
-          content: "🏆 Received the **Research Achievement Award** from the **NUS School of Computing** in recognition of research contributions."
+          icon: "el-icon-trophy",
+          summary: "Research Achievement Award from NUS Computing",
+          content: "Received the **Research Achievement Award** from the **NUS School of Computing** in recognition of research contributions."
         },
         // {
         //   date: "2025-03",
@@ -116,23 +117,29 @@ export default {
         // },
         {
           date: "2025-02",
+          icon: "el-icon-document-checked",
+          summary: "Two papers accepted to CHI 2025",
           content:
-              "🎉 **Two** papers accepted to **CHI 2025**: <br/>" +
-              "- [first author] Full paper <u>_Timing Matters: How Using LLMs at Different Timings Influences Writers’ Perceptions and Ideation Outcomes in AI-Assisted Ideation_</u> <br/>" +
-              "- [fifth author] Contributed to <u>_Deconstructing Depression Stigma: Integrating AI-driven Data Collection and Analysis with Causal Knowledge Graphs_</u> (led by Menghan)"
+              "**Two** papers accepted to **CHI 2025**:\n\n" +
+              "- [first author] Full paper ***Timing Matters: How Using LLMs at Different Timings Influences Writers’ Perceptions and Ideation Outcomes in AI-Assisted Ideation***\n" +
+              "- [fifth author] Contributed to ***Deconstructing Depression Stigma: Integrating AI-driven Data Collection and Analysis with Causal Knowledge Graphs*** (led by Menghan)"
         },
         {
           date: "2025-02",
+          icon: "el-icon-document-checked",
+          summary: "One paper accepted to CSCW 2025",
           content:
-              "🎉 **One** paper accepted to **CSCW 2025**: <br/>" +
-              "- [first author] <u>_AI-Based Speaking Assistant: Supporting Non-Native Speakers’ Speaking in Real-Time Multilingual Communication_</u>"
+              "**One** paper accepted to **CSCW 2025**:\n\n" +
+              "- [first author] [***AI-Based Speaking Assistant: Supporting Non-Native Speakers’ Speaking in Real-Time Multilingual Communication***](https://doi.org/10.1145/3757455)"
         },
         // { date: "2024-12", content: "🎉 [first author] Workshop paper <u>_Empowering Bystanders: Enhancing Direct Intervention in Cyberbullying with EmojiGen_</u> accepted to [**WABF (World Anti-Bullying Forum) 2025**](https://indico2.uis.no/event/49/contributions/1491/)" },
         {
           date: "2024-05",
+          icon: "el-icon-document-checked",
+          summary: "One paper accepted to CHI 2024 Late-Breaking Work",
           content:
-              "🎉 **One** paper accepted to **CHI 2024 Late-Breaking Work (LBW)**: <br/>" +
-              "- [forth author] <u>_Mitigating Ageism through Virtual Reality: Intergenerational Collaborative Escape Room Design_</u>"
+              "**One** paper accepted to **CHI 2024 Late-Breaking Work (LBW)**:\n\n" +
+              "- [forth author] ***Mitigating Ageism through Virtual Reality: Intergenerational Collaborative Escape Room Design***"
         }
       ],
       awards: [
@@ -162,159 +169,65 @@ export default {
           title: "CHI 2026 Best Paper Honorable Mention Award",
           year: "2026",
           description:
-              "Awarded to _Designing Computational Tools for Exploring Causal Relationships in Qualitative Data_."
+              "Awarded to ***Designing Computational Tools for Exploring Causal Relationships in Qualitative Data***."
         }
       ]
     };
   },
   methods: {
     renderMarkdown(content) {
-      return marked(content);
+      return marked(content.replace(/^(?:🏆|🎉|🏅|🌟|🌐|🚀)\s*/, ""));
     }
   }
 };
 </script>
 
 <style scoped>
-.recent-news-page {
-  height: 51vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.news-and-awards { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 48px; padding-top: 40px; border-top: 1px solid var(--line); }
+h2 { margin-bottom: 28px; }
+.awards-panel { padding-left: 32px; border-left: 1px solid var(--line); }
+ol, ul { list-style: none; padding: 0; margin: 0; }
+.news-scroll { max-height: 420px; overflow-y: auto; padding-right: 12px; scrollbar-gutter: stable; scrollbar-width: thin; scrollbar-color: #c8c8c8 transparent; border-radius: 4px; }
+.news-scroll:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.news-scroll::-webkit-scrollbar { width: 5px; }
+.news-scroll::-webkit-scrollbar-track { background: transparent; }
+.news-scroll::-webkit-scrollbar-thumb { background: #c8c8c8; border-radius: 999px; }
+.news-scroll::-webkit-scrollbar-thumb:hover { background: #999; }
+.news-item { margin-bottom: 24px; }
+.news-summary { list-style: none; cursor: pointer; border-radius: 4px; }
+.news-summary::-webkit-details-marker { display: none; }
+.news-summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+time, .award-year { color: var(--accent); font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums; }
+time { display: block; margin-bottom: 6px; }
+.news-event { display: grid; grid-template-columns: 18px minmax(0, 1fr) 12px; gap: 10px; align-items: start; }
+.news-icon { color: var(--text); font-size: 17px; line-height: 1.45; }
+.news-overview { color: var(--text); font-family: var(--font-display); font-size: 16px; font-weight: 500; line-height: 1.5; }
+.news-chevron { color: var(--muted); font-size: 12px; line-height: 2; transition: transform 160ms ease; }
+.news-details[open] .news-chevron { transform: rotate(180deg); }
+.news-summary:hover .news-overview { opacity: .72; }
+.news-content { color: var(--muted); font-size: 15px; line-height: 1.7; margin: 10px 22px 0 28px; }
+.news-content ::v-deep p { margin: 0 0 8px; }
+.news-content ::v-deep p:last-child { margin-bottom: 0; }
+.news-content ::v-deep ul { list-style: disc; padding-left: 18px; margin: 8px 0 0; }
+.news-content ::v-deep li { padding-left: 2px; margin-bottom: 7px; }
+.news-content ::v-deep li:last-child { margin-bottom: 0; }
+.news-content ::v-deep strong { color: var(--text); font-weight: 600; }
+.news-content ::v-deep em { font-style: italic; }
+.news-content ::v-deep em strong { font-weight: 600; }
+.news-content ::v-deep a { color: var(--text); text-decoration: none; }
+.news-content ::v-deep a:hover { opacity: .72; }
+.award-item { display: grid; grid-template-columns: 38px minmax(0, 1fr); gap: 14px; margin-bottom: 24px; }
+.award-item:last-child { margin-bottom: 0; }
+.award-year { padding-top: 3px; }
+h3 { font-size: 16px; line-height: 1.5; margin: 0 0 7px; }
+.award-desc { color: var(--muted); font-size: 14px; line-height: 1.7; }
+.award-desc ::v-deep p { margin: 0; }
+.award-desc ::v-deep strong { font-weight: 600; }
+@media (max-width: 900px) { .news-and-awards { gap: 28px; } .awards-panel { padding-left: 24px; } }
+@media (max-width: 900px) {
+  .news-and-awards { grid-template-columns: 1fr; gap: 36px; padding-top: 32px; }
+  .news-scroll { max-height: 360px; }
+  .awards-panel { padding: 32px 0 0; border-left: 0; border-top: 1px solid var(--line); }
 }
-
-.page-center {
-  width: 100%;
-  max-width: 1120px;
-  height: 51vh;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.content-row,
-.full-height {
-  height: 100%;
-}
-
-.panel {
-  height: 100%;
-  background: linear-gradient(180deg, rgba(252, 250, 246, 0.96) 0%, rgba(247, 244, 236, 0.96) 100%);
-  border: 1px solid rgba(20, 92, 82, 0.12);
-  border-radius: 20px;
-  padding: 20px 18px;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  box-shadow: 0 16px 42px rgba(21, 31, 38, 0.06);
-}
-
-.panel-title {
-  font-family: var(--display-font);
-  font-size: 0.96rem;
-  font-weight: 600;
-  line-height: 1.1;
-  margin: 0 0 12px;
-  flex-shrink: 0;
-  color: #145c52;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.panel-scroll {
-  flex: 1;
-  overflow-y: auto;
-  padding-right: 8px;
-}
-
-.panel-scroll::-webkit-scrollbar {
-  width: 8px;
-}
-
-.panel-scroll::-webkit-scrollbar-thumb {
-  background: rgba(20, 92, 82, 0.24);
-  border-radius: 999px;
-}
-
-.news-content {
-  font-size: 13px;
-  line-height: 1.62;
-  color: #313131;
-}
-
-.panel :deep(.el-timeline-item__timestamp) {
-  color: #145c52;
-  font-weight: 700;
-}
-
-.panel :deep(.el-timeline-item__node) {
-  background-color: #145c52;
-}
-
-.panel :deep(.el-card__body) {
-  padding: 18px;
-}
-
-.award-card {
-  margin-bottom: 14px;
-  border-radius: 14px;
-  border: 1px solid rgba(20, 92, 82, 0.08);
-  background: rgba(255, 255, 255, 0.74);
-  box-shadow: none;
-}
-
-.award-title {
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.award-meta {
-  font-size: 12px;
-  color: #888;
-  margin: 4px 0 6px;
-}
-
-.award-desc {
-  font-size: 13px;
-  line-height: 1.55;
-}
-
-@media (max-width: 768px) {
-  .recent-news-page,
-  .page-center,
-  .content-row,
-  .full-height {
-    height: auto;
-  }
-
-  .page-center {
-    max-width: 100%;
-  }
-
-  .panel {
-    padding: 18px 16px;
-    border-radius: 18px;
-  }
-
-  .panel-scroll {
-    max-height: 42vh;
-  }
-
-  .full-height + .full-height {
-    margin-top: 14px;
-  }
-
-  .panel-title {
-    font-size: 0.88rem;
-  }
-
-  .news-content,
-  .award-desc {
-    font-size: 12px;
-    line-height: 1.55;
-  }
-
-  .award-title {
-    font-size: 13px;
-  }
-}
+@media (prefers-reduced-motion: reduce) { .news-chevron { transition: none; } }
 </style>

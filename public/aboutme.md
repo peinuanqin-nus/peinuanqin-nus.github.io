@@ -1,16 +1,10 @@
-[//]: # (I am a **CS PhD student** at NUS, focusing on *HCI* and *AI-assisted writing*.)
-<span style="background-color: lightyellow; color: black; display: inline-block; padding: 0; font-size: 1.2rem; font-weight: bolder">
-Hello! This is Peinuan!
-</span>
+Peinuan Qin is a third-year **PhD candidate in Computer Science** at the National University of Singapore (NUS) and a member of the [AI4SG](https://www.ai4sg.org/) Lab, supervised by [Prof. Yi-Chieh Lee (EJ)](https://www.comp.nus.edu.sg/cs/people/yclee/).
 
+Peinuan's research focuses on **human-AI interaction (HAI)**, with an emphasis on designing **human-centered AI systems** that support **communication, learning, creation**, and **social good**.
 
-I am a 3rd-year **PhD candidate** of Computer Science (SoC) at the [AI4SG](https://www.ai4sg.org/) Lab @ National University of Singapore (NUS)
-, working under the supervision of [Prof. Yi-Chieh Lee (EJ)](https://www.comp.nus.edu.sg/cs/people/yclee/).
-My research focuses on **human-AI Interaction (HAI)**, with an emphasis on designing **human-centered AI systems** that support **communication, learning**, **creation**, and **social good**.
+Alongside academic research, Peinuan explores entrepreneurial opportunities related to this work, with initial support from the Venture Initiation Programme (VIP@SoC) Award (2025).
 
-Alongside my academic research, I also explore entrepreneurial opportunities related to my work, with initial support from the Venture Initiation Programme (VIP@SoC) Award (2025).
-
-_I am actively seeking potential high-value collaborators! If you are interested in my research and are highly self-motivated, please contact me at Jeffrey-qin@outlook.com, preferably with your CV and preliminary research plan._
+Peinuan welcomes motivated research collaborators. Prospective collaborators can reach out at [Jeffrey-qin@outlook.com](mailto:Jeffrey-qin@outlook.com), ideally with a CV and a preliminary research plan.
 
 
 [//]: # (- 🔬 Research: AI-PM, Writing Support Tools, HCI)

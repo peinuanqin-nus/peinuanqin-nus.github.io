@@ -1,56 +1,23 @@
 <template>
   <div class="collaborator-panel">
-    <div class="section-shell">
-      <div class="section-heading compact-heading">
-        <p class="section-eyebrow">Research Network</p>
+    <div class="section-heading">
+      <h2>Collaborators</h2>
+    </div>
+    <div v-for="group in collaboratorGroups" :key="group.title" class="collaborator-group">
+      <div class="group-heading">
+        <h3>{{ group.title }}</h3>
+        <p>{{ group.description }}</p>
       </div>
-
-      <div
-          v-for="group in collaboratorGroups"
-          :key="group.title"
-          class="group-block"
-      >
-        <div class="group-shell">
-          <div class="group-header">
-            <div>
-              <h3 class="group-title">{{ group.title }}</h3>
-              <p class="group-description">{{ group.description }}</p>
-            </div>
-            <span class="group-count">{{ group.people.length }}</span>
+      <div class="people-grid">
+        <component v-for="person in group.people" :key="person.name" :is="person.link ? 'a' : 'div'" :href="person.link || null" :target="person.link ? '_blank' : null" :rel="person.link ? 'noopener noreferrer' : null" class="person">
+          <span class="avatar-frame">
+            <img :src="person.avatar" width="56" height="56" alt="" loading="lazy" class="avatar" :class="[person.avatarClass, { 'avatar-top': person.avatarPosition === 'top' }]" />
+          </span>
+          <div class="person-info">
+            <p class="person-name">{{ person.name }}<span v-if="person.link" class="person-arrow" aria-hidden="true">↗</span></p>
+            <p class="person-role">{{ person.role }}</p>
           </div>
-
-          <el-row :gutter="20">
-            <el-col
-                v-for="(person, index) in group.people"
-                :key="`${group.title}-${index}`"
-                :xs="24"
-                :sm="12"
-                :lg="8"
-            >
-              <component
-                  :is="person.link ? 'a' : 'div'"
-                  :href="person.link || null"
-                  :target="person.link ? '_blank' : null"
-                  :rel="person.link ? 'noopener noreferrer' : null"
-                  class="collaborator-card"
-              >
-                <img
-                    :src="person.avatar"
-                    class="avatar"
-                    :class="{ 'avatar-top': person.avatarPosition === 'top' }"
-                    :alt="person.name"
-                />
-
-                <div class="info">
-                  <p class="name">{{ person.name }}</p>
-                  <p class="role">{{ person.role }}</p>
-                </div>
-
-                <span class="card-arrow">{{ person.link ? "Visit" : "Profile" }}</span>
-              </component>
-            </el-col>
-          </el-row>
-        </div>
+        </component>
       </div>
     </div>
   </div>
@@ -180,6 +147,13 @@ export default {
           link: "https://junti.space/"
         },
         {
+          name: "Zhixing Liu",
+          role: "Research collaborator, NUS Computing",
+          avatar: "/collaborators/zhixing-cscw.jpeg",
+          avatarClass: "avatar-zhixing",
+          link: ""
+        },
+        {
           name: "Ann Chen",
           role: "AI PM & Researcher @ MIT & Harvard",
           avatar: "/collaborators/ann.png",
@@ -208,7 +182,8 @@ export default {
         {
           name: "Jiting Cheng",
           role: "PhD Student, University of Sydney",
-          avatar: "/collaborators/jiting.png",
+          avatar: "/collaborators/jiting-cscw.jpeg",
+          avatarClass: "avatar-jiting",
           link: ""
         },
         {
@@ -251,192 +226,30 @@ export default {
 </script>
 
 <style scoped>
-.collaborator-panel {
-  width: 100%;
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 0;
-  color: #222;
-}
-
-.section-heading {
-  max-width: 760px;
-  margin-bottom: 28px;
-}
-
-.section-shell {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(249, 247, 242, 0.96) 100%);
-  border: 1px solid rgba(20, 92, 82, 0.1);
-  border-radius: 20px;
-  padding: 16px 16px 14px;
-  box-shadow: 0 16px 40px rgba(21, 31, 38, 0.05);
-}
-
-.compact-heading {
-  margin-bottom: 18px;
-}
-
-.section-eyebrow {
-  margin: 0 0 12px;
-  font-size: 0.86rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #145c52;
-  font-weight: 700;
-}
-
-.group-block + .group-block {
-  margin-top: 20px;
-}
-
-.group-header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 14px;
-}
-
-.group-title {
-  margin: 0;
-  font-family: var(--display-font);
-  font-size: 0.96rem;
-  font-weight: 600;
-  line-height: 1.1;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #6d4f2a;
-}
-
-.group-description {
-  margin: 4px 0 0;
-  color: #7d827f;
-  line-height: 1.5;
-  font-size: 0.84rem;
-}
-
-.group-count {
-  flex-shrink: 0;
-  min-width: 38px;
-  height: 38px;
-  border-radius: 12px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(20, 92, 82, 0.08);
-  color: #145c52;
-  font-size: 0.92rem;
-  font-weight: 700;
-}
-
-.group-shell {
-  padding: 0;
-}
-
-.collaborator-card {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  min-height: 94px;
-  padding: 14px;
-  margin-top: 12px;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.82);
-  border: 1px solid rgba(20, 92, 82, 0.08);
-  box-shadow: 0 8px 24px rgba(18, 31, 27, 0.05);
-  text-decoration: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-}
-
-.collaborator-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 30px rgba(18, 31, 27, 0.09);
-  background: rgba(255, 255, 255, 0.95);
-}
-
-.avatar {
-  width: 64px;
-  height: 64px;
-  border-radius: 16px;
-  object-fit: cover;
-  object-position: center center;
-  flex-shrink: 0;
-}
-
-.avatar-top {
-  object-position: center 24%;
-}
-
-.info {
-  flex: 1;
-  min-width: 0;
-}
-
-.name {
-  margin: 0;
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: #213532;
-}
-
-.role {
-  margin: 8px 0 0;
-  font-size: 0.84rem;
-  line-height: 1.48;
-  color: #5f6e69;
-}
-
-.card-arrow {
-  flex-shrink: 0;
-  color: #145c52;
-  font-size: 0.76rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-@media (max-width: 768px) {
-  .group-header {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .section-shell {
-    padding: 14px 14px 12px;
-    border-radius: 18px;
-  }
-
-  .collaborator-card {
-    margin-top: 10px;
-    padding: 12px;
-    min-height: 84px;
-    border-radius: 16px;
-  }
-
-  .avatar {
-    width: 56px;
-    height: 56px;
-    border-radius: 14px;
-  }
-
-  .group-title,
-  .section-eyebrow {
-    font-size: 0.82rem;
-  }
-
-  .group-description,
-  .role {
-    font-size: 0.78rem;
-    line-height: 1.4;
-  }
-
-  .name {
-    font-size: 0.88rem;
-  }
-
-  .card-arrow {
-    display: none;
-  }
+.collaborator-panel { border-top: 1px solid var(--line); padding-top: 40px; }
+.collaborator-group + .collaborator-group { margin-top: 40px; }
+.group-heading { margin-bottom: 24px; }
+h3 { margin-bottom: 7px; }
+.group-heading > p { color: var(--muted); font-size: 15px; margin: 0; max-width: 66ch; }
+.people-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.person { display: flex; align-items: flex-start; gap: 14px; padding: 18px; color: var(--text); text-decoration: none; border: 1px solid #ededed; border-radius: var(--radius); background: #fafafa; }
+.avatar-frame { display: block; width: 56px; height: 56px; border-radius: 50%; overflow: hidden; flex-shrink: 0; background: #eeeeee; }
+.avatar { width: 100%; height: 100%; object-fit: cover; }
+.avatar-top { object-position: center 24%; }
+/* Match the portrait crops on the CSCW presentation's author slide. */
+.avatar-jiting { transform: scale(2.173913); transform-origin: 50% 25.925926%; }
+.avatar-zhixing { transform: scale(1.5625); transform-origin: 50% 4.166667%; }
+.person-info { min-width: 0; }
+.person-name { font-family: var(--font-display); font-size: 16px; font-weight: 500; margin: 0 0 4px; line-height: 1.4; }
+.person-arrow { display: inline-block; margin-left: 7px; color: var(--muted); font-size: 12px; }
+.person-role { font-size: 14px; line-height: 1.65; color: var(--muted); margin: 0; }
+a.person:hover .person-name { color: var(--accent); }
+a.person:hover .person-arrow { color: var(--accent); }
+a.person:hover { background: var(--surface); border-color: #dcdcdc; }
+@media (max-width: 900px) { .people-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) {
+  .collaborator-panel { padding-top: 32px; }
+  .people-grid { grid-template-columns: 1fr; gap: 12px; }
+  .person { gap: 16px; }
 }
 </style>

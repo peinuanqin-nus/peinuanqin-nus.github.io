@@ -1,0 +1,19 @@
+{
+  "title": "From Immediate Assistance to Sustained Support: Designing AI-Mediated Communication for Non-Native Speakers' Interaction with Native Speakers",
+  "short_title": "From Immediate Assistance to Sustained Support",
+  "author": "__<u>Peinuan Qin</u>__",
+  "abstract": "Non-native speakers (NNSs) frequently participate in multilingual collaboration through a shared language, yet they often face a central difficulty: communicating effectively with native speakers (NSs) in real time. This challenge creates two complementary needs for support design. First, NNSs need immediate assistance that helps them manage linguistic barriers, cognitive load, and interactional pressure so that they can participate in ongoing conversations and express themselves more effectively. Second, recurring communication difficulties reveal authentic gaps in communicative competence, creating design opportunities for sustained support that promotes language acquisition and communicative development. My dissertation investigates how AI-mediated communication (AIMC) systems can address both needs. Through empirical studies, my dissertation contributes to an understanding of how AI support affects real-time communication, what opportunities and challenges arise when AI mediates the interaction, and how AIMC systems can be designed to connect immediate assistance with sustained communicative development.",
+  "url": "https://doi.org/10.1145/3785651.3830040",
+  "arxiv": "",
+  "categories": [
+    "AI for communication",
+    "AI for learning"
+  ],
+  "labels": [],
+  "status": [
+    "🟢 Accept"
+  ],
+  "published": "Proceedings of the 2026 Companion of the Computer-Supported Cooperative Work and Social Computing, pp. 643-647.",
+  "year": "2026 CSCW DC",
+  "image": "/projects/cscw_doctoral_consortium/img.png"
+}

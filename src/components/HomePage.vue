@@ -1,309 +1,87 @@
 <template>
-  <el-container>
-    <el-header class="fixed-header">
-      <div class="nav-bar">
-        <div class="brand-block" @click="scrollToSection('profile')">
-          <span class="brand-mark">PQ</span>
-          <div class="brand-text">
-            <span class="title">{{ userName }}</span>
-            <span class="subtitle">Human-AI Interaction Research</span>
-          </div>
-        </div>
-
-        <div class="nav-links">
-          <span @click="scrollToSection('profile')">Profile</span>
-          <span @click="scrollToSection('recent_news')">Recent News</span>
-          <span @click="scrollToSection('projects')">Projects</span>
-          <span @click="scrollToSection('collaborators')">Collaborators</span>
-        </div>
+  <div class="portfolio">
+    <button class="skip-link" @click="scrollToSection('profile')">Skip to content</button>
+    <header class="site-header">
+      <div class="nav-bar page-width">
+        <button class="brand" aria-label="Peinuan Qin, back to profile" @click="scrollToSection('profile')">
+          <span>Qin Peinuan</span>
+        </button>
+        <nav aria-label="Main navigation">
+          <button
+              v-for="section in sections"
+              :key="section.id"
+              :aria-current="activeSection === section.id ? 'location' : null"
+              @click="scrollToSection(section.id)"
+          >{{ section.label }}</button>
+        </nav>
       </div>
-    </el-header>
+    </header>
 
-    <div class="header-spacer"></div>
-
-    <el-main class="main_container">
-      <section id="profile" class="page-section profile-section">
+    <main class="page-width">
+      <section id="profile" class="profile-section" aria-label="Profile" tabindex="-1">
         <ProfilePanel />
       </section>
-
-      <section id="recent_news" class="page-section">
-        <RecentNews />
-      </section>
-
-      <section id="projects" class="page-section">
+      <section id="projects" class="page-section" aria-label="Projects" tabindex="-1">
         <ProjectPanel />
       </section>
-
-      <section id="collaborators" class="page-section">
+      <section id="recent_news" v-reveal class="page-section" aria-label="Recent News" tabindex="-1">
+        <RecentNews />
+      </section>
+      <section id="collaborators" v-reveal class="page-section" aria-label="Collaborators" tabindex="-1">
         <CollaboratorPanel />
       </section>
-    </el-main>
-  </el-container>
+    </main>
+    <footer class="site-footer page-width">
+      <span>Peinuan Qin</span>
+      <span>Human-AI Interaction Research</span>
+      <button class="text-button" @click="scrollToSection('profile')">Back to top <span aria-hidden="true">↑</span></button>
+    </footer>
+  </div>
 </template>
 
 <script>
-import ProfilePanel from "@/components/ProfilePanel";
-import RecentNews from "@/components/RecentNews";
-import ProjectPanel from "@/components/ProjectPanel";
-import CollaboratorPanel from "@/components/CollaboratorPanel";
+import ProfilePanel from '@/components/ProfilePanel';
+import RecentNews from '@/components/RecentNews';
+import ProjectPanel from '@/components/ProjectPanel';
+import CollaboratorPanel from '@/components/CollaboratorPanel';
+import reveal from '@/directives/reveal';
 
 export default {
-  name: "PersonalHomepage",
+  name: 'PersonalHomepage',
   components: { CollaboratorPanel, ProjectPanel, RecentNews, ProfilePanel },
+  directives: { reveal },
   data() {
     return {
-      userName: "Qin Peinuan"
+      activeSection: 'profile',
+      sections: [
+        { id: 'profile', label: 'Profile' },
+        { id: 'projects', label: 'Projects' },
+        { id: 'recent_news', label: 'Recent News' },
+        { id: 'collaborators', label: 'Collaborators' }
+      ]
     };
+  },
+  mounted() {
+    this.sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) this.activeSection = entry.target.id;
+      });
+    }, { rootMargin: '-110px 0px -60% 0px' });
+    this.sections.forEach(({ id }) => this.sectionObserver.observe(document.getElementById(id)));
+  },
+  beforeDestroy() {
+    if (this.sectionObserver) this.sectionObserver.disconnect();
   },
   methods: {
     scrollToSection(id) {
-      const el = document.getElementById(id);
-      if (el) {
-        const mobileOffset = window.innerWidth <= 768 ? 112 : 122;
-        const y = el.getBoundingClientRect().top + window.pageYOffset - mobileOffset;
-        window.scrollTo({
-          top: y,
-          behavior: "smooth"
-        });
-      }
+      const section = document.getElementById(id);
+      if (!section) return;
+      this.activeSection = id;
+      section.focus({ preventScroll: true });
+      section.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
     }
   }
 };
 </script>
 
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Spectral:wght@300;400;700&display=swap');
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: 'Spectral', serif;
-  background:
-      radial-gradient(circle at top left, rgba(210, 227, 215, 0.92) 0%, rgba(245, 238, 224, 0.96) 28%, rgba(251, 249, 244, 0.98) 60%, #ffffff 100%);
-  margin: 0;
-  color: #1f1f1f;
-  font-size: 15px;
-}
-
-:root {
-  --page-max-width: 1120px;
-  --page-side-padding: 24px;
-  --header-height: 76px;
-  --section-gap: 72px;
-  --display-font: 'Cormorant Garamond', serif;
-}
-
-.main_container {
-  width: 100%;
-  padding: 0 0 60px;
-  box-sizing: border-box;
-  background: transparent;
-}
-
-.header-spacer {
-  height: calc(var(--header-height) + 22px);
-  flex-shrink: 0;
-}
-
-.el-header {
-  color: #17322e;
-  text-align: left;
-  padding: 0;
-}
-
-.fixed-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: var(--header-height);
-  z-index: 999;
-  background: rgba(246, 242, 233, 0.88);
-  backdrop-filter: blur(18px);
-  color: #17322e;
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid rgba(20, 92, 82, 0.1);
-  box-shadow: 0 10px 28px rgba(25, 42, 38, 0.05);
-}
-
-.nav-bar {
-  width: 100%;
-  max-width: var(--page-max-width);
-  margin: auto;
-  padding: 0 var(--page-side-padding);
-  box-sizing: border-box;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.brand-block {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  cursor: pointer;
-}
-
-.brand-mark {
-  width: 38px;
-  height: 38px;
-  border-radius: 12px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #145c52, #2c796d);
-  color: #f8f7f2;
-  font-size: 0.9rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-}
-
-.brand-text {
-  display: flex;
-  flex-direction: column;
-}
-
-.nav-links {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: 10px;
-}
-
-.nav-links span {
-  padding: 8px 12px;
-  border-radius: 999px;
-  font-size: 12px;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: #36554f;
-  background: rgba(255, 255, 255, 0.55);
-  border: 1px solid rgba(20, 92, 82, 0.08);
-  transition: 0.2s;
-  cursor: pointer;
-}
-
-.nav-links span:hover {
-  color: #145c52;
-  background: rgba(20, 92, 82, 0.08);
-  transform: translateY(-1px);
-}
-
-.title {
-  font-size: 1rem;
-  font-weight: 700;
-  margin: 0;
-  letter-spacing: 0.02em;
-  color: #17322e;
-}
-
-.subtitle {
-  margin-top: 2px;
-  font-size: 0.68rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #6b7f79;
-}
-
-.el-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0;
-}
-
-.page-section {
-  width: 100%;
-  padding: 0 var(--page-side-padding);
-  box-sizing: border-box;
-  margin-bottom: var(--section-gap);
-  scroll-margin-top: calc(var(--header-height) + 24px);
-}
-
-.profile-section {
-  margin-bottom: 54px;
-  padding-top: 4px;
-}
-
-.page-section:last-child {
-  margin-bottom: 0;
-}
-
-@media (max-width: 768px) {
-  :root {
-    --page-side-padding: 16px;
-    --header-height: 96px;
-    --section-gap: 40px;
-  }
-
-  .fixed-header {
-    align-items: flex-start;
-    padding: 10px 0 8px;
-    box-sizing: border-box;
-  }
-
-  .header-spacer {
-    height: calc(var(--header-height) + 6px);
-  }
-
-  .nav-bar {
-    align-items: flex-start;
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 8px;
-  }
-
-  .brand-block {
-    width: 100%;
-    gap: 10px;
-  }
-
-  .brand-mark {
-    width: 34px;
-    height: 34px;
-    border-radius: 10px;
-    font-size: 0.82rem;
-  }
-
-  .title {
-    font-size: 0.92rem;
-  }
-
-  .subtitle {
-    display: none;
-  }
-
-  .nav-links {
-    width: 100%;
-    justify-content: flex-start;
-    flex-wrap: nowrap;
-    gap: 8px;
-    overflow-x: auto;
-    padding-bottom: 2px;
-    scrollbar-width: none;
-  }
-
-  .nav-links::-webkit-scrollbar {
-    display: none;
-  }
-
-  .nav-links span {
-    flex: 0 0 auto;
-    padding: 6px 10px;
-    font-size: 11px;
-    white-space: nowrap;
-  }
-
-  .page-section {
-    scroll-margin-top: calc(var(--header-height) + 14px);
-  }
-
-  .profile-section {
-    margin-bottom: 34px;
-  }
-}
-</style>
+<style src="@/assets/portfolio.css"></style>
